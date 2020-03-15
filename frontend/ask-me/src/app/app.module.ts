@@ -21,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { JwtInterceptor } from './_helpers';
 import { NavbarComponent } from './navbar/navbar.component';
+import { FeedComponent } from './feed/feed.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    FeedComponent
   ],
   imports: [
     BrowserModule,
