@@ -1,3 +1,4 @@
+
 name := "server"
 
 version := "1.0"
@@ -10,5 +11,7 @@ resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
 scalaVersion := "2.11.11"
 
 libraryDependencies ++= Seq(javaJdbc, cache, javaWs)
+
+libraryDependencies += "com.google.code.gson" % "gson" % "2.8.6"
 
 unmanagedResourceDirectories in Test <+= baseDirectory(_ / "target/web/public/test")
