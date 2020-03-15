@@ -16,7 +16,6 @@ import {MatCardModule} from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { HomeComponent } from './home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { JwtInterceptor } from './_helpers';
@@ -28,7 +27,6 @@ import { FeedComponent } from './feed/feed.component';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent,
     NavbarComponent,
     FeedComponent
   ],
