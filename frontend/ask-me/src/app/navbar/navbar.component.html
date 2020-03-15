@@ -12,8 +12,14 @@
         </button>
     </mat-form-field>
 
-    <button (click)='navigateToLogin()' mat-button>Login</button>
-    <button (click)='navigateToSignup()' mat-button>Sign Up</button>
+    <div [hidden]="!isLoggedIn">
+        <button (click)='profile()' mat-button>Profile</button>
+        <button (click)='logout()' mat-button>Logout</button>
+    </div>
+    <div [hidden]="isLoggedIn">
+        <button (click)='navigateToLogin()' mat-button>Login</button>
+        <button (click)='navigateToSignup()' mat-button>Sign Up</button>
+    </div>
 
     <!-- <span>Right Aligned Text</span> -->
 </mat-toolbar>

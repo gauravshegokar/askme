@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {AuthenticationService} from '@app/_services/authentication.service'
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +9,23 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private authenticationService: AuthenticationService
+    ) { }
+  
+  isLoggedIn = false
+  currentUser = this.authenticationService.currentUser.subscribe(
+    (user) => {
+      if(user){
+        this.isLoggedIn = true
+      }else{
+        this.isLoggedIn = false
+      }
+    },
+    (msg) => {
+      console.log('Error Getting Location: ', msg);
+    }
+  );
 
   ngOnInit(): void {
   }
@@ -21,4 +38,11 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['signup'])
   }
 
+  logout(){
+    this.authenticationService.logout()
+  }
+
+  profile(){
+
+  }
 }
