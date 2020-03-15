@@ -2,7 +2,7 @@
     <mat-card-title>Sign Up</mat-card-title>
 <mat-card-content>
 
-<form [formGroup]="form" (ngSubmit)="submit()">
+<form [formGroup]="form" (ngSubmit)="register()">
   <p>
     <mat-form-field>
       <input type="text" matInput placeholder="Username" formControlName="username">
@@ -14,7 +14,16 @@
       <input type="password" matInput placeholder="Password" formControlName="password">
     </mat-form-field>
   </p>
-
+  <p>
+    <mat-form-field>
+      <input type="text" matInput placeholder="First Name" formControlName="fname">
+    </mat-form-field>
+  </p>
+  <p>
+    <mat-form-field>
+      <input type="text" matInput placeholder="Last Name" formControlName="password">
+    </mat-form-field>
+  </p>
   <p *ngIf="error" class="error">
     {{ error }}
   </p>

@@ -10,15 +10,4 @@ export class AppComponent {
   constructor(private router: Router) { }
 
   title = 'ask-me';
-
-  value: ""
-
-  navigateToLogin() {
-    this.router.navigate(['login'])
-  }
-
-  navigateToSignup() {
-    this.router.navigate(['signup'])
-  }
-
 }

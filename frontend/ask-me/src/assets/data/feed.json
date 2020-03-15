@@ -1,0 +1,42 @@
+{
+    "feed": [
+        {
+            "channelId": 1,
+            "channelName": "CoronaVirusUpdates",
+            "postId": 2,
+            "postText": "How Corona Virus Spreads?",
+            "profane": false,
+            "author": "user221",
+            "authorId": 2,
+            "likesCount": 55,
+            "datePosted": "14 March 2020",
+            "tags": [
+                {
+                    "tagId": 1,
+                    "tagName": "#CoronaVirus"
+                }
+            ]
+        },
+        {
+            "channelId": 2,
+            "channelName": "News",
+            "postId": 1,
+            "postText": "Corona Virus spread over 100 countries",
+            "profane": false,
+            "author": "newsguru",
+            "authorId": 4,
+            "likesCount": 100,
+            "datePosted": "10 March 2020",
+            "tags": [
+                {
+                    "tagId": 1,
+                    "tagName": "#CoronaVirus"
+                },
+                {
+                    "tagId": 2,
+                    "tagName": "#pandemic"
+                }
+            ]
+        }
+    ]
+}
