@@ -45,4 +45,8 @@ export class NavbarComponent implements OnInit {
   profile(){
 
   }
+
+  createPost(){
+    
+  }
 }

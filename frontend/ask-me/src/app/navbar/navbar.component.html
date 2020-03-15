@@ -13,6 +13,7 @@
     </mat-form-field>
 
     <div [hidden]="!isLoggedIn">
+        <button (click)='createPost()' mat-button>New Post</button>
         <button (click)='profile()' mat-button>Profile</button>
         <button (click)='logout()' mat-button>Logout</button>
     </div>
