@@ -3,12 +3,21 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
+GET         /                                    controllers.Application.index()
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET         /assets/*file                        controllers.Assets.at(path="/public", file)
 
 # Login
-POST   /api/login                   controllers.LoginController.postUser()
+POST        /api/login                           controllers.LoginController.postUser()
 # Signup
-POST /api/signup                    controllers.SignupController.addUser()
+POST        /api/signup                          controllers.SignupController.addUser()
+
+# user basic info
+GET         /api/users/:userId                   controllers.UserInformationController.getUserBasicInfo()
+
+# user interests
+GET         /api/users/:userId/interests         controllers.UserInformationController.getUserInterests()
+
+# add post
+POST        /api/channels/:channelId/post        controllers.PostController.addPost()

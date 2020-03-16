@@ -14,4 +14,6 @@ libraryDependencies ++= Seq(javaJdbc, cache, javaWs)
 
 libraryDependencies += "com.google.code.gson" % "gson" % "2.8.6"
 
+libraryDependencies += "io.ebean" % "ebean" % "11.22.10"
+
 unmanagedResourceDirectories in Test <+= baseDirectory(_ / "target/web/public/test")

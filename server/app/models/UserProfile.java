@@ -1,11 +1,20 @@
 package models;
 
+
+import io.ebean.*;
+import play.data.validation.Constraints;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.sql.Timestamp;
-import javax.persistence.*;
-import com.avaje.ebean.Model;
-import play.data.validation.*;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
-public class User extends Model {
+public class UserProfile extends Model {
+
     @Id
     @GeneratedValue
     private int id;
@@ -16,7 +25,30 @@ public class User extends Model {
     private String password;
 
     private String fname;
+
+    public List<Tag> interests=new ArrayList<>();
+
+
+    public List<Tag> getInterests() {
+        return interests;
+    }
+
+    public void setInterests(Tag interest) {
+        this.interests.add(interest);
+    }
+
+    public String getAccessLevel() {
+        return accessLevel;
+    }
+
+    public void setAccessLevel(String accessLevel) {
+        this.accessLevel = accessLevel;
+    }
+
     private String lname;
+    private String accessLevel;
+
+
 
     public String getUsername() {
         return username;
@@ -70,6 +102,8 @@ public class User extends Model {
         this.id = id;
     }
 
-    public static final Finder<Long, User> find = new Finder<>(User.class);
+    public static final Finder<Long, UserProfile> find = new Finder<>(UserProfile.class);
+
+
 
 }

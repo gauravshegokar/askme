@@ -1,7 +1,7 @@
 package controllers;
 
 import com.google.gson.JsonObject;
-import models.User;
+import models.UserProfile;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -25,14 +25,14 @@ public class LoginController extends Controller {
 
 
         // creating user bean
-        User user = new User();
+        UserProfile user = new UserProfile();
         user.setUsername(username);
         user.setPassword(password);
 
         // Check if user exits
-        List<User> dbUserMapped=new ArrayList<>();
+        List<UserProfile> dbUserMapped=new ArrayList<>();
         try {
-            dbUserMapped=User.find.query().where().ilike("username", user.getUsername()).findList();
+            dbUserMapped=UserProfile.find.query().where().ilike("username", user.getUsername()).findList();
         }
         catch (Exception e){
             return internalServerError("{\"error\":\"Internal Server Error\"}");
