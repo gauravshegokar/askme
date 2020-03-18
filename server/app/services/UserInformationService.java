@@ -2,27 +2,27 @@ package services;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import models.Post;
 import models.Tag;
 import models.UserProfile;
 import play.mvc.Result;
 
 import java.util.List;
 
-import static play.mvc.Results.badRequest;
-import static play.mvc.Results.status;
+import static play.mvc.Results.*;
 
 public class UserInformationService {
 
     public Result getUserBasicInfo(String id) {
 
-        System.out.println("inside user basic info, id= "+id);
+        System.out.println("inside user basic info, id= " + id);
 
         // creating user bean
         UserProfile userToFind = new UserProfile();
         userToFind.setId(Integer.parseInt(id));
 
         // Check if user exits
-        List<UserProfile> dbUserMapped = UserProfile.find.query().where().eq("id",id).findList();
+        List<UserProfile> dbUserMapped = UserProfile.find.query().where().eq("id", id).findList();
         if (dbUserMapped.size() == 0) {
             return badRequest("\"{\\\"error\\\":\\\"user not found\\\"}\"");
         } else if (dbUserMapped.size() > 0) {
@@ -84,6 +84,50 @@ public class UserInformationService {
         }
 
         return status(200, resultJson.toString()).withHeader("auth", id);
+
+
+    }
+
+
+    public Result getUserPosts(String userId) {
+
+        try {
+
+            //get user from userid
+            List<UserProfile> users = UserProfile.find.query().where().eq("id", userId).findList();
+
+            if (users.size() == 0) {
+                return badRequest("{\"error\": \"user not found\"}");
+            }
+
+            //get posts from userprofile table
+            List<Post> posts = users.get(0).getPosts();
+
+            //create post json array
+            JsonArray postsJsonArray = new JsonArray();
+
+            for (Post post : posts) {
+
+                JsonObject postJson = new JsonObject();
+                postJson.addProperty("postId", post.getPostId());
+                postJson.addProperty("postText", post.getText());
+                postJson.addProperty("channelName", post.getChannel().getChannelName());
+                postJson.addProperty("channelId", post.getChannel().getChannelId());
+                postJson.addProperty("datePosted", String.valueOf(post.getDate_created()));
+
+                postsJsonArray.add(postJson);
+            }
+
+            JsonObject resultJson = new JsonObject();
+            resultJson.add("posts", postsJsonArray);
+
+            return status(200, resultJson.toString()).withHeader("auth", userId);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return internalServerError("{\"error\":\"Couldn't fetch user posts \"}");
+        }
 
 
     }

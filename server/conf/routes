@@ -16,6 +16,9 @@ POST        /api/signup                          controllers.SignupController.ad
 # user basic info
 GET         /api/users/:userId                   controllers.UserInformationController.getUserBasicInfo(userId: String)
 
+# user posts info
+GET         /api/users/:userId/posts              controllers.UserInformationController.getUserPosts(userId: String)
+
 # user interests
 GET         /api/users/:userId/interests         controllers.UserInformationController.getUserInterests(userId: String)
 

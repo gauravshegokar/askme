@@ -21,6 +21,20 @@ public class UserProfile extends Model {
     @Constraints.Required
     private String password;
 
+
+    private String fname;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "author")
+    private List<Post> posts;
+
+
+    @ManyToMany(mappedBy = "followers")
+    private List<Tag> interests=new ArrayList<>();
+
+    private String lname;
+    private String accessLevel;
+
+
     public List<Post> getPosts() {
         return posts;
     }
@@ -34,17 +48,6 @@ public class UserProfile extends Model {
 
 
 
-    private String fname;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Post> posts;
-
-
-   @ManyToMany(mappedBy = "followers")
-    private List<Tag> interests=new ArrayList<>();
-
-    private String lname;
-    private String accessLevel;
 
     @Override
     public String toString() {

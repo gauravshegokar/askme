@@ -22,6 +22,7 @@ public class Post extends Model {
     public Timestamp date_created;
 
     @ManyToOne
+    @JoinColumn(name="authorId",referencedColumnName = "id")
     private UserProfile author;
 
     private boolean isProfane;
