@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Model;
+import play.data.validation.Constraints;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,9 +15,11 @@ public class Channel extends Model {
     @GeneratedValue
     private int channelId;
 
+    @Constraints.Required
     private String channelName;
 
-    private UserProfile admin;
+    @Constraints.Required
+    private UserProfile channelOwner;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Post> posts;
@@ -27,20 +30,22 @@ public class Channel extends Model {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Tag> tags;
 
-    private String description;
+    private String channelDescription;
 
-    private Date date;
+    @Constraints.Required
+    @Column(columnDefinition = "datetime")
+    private Date dateCreated;
 
     public static Finder<Long, Channel> getFind() {
         return find;
     }
 
-    public UserProfile getAdmin() {
-        return admin;
+    public UserProfile getChannelOwner() {
+        return channelOwner;
     }
 
-    public void setAdmin(UserProfile admin) {
-        this.admin = admin;
+    public void setChannelOwner(UserProfile channelOwner) {
+        this.channelOwner = channelOwner;
     }
 
     public List<UserProfile> getMembers() {
@@ -59,20 +64,20 @@ public class Channel extends Model {
         this.tags = tags;
     }
 
-    public String getDescription() {
-        return description;
+    public String getChannelDescription() {
+        return channelDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setChannelDescription(String channelDescription) {
+        this.channelDescription = channelDescription;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getDateCreated() {
+        return dateCreated;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     public int getChannelId() {
