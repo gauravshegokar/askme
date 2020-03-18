@@ -7,12 +7,9 @@ import services.SignupService;
 
 
 public class SignupController extends Controller {
-
     public Result addUser() {
-
-
-        String username = null;
-        String password = null;
+        String username;
+        String password;
         String fname;
         String lname;
         String userType;
@@ -21,10 +18,10 @@ public class SignupController extends Controller {
         try {
             username = request().body().asFormUrlEncoded().get("username")[0];
             password = request().body().asFormUrlEncoded().get("password")[0];
-
         } catch (Exception e) {
             return badRequest("{\"error\":\"Missing required parameters\"}");
         }
+
         try {
             fname = request().body().asFormUrlEncoded().get("fname")[0];
         } catch (Exception e) {

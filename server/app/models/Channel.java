@@ -11,7 +11,6 @@ import java.util.List;
 
 @Entity
 public class Channel extends Model {
-
     @Id
     @GeneratedValue
     private int channelId;
@@ -19,7 +18,6 @@ public class Channel extends Model {
     private String channelName;
 
     private List<Post> posts;
-
 
     public int getChannelId() {
         return channelId;
@@ -44,10 +42,9 @@ public class Channel extends Model {
     public void setPosts(Post post) {
         if (this.posts == null) {
             this.posts = new ArrayList<>();
-            this.posts.add(post);
-        } else {
-            this.posts.add(post);
         }
+
+        this.posts.add(post);
     }
 
     public static final Finder<Long, Channel> find = new Finder<>(Channel.class);

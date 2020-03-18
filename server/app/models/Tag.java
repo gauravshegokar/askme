@@ -8,7 +8,6 @@ import javax.persistence.Id;
 
 @Entity
 public class Tag extends Model {
-
     @Id
     @GeneratedValue
     private int tagId;

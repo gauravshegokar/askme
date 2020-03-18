@@ -13,8 +13,6 @@ import static play.mvc.Results.status;
 public class RegularUser implements User {
     @Override
     public Result addUser(String username, String pwd, String userType, String fname, String lname) {
-
-
         // creating user bean
         UserProfile user = new UserProfile();
         user.setUsername(username);
@@ -35,8 +33,6 @@ public class RegularUser implements User {
         }
 
         return badRequest("{\"error\":\"Unable to perform operation\"}");
-
-
     }
 
     @Override

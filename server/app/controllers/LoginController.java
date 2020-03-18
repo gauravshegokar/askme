@@ -9,9 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LoginController extends Controller {
-
     // POST api/login
-    public Result postUser(){
+    public Result postUser() {
         String username = null;
         String password = null;
 
@@ -19,7 +18,7 @@ public class LoginController extends Controller {
         try {
             username = request().body().asFormUrlEncoded().get("username")[0];
             password = request().body().asFormUrlEncoded().get("password")[0];
-        } catch (Exception e){
+        } catch (Exception e) {
             return badRequest("{\"error\":\"Missing required parameters\"}");
         }
 
@@ -30,15 +29,14 @@ public class LoginController extends Controller {
         user.setPassword(password);
 
         // Check if user exits
-        List<UserProfile> dbUserMapped=new ArrayList<>();
+        List<UserProfile> dbUserMapped = new ArrayList<>();
         try {
-            dbUserMapped=UserProfile.find.query().where().ilike("username", user.getUsername()).findList();
-        }
-        catch (Exception e){
+            dbUserMapped = UserProfile.find.query().where().ilike("username", user.getUsername()).findList();
+        } catch (Exception e) {
             return internalServerError("{\"error\":\"Internal Server Error\"}");
         }
 
-        if (dbUserMapped.size() > 0 && dbUserMapped.get(0).getPassword().equals(user.getPassword())){
+        if (dbUserMapped.size() > 0 && dbUserMapped.get(0).getPassword().equals(user.getPassword())) {
             JsonObject resultJson = new JsonObject();
             resultJson.addProperty("auth", String.valueOf(dbUserMapped.get(0).getId()));
             return status(200, resultJson.toString());

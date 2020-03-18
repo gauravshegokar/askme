@@ -14,7 +14,6 @@ import java.util.List;
 
 @Entity
 public class UserProfile extends Model {
-
     @Id
     @GeneratedValue
     private int id;
@@ -23,11 +22,10 @@ public class UserProfile extends Model {
     private String username;
     @Constraints.Required
     private String password;
-
     private String fname;
-
+    private String lname;
+    private String accessLevel;
     public List<Tag> interests=new ArrayList<>();
-
 
     public List<Tag> getInterests() {
         return interests;
@@ -44,11 +42,6 @@ public class UserProfile extends Model {
     public void setAccessLevel(String accessLevel) {
         this.accessLevel = accessLevel;
     }
-
-    private String lname;
-    private String accessLevel;
-
-
 
     public String getUsername() {
         return username;
@@ -103,7 +96,4 @@ public class UserProfile extends Model {
     }
 
     public static final Finder<Long, UserProfile> find = new Finder<>(UserProfile.class);
-
-
-
 }
