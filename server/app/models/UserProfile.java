@@ -4,10 +4,7 @@ package models;
 import io.ebean.*;
 import play.data.validation.Constraints;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,8 +23,25 @@ public class UserProfile extends Model {
 
     private String fname;
 
-    public List<Tag> interests=new ArrayList<>();
+   @ManyToMany(mappedBy = "followers")
+    private List<Tag> interests=new ArrayList<>();
 
+    private String lname;
+    private String accessLevel;
+
+    @Override
+    public String toString() {
+        return "UserProfile{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", fname='" + fname + '\'' +
+                ", interests=" + interests +
+                ", lname='" + lname + '\'' +
+                ", accessLevel='" + accessLevel + '\'' +
+                ", date_created=" + date_created +
+                '}';
+    }
 
     public List<Tag> getInterests() {
         return interests;
@@ -44,9 +58,6 @@ public class UserProfile extends Model {
     public void setAccessLevel(String accessLevel) {
         this.accessLevel = accessLevel;
     }
-
-    private String lname;
-    private String accessLevel;
 
 
 

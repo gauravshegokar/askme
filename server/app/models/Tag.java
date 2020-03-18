@@ -2,9 +2,8 @@ package models;
 
 import io.ebean.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Tag extends Model {
@@ -14,6 +13,18 @@ public class Tag extends Model {
     private int tagId;
 
     private String tagName;
+
+    @ManyToMany
+    @JoinTable(name="interest_followers")
+    private List<UserProfile> followers;
+
+    public List<UserProfile> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(List<UserProfile> followers) {
+        this.followers = followers;
+    }
 
     public int getTagId() {
         return tagId;

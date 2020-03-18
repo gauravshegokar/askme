@@ -22,6 +22,8 @@ public class RegularUser implements User {
         user.setFname(fname);
         user.setLname(lname);
         user.setAccessLevel("regular");
+        System.out.println(user.toString());
+
 
         // Check if user exits
         List<UserProfile> dbUserMapped = UserProfile.find.query().where().ilike("username", user.getUsername()).findList();

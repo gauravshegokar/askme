@@ -17,27 +17,31 @@ public class SignupController extends Controller {
         String lname;
         String userType;
 
+
+
         // Validation
         try {
-            username = request().body().asFormUrlEncoded().get("username")[0];
-            password = request().body().asFormUrlEncoded().get("password")[0];
+            username = request().body().asJson().get("username").asText();
+            password = request().body().asJson().get("password").asText();
 
         } catch (Exception e) {
+
             return badRequest("{\"error\":\"Missing required parameters\"}");
         }
         try {
-            fname = request().body().asFormUrlEncoded().get("fname")[0];
+            fname = request().body().asJson().get("fname").asText();
         } catch (Exception e) {
             fname = "";
         }
 
         try {
-            lname = request().body().asFormUrlEncoded().get("lname")[0];
+            lname = request().body().asJson().get("lname").asText();
         } catch (Exception e) {
             lname = "";
         }
 
-        userType = request().body().asFormUrlEncoded().get("userType")[0];
+        userType = request().body().asJson().get("userType").asText();
+
 
         return SignupService.addUser(username, password, userType, fname, lname);
     }
