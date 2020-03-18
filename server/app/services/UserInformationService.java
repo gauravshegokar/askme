@@ -15,12 +15,14 @@ public class UserInformationService {
 
     public Result getUserBasicInfo(String id) {
 
+        System.out.println("inside user basic info, id= "+id);
+
         // creating user bean
         UserProfile userToFind = new UserProfile();
         userToFind.setId(Integer.parseInt(id));
 
         // Check if user exits
-        List<UserProfile> dbUserMapped = UserProfile.find.query().where().ilike("userId", String.valueOf(userToFind.getId())).findList();
+        List<UserProfile> dbUserMapped = UserProfile.find.query().where().eq("id",id).findList();
         if (dbUserMapped.size() == 0) {
             return badRequest("\"{\\\"error\\\":\\\"user not found\\\"}\"");
         } else if (dbUserMapped.size() > 0) {

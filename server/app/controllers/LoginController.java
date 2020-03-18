@@ -16,8 +16,8 @@ public class LoginController extends Controller {
 
         // Validation
         try {
-            username = request().body().asFormUrlEncoded().get("username")[0];
-            password = request().body().asFormUrlEncoded().get("password")[0];
+            username = request().body().asJson().get("username").asText();
+            password = request().body().asJson().get("password").asText();
         } catch (Exception e) {
             return badRequest("{\"error\":\"Missing required parameters\"}");
         }

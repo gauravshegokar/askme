@@ -1,5 +1,7 @@
 package models;
 
-import io.ebean.*;
+
+import com.avaje.ebean.Model;
+
 public class Comment extends Model {
 }

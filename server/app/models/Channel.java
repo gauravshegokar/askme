@@ -1,7 +1,6 @@
 package models;
 
-import io.ebean.Finder;
-import io.ebean.Model;
+import com.avaje.ebean.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
