@@ -7,12 +7,9 @@ import services.SignupService;
 
 
 public class SignupController extends Controller {
-
     public Result addUser() {
-
-
-        String username = null;
-        String password = null;
+        String username;
+        String password;
         String fname;
         String lname;
         String userType;
@@ -21,6 +18,7 @@ public class SignupController extends Controller {
 
         // Validation
         try {
+
             username = request().body().asJson().get("username").asText();
             password = request().body().asJson().get("password").asText();
 
@@ -28,6 +26,7 @@ public class SignupController extends Controller {
 
             return badRequest("{\"error\":\"Missing required parameters\"}");
         }
+
         try {
             fname = request().body().asJson().get("fname").asText();
         } catch (Exception e) {

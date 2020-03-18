@@ -14,19 +14,17 @@ import java.util.List;
 
 @Entity
 public class Post extends Model {
-
-    private UserProfile author;
-
-    private boolean isProfane;
-
+    public static final Finder<Long, Post> find = new Finder<>(Post.class);
     @Id
     @GeneratedValue
     private int postId;
-
+    @Constraints.Required
+    @Column(columnDefinition = "datetime")
+    public Timestamp date_created;
+    private UserProfile author;
+    private boolean isProfane;
     private Channel channel;
-
     private String text;
-
     private List<Tag> tags;
 
     public List<Tag> getTags() {
@@ -34,8 +32,8 @@ public class Post extends Model {
     }
 
     public void setTags(Tag tag) {
-        if(this.tags==null){
-            tags=new ArrayList<>();
+        if (this.tags == null) {
+            tags = new ArrayList<>();
         }
         this.tags.add(tag);
     }
@@ -44,12 +42,6 @@ public class Post extends Model {
         this.tags = tags;
     }
 
-    @Constraints.Required
-    @Column(columnDefinition = "datetime")
-    public Timestamp date_created;
-
-
-
     public boolean isProfane() {
         return isProfane;
     }
@@ -57,8 +49,6 @@ public class Post extends Model {
     public void setProfane(boolean profane) {
         isProfane = profane;
     }
-
-
 
     public UserProfile getAuthor() {
         return author;
@@ -99,8 +89,4 @@ public class Post extends Model {
     public void setDate_created(Timestamp date_created) {
         this.date_created = date_created;
     }
-
-    public static final Finder<Long, Post> find = new Finder<>(Post.class);
-
-
 }

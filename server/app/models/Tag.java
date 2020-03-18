@@ -7,7 +7,6 @@ import java.util.List;
 
 @Entity
 public class Tag extends Model {
-
     @Id
     @GeneratedValue
     private int tagId;

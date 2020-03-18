@@ -19,7 +19,4 @@ libraryDependencies += "io.ebean" % "ebean" % "11.22.10"
 libraryDependencies += "mysql" % "mysql-connector-java" % "8.0.11"
 libraryDependencies += jdbc
 
-
 unmanagedResourceDirectories in Test <+= baseDirectory(_ / "target/web/public/test")
-
-
