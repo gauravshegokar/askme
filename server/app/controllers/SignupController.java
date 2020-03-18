@@ -7,6 +7,7 @@ import services.SignupService;
 
 
 public class SignupController extends Controller {
+
     public Result addUser() {
         String username;
         String password;
@@ -14,13 +15,12 @@ public class SignupController extends Controller {
         String lname;
         String userType;
 
-
-
         // Validation
         try {
 
             username = request().body().asJson().get("username").asText();
             password = request().body().asJson().get("password").asText();
+            userType = request().body().asJson().get("userType").asText();
 
         } catch (Exception e) {
 
@@ -39,8 +39,9 @@ public class SignupController extends Controller {
             lname = "";
         }
 
-        userType = request().body().asJson().get("userType").asText();
-
+        if(!(userType.equalsIgnoreCase("admin")|userType.equalsIgnoreCase("regular"))){
+            return badRequest("{\"error\":\"Incorrect user type\"}");
+        }
 
         return SignupService.addUser(username, password, userType, fname, lname);
     }

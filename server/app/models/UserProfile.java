@@ -1,7 +1,8 @@
 package models;
 
 
-import io.ebean.*;
+import com.avaje.ebean.Finder;
+import com.avaje.ebean.Model;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;

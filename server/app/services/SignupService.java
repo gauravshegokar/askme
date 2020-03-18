@@ -26,7 +26,7 @@ public class SignupService {
             return user.addUser(username, pwd, userType, fname, lname);
         }
 
-        return internalServerError("{\"error\":\"Internal Server error while adding user\"}");
+        return badRequest("{\"error\":\" error while adding user\"}");
     }
 
 
