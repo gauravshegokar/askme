@@ -1,0 +1,20 @@
+{
+  "comments":[
+      {
+      "commentId":1,
+      "commentText": "Please provide more details here.",
+      "date": "14 March 2020",
+      "userId": 2,
+      "username": "zhugongpu"
+    },
+    {
+      "commentId":2,
+      "commentText": "Is this a contagious disease?",
+      "date": "16 March 2020",
+      "userId": 3,
+      "username": "gauravshegokar"
+    }
+  ]
+}
+
+
