@@ -24,7 +24,7 @@ public class UserProfile extends Model {
 
     private String fname;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "author")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "authorId")
     private List<Post> posts;
 
 
