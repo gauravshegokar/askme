@@ -20,7 +20,7 @@ public class UserProfile extends Model {
     @Constraints.Required
     private String password;
     private String fname;
-<<<<<<< HEAD
+
 
    @ManyToMany(mappedBy = "followers")
     private List<Tag> interests=new ArrayList<>();
@@ -42,12 +42,7 @@ public class UserProfile extends Model {
                 '}';
     }
 
-=======
-    private String lname;
-    private String accessLevel;
-    public List<Tag> interests=new ArrayList<>();
 
->>>>>>> 8cb45f9c2bf50553c3da44a35df96da6e45cbfb2
     public List<Tag> getInterests() {
         return interests;
     }
@@ -64,11 +59,6 @@ public class UserProfile extends Model {
         this.accessLevel = accessLevel;
     }
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 8cb45f9c2bf50553c3da44a35df96da6e45cbfb2
     public String getUsername() {
         return username;
     }
