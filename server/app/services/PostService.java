@@ -18,11 +18,13 @@ public class PostService {
     public Result addPost(String channelId, String userId, String text, boolean isProfane, String tags) {
 
         // Check if user exits
-        List<UserProfile> dbUserMapped = UserProfile.find.query().where().ilike("username", userId).findList();
+        List<UserProfile> dbUserMapped = UserProfile.find.query().where().ilike("id", userId).findList();
 
         if (dbUserMapped.size() == 0) {
-            return status(401, "Authorization failed");
+            return status(401, "User not found");
         } else {
+
+
             //check if channel present
             List<Channel> dbChannelMapped = Channel.find.query().where().ilike("channelId", channelId).findList();
 
@@ -34,14 +36,23 @@ public class PostService {
                 List<String> tagNames = Arrays.asList(tags.split(","));
 
                 for (String tagName : tagNames) {
+
+
                     List<Tag> existingTag = Tag.find.query().where().eq("tagName", tagName).findList();
 
                     if (existingTag.size() == 0) {
+
+
                         Tag newTag = new Tag();
                         newTag.setTagName(tagName);
+                        newTag.save();
                         postTags.add(newTag);
                     } else {
+
+
                         postTags.add(existingTag.get(0));
+
+
                     }
                 }
 

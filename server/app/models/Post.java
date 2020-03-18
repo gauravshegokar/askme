@@ -4,27 +4,35 @@ package models;
 import com.avaje.ebean.Model;
 import play.data.validation.Constraints;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Post extends Model {
+
     public static final Finder<Long, Post> find = new Finder<>(Post.class);
     @Id
     @GeneratedValue
     private int postId;
+
     @Constraints.Required
     @Column(columnDefinition = "datetime")
     public Timestamp date_created;
+
+    @ManyToOne
     private UserProfile author;
+
     private boolean isProfane;
+
+    @ManyToOne
     private Channel channel;
+
     private String text;
+
+    @ManyToMany
+    @JoinTable(name="post_tag_mapper")
     private List<Tag> tags;
 
     public List<Tag> getTags() {

@@ -20,4 +20,4 @@ GET         /api/users/:userId                   controllers.UserInformationCont
 GET         /api/users/:userId/interests         controllers.UserInformationController.getUserInterests(userId: String)
 
 # add post
-#POST        /api/channels/:channelId/post        controllers.PostController.addPost()
+POST        /api/channels/:channelId/post        controllers.PostController.addPost(channelId: String)

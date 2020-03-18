@@ -5,6 +5,7 @@ package models;
 import com.avaje.ebean.Model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,8 +17,24 @@ public class Tag extends Model {
     private String tagName;
 
     @ManyToMany
+    private List<Post> posts;
+
+
+    @ManyToMany
     @JoinTable(name="interest_followers")
     private List<UserProfile> followers;
+
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Post post) {
+        if(this.posts == null){
+            this.posts=new ArrayList<>();
+        }
+        this.posts.add(post);
+    }
 
     public List<UserProfile> getFollowers() {
         return followers;

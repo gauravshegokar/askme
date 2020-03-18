@@ -20,7 +20,24 @@ public class UserProfile extends Model {
     private String username;
     @Constraints.Required
     private String password;
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Post post) {
+        if(this.posts == null){
+            this.posts=new ArrayList<>();
+        }
+        this.posts.add(post);
+    }
+
+
+
     private String fname;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Post> posts;
 
 
    @ManyToMany(mappedBy = "followers")

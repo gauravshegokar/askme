@@ -2,9 +2,7 @@ package models;
 
 import com.avaje.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +14,7 @@ public class Channel extends Model {
 
     private String channelName;
 
+    @OneToMany
     private List<Post> posts;
 
     public int getChannelId() {
