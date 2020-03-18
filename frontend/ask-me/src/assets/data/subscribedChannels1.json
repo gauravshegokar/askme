@@ -1,0 +1,13 @@
+{
+  "subscribedChannels" : [
+    {
+      "channelId" : 1,
+      "channelName" : "CoronaVirusUpdates"
+    },
+    {
+      "channelId" : 2,
+      "channelName" : "News"
+    }
+  ]
+}
+

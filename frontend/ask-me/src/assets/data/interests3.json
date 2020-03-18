@@ -1,0 +1,13 @@
+{
+  "interests" : [
+    {
+      "tagId" : 2,
+      "tagName" : "Pandemic"
+    },
+    {
+      "tagId" : 3,
+      "tagName" : "Latest"
+    }
+  ]
+}
+

@@ -14,7 +14,7 @@
 
     <div [hidden]="!isLoggedIn">
         <button (click)='createPost()' mat-button>New Post</button>
-        <button (click)='profile()' mat-button>Profile</button>
+        <button (click)='profile(1)' mat-button>Profile</button>
         <button (click)='logout()' mat-button>Logout</button>
     </div>
     <div [hidden]="isLoggedIn">

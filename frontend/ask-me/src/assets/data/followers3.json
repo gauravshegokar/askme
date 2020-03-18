@@ -1,0 +1,17 @@
+{
+  "followers" : [
+    {
+      "userId" : 1,
+      "userName" : "sinhaleeza"
+    },
+    {
+      "userId" : 2,
+      "userName" : "zhugongpu"
+    },
+    {
+      "userId" : 4,
+      "userName" : "thaorecharu"
+    }
+  ]
+}
+

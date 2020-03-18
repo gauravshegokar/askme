@@ -21,6 +21,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { JwtInterceptor } from './_helpers';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FeedComponent } from './feed/feed.component';
+import { PostsComponent } from './posts/posts.component';
+import { NewPostComponent } from './new-post/new-post.component';
+import {MatSelectModule} from "@angular/material/select";
+import {MatRadioModule} from "@angular/material/radio";
+import { ProfileComponent } from './profile/profile.component';
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
@@ -28,7 +34,10 @@ import { FeedComponent } from './feed/feed.component';
     LoginComponent,
     RegisterComponent,
     NavbarComponent,
-    FeedComponent
+    FeedComponent,
+    PostsComponent,
+    NewPostComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +51,10 @@ import { FeedComponent } from './feed/feed.component';
     FormsModule,
     MatCardModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatGridListModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

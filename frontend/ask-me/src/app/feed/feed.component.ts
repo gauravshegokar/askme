@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FeedService } from './feed.service'
 import { Feed } from '@app/_models/feed';
 @Component({
@@ -8,7 +9,7 @@ import { Feed } from '@app/_models/feed';
 })
 export class FeedComponent implements OnInit {
 
-  constructor(private feedService: FeedService) { }
+  constructor(private feedService: FeedService,private router:Router) { }
 
   public feedData : Feed
 
@@ -28,6 +29,10 @@ export class FeedComponent implements OnInit {
         console.log(err)
       }
     )
+  }
+
+  channelPosts(chId){
+    this.router.navigate(['posts'], { queryParams: { channelId : chId } })
   }
 
 }

@@ -42,11 +42,11 @@ export class NavbarComponent implements OnInit {
     this.authenticationService.logout()
   }
 
-  profile(){
-
+  profile(profileId){
+    this.router.navigate(['profile'],{ queryParams: { profileId : profileId } })
   }
 
   createPost(){
-    
+    this.router.navigate(['newPost'])
   }
 }

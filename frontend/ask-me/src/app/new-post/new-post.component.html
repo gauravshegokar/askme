@@ -1,0 +1,56 @@
+<div *ngIf="channelsData">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <img src="assets/images/userPosts.png" style="height: 80px;width: 80px;">
+    </mat-card-header><br>
+    <mat-card-header>
+      <mat-card-title>
+        <span>New Post</span>
+      </mat-card-title>
+      <mat-card-subtitle><b>Please select the channel where you want your post to appear and enter the post details</b></mat-card-subtitle>
+    </mat-card-header>
+    <form [formGroup]="form" (ngSubmit)="submit()" >
+    <mat-form-field style="margin-left: 18px">
+      <mat-label>Please select Channel</mat-label>
+      <mat-select formControlName="selChannel">
+        <mat-option>
+          ---Select---
+        </mat-option>
+        <mat-option *ngFor="let channel of channelsData.channels" [value]="channel.channelId" >
+          {{channel.channelName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field style="width: 400px;margin-left: 18px">
+      <mat-label>Post content</mat-label>
+      <textarea matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5" formControlName="selPostContent"></textarea>
+    </mat-form-field>
+    <br>
+    <mat-form-field style="margin-left: 18px">
+      <mat-select style="visibility: hidden">
+      </mat-select>
+      Profanity filtering :<br><br>
+      <mat-radio-group aria-label="Select an option" formControlName="selProfanityFiltering">
+        <mat-radio-button value="True">True</mat-radio-button>&nbsp;
+        <mat-radio-button value="False">False</mat-radio-button>
+      </mat-radio-group>
+    </mat-form-field>
+    <br>
+    <mat-form-field style="width: 400px;margin-left: 18px">
+      <mat-label>Tags</mat-label>
+      <textarea matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5" formControlName="selTags"></textarea>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button style="width: 100px;margin-left: 18px">Submit Post</button>
+    </form>
+  </mat-card>
+</div>

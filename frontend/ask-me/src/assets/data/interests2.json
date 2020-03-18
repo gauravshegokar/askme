@@ -1,0 +1,17 @@
+{
+  "interests" : [
+    {
+      "tagId" : 1,
+      "tagName" : "CoronaVirus"
+    },
+    {
+      "tagId" : 2,
+      "tagName" : "Pandemic"
+    },
+    {
+      "tagId" : 3,
+      "tagName" : "Latest"
+    }
+  ]
+}
+

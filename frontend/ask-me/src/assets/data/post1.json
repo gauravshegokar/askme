@@ -1,0 +1,50 @@
+{
+    "posts": [
+        {
+            "postId": 1,
+            "postText": "How Corona Virus Spreads?",
+            "profane": false,
+            "author": "Leeza",
+            "authorId": 1,
+            "likesCount": 57,
+            "datePosted": "14 March 2020",
+            "tags": [
+                {
+                    "tagId": 1,
+                    "tagName": "#CoronaVirus"
+                }
+            ]
+        },
+      {
+            "postId": 2,
+            "postText": "What are the coronavirus symptoms?",
+            "profane": false,
+            "author": "Gaurav",
+            "authorId": 2,
+            "likesCount": 100,
+            "datePosted": "27 Feb 2020",
+            "tags": [
+              {
+                "tagId": 1,
+                "tagName": "#CoronaVirus"
+              }
+            ]
+      },
+      {
+            "channelId": 1,
+            "postId": 3,
+            "postText": "How many are affected so far in the USA?",
+            "profane": false,
+            "author": "Charu",
+            "authorId": 3,
+            "likesCount": 76,
+            "datePosted": "12 March 2020",
+            "tags": [
+              {
+                "tagId": 1,
+                "tagName": "#CoronaVirus"
+              }
+            ]
+      }
+    ]
+}

@@ -20,7 +20,7 @@
             </mat-card-content>
             <mat-card-actions>
                 <span>
-                    <button mat-button>Read More</button>
+                    <button mat-button (click)='channelPosts(feed.channelId)'>Read More</button>
                     <button mat-button>Upvote</button>
                 </span>
                 <span style="float:right;"><button mat-button>{{feed.datePosted}}</button></span>

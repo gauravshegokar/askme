@@ -1,0 +1,107 @@
+<table>
+  <tr>
+    <td style="padding: 20px">
+      <div *ngIf="profileData">
+        <mat-card class="example-card">
+          <img src="assets/images/profileDetails.png" style="height: 80px;width: 80px;">
+          <mat-card-header>
+            <mat-card-title>
+              <span>User Details</span>
+              <br><br>
+            </mat-card-title>
+            <mat-card-subtitle><b> UserName : {{profileData.userName}}</b></mat-card-subtitle>
+            <mat-card-subtitle><b> User Id : {{profileData.userId}}</b></mat-card-subtitle>
+            <mat-card-subtitle><b> First Name : {{profileData.firstName}}</b></mat-card-subtitle>
+            <mat-card-subtitle><b> Last Name : {{profileData.lastName}}</b></mat-card-subtitle>
+            <mat-card-subtitle><b> Joined on : {{profileData.dateJoined}}</b></mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </td>
+    <td style="padding: 20px">
+      <div *ngIf="interestsData">
+        <mat-card class="example-card">
+          <img src="assets/images/userInterests.jpg" style="height: 80px;width: 80px;">
+          <mat-card-header>
+            <mat-card-title>
+              <span>User Interests</span>
+              <br><br>
+            </mat-card-title>
+            <mat-card-subtitle *ngFor="let interest of interestsData.interests">
+              <b> Tag Id :{{interest.tagId}} &nbsp;&nbsp; Tag Name :{{interest.tagName}}</b><br>
+            </mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </td>
+    <td style="padding: 20px">
+      <div *ngIf="followersData">
+        <mat-card class="example-card">
+          <img src="assets/images/userFollowers.gif" style="height: 80px;width: 80px;">
+          <mat-card-header>
+            <mat-card-title>
+              <span>User Followers</span>
+              <br><br>
+            </mat-card-title>
+            <mat-card-subtitle *ngFor="let follower of followersData.followers">
+              <b> Follower Id :{{follower.userId}} &nbsp;&nbsp; Follower Name :{{follower.userName}}</b><br>
+            </mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="padding: 20px">
+      <div *ngIf="userPostsData">
+        <mat-card class="example-card">
+          <img src="assets/images/userPosts.png" style="height: 80px;width: 80px;">
+          <mat-card-header>
+            <mat-card-title>
+              <span>User Posts</span>
+              <br><br>
+            </mat-card-title>
+            <mat-card-subtitle *ngFor="let userPost of userPostsData.posts">
+              <b> Post Id :{{userPost.postId}} &nbsp;&nbsp;&nbsp; Date posted :{{userPost.datePosted}}</b><br>
+              <b> Channel Name :{{userPost.channelName}}</b><br>
+              <b> Post Text : {{userPost.postText}}</b><br>
+            </mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </td>
+    <td style="padding: 20px">
+      <div *ngIf="ownedChannelsData">
+        <mat-card class="example-card">
+          <img src="assets/images/ownedChannels.png" style="height: 80px;width: 80px;">
+          <mat-card-header>
+            <mat-card-title>
+              <span>User Owned Channels</span>
+              <br><br>
+            </mat-card-title>
+            <mat-card-subtitle *ngFor="let ownedChannel of ownedChannelsData.ownedChannels">
+              <b> Channel Id :{{ownedChannel.channelId}} &nbsp;&nbsp;&nbsp; Channel Name :{{ownedChannel.channelName}}</b><br>
+            </mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </td>
+    <td style="padding: 20px">
+      <div *ngIf="subscribedChannelsData">
+        <mat-card class="example-card">
+          <img src="assets/images/subscribedChannels.png" style="height: 80px;width: 80px;">
+          <mat-card-header>
+            <mat-card-title>
+              <span>User Subscribed Channels</span>
+              <br><br>
+            </mat-card-title>
+            <mat-card-subtitle *ngFor="let subscribedChannel of subscribedChannelsData.subscribedChannels">
+              <b> Channel Id :{{subscribedChannel.channelId}} &nbsp;&nbsp;&nbsp; Channel Name :{{subscribedChannel.channelName}}</b><br>
+            </mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,42 @@
+{
+    "posts": [
+      {
+          "postId": 4,
+          "postText": "Stock crashes post Cororavirus pandemic",
+          "profane": false,
+          "author": "Gongpu",
+          "authorId": 4,
+          "likesCount": 100,
+          "datePosted": "10 March 2020",
+          "tags": [
+            {
+              "tagId": 1,
+              "tagName": "#CoronaVirus"
+            },
+            {
+              "tagId": 2,
+              "tagName": "#stocks"
+            }
+          ]
+      },
+        {
+            "postId": 5,
+            "postText": "USA Economy uncertainity post COVD-19 scenario",
+            "profane": false,
+            "author": "Leeza",
+            "authorId": 1,
+            "likesCount": 97,
+            "datePosted": "2 March 2020",
+            "tags": [
+                {
+                    "tagId": 1,
+                    "tagName": "#CoronaVirus"
+                },
+                {
+                    "tagId": 2,
+                    "tagName": "#economy"
+                }
+            ]
+        }
+    ]
+}

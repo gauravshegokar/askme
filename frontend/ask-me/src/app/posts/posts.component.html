@@ -1,0 +1,39 @@
+<div *ngIf="postsData">
+  <mat-card class="example-card" style="margin-left: 25px;margin-right: 25px;margin-top: 25px;">
+    <mat-card-header>
+      <img src="assets/images/subscribedChannels.png" style="height: 80px;width: 80px;">
+    </mat-card-header>
+  <mat-card-header>
+    <mat-card-title>
+      <span>{{channelData.channelName}}</span>
+    </mat-card-title>
+      <mat-card-subtitle><b>{{channelData.channelDescription}}</b></mat-card-subtitle>
+    <mat-card-subtitle><b> Created by : {{channelData.channelOwner}} on : {{channelData.dateCreated}}</b></mat-card-subtitle>
+  </mat-card-header>
+
+  <div *ngFor="let post of postsData.posts" style="margin-left: 18px;background-color: lightblue; width: 500px">
+      <mat-card-content style="margin-left: 18px;padding-top: 10px;">
+        <mat-card-subtitle>
+          {{post.postText}}<br>
+          <span *ngFor="let tag of post.tags">
+              {{tag.tagName}}
+          </span>
+          <span style="float:right;margin-right: 15px">Author : {{post.author}}</span>
+          <br>
+          <span style="float:right;margin-right: 15px">Date Posted : {{post.datePosted}}</span>
+          <br>
+          <span style="float:right;margin-right: 15px">Upvotes {{post.likesCount}}</span>
+          <br>
+
+        </mat-card-subtitle>
+
+        <mat-card-actions>
+          <span>
+              <button mat-raised-button>Upvote</button>
+          </span>
+        </mat-card-actions>
+
+      </mat-card-content>
+  </div>
+  </mat-card>
+</div>
