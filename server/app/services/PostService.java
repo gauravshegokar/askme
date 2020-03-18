@@ -1,5 +1,7 @@
 package services;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import models.Channel;
 import models.Post;
 import models.Tag;
@@ -10,8 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static play.mvc.Results.badRequest;
-import static play.mvc.Results.status;
+import static play.mvc.Results.*;
 
 public class PostService {
 
@@ -74,6 +75,52 @@ public class PostService {
 
             }
         }
+
+    }
+
+
+    public Result getPost(String postId, String userId) {
+
+        List<Post> post = Post.find.query().where().eq("postId", postId).findList();
+        if (post.size() == 0) {
+            return badRequest("\"{\"error\":\"Post doesn't exist\"}\"").withHeader("auth", userId);
+        }
+
+        try {
+
+            //creating tag array
+            JsonArray tagArray = new JsonArray();
+            List<Tag> tags = post.get(0).getTags();
+
+            for (Tag tag : tags) {
+                JsonObject tagJsonObject = new JsonObject();
+                tagJsonObject.addProperty("tagId", tag.getTagId());
+                tagJsonObject.addProperty("tagName", tag.getTagName());
+                tagArray.add(tagJsonObject);
+            }
+
+            //creating result json
+            JsonObject resultJson = new JsonObject();
+
+            resultJson.addProperty("postId", post.get(0).getPostId());
+            resultJson.addProperty("postText", post.get(0).getText());
+            resultJson.addProperty("profane", post.get(0).isProfane());
+            resultJson.addProperty("authorId", post.get(0).getAuthor().getId());
+            resultJson.addProperty("authorName", post.get(0).getAuthor().getUsername());
+            resultJson.addProperty("datePosted", String.valueOf(post.get(0).getDate_created()));
+            resultJson.addProperty("channelId",post.get(0).getChannel().getChannelId());
+            resultJson.addProperty("channelName",post.get(0).getChannel().getChannelName());
+            resultJson.add("tags", tagArray);
+
+            return status(200, resultJson.toString()).withHeader("auth",userId);
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return internalServerError("{\"error\": \"Unable to fetch post\"}");
+        }
+
+
 
     }
 

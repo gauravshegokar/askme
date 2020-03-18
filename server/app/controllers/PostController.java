@@ -24,4 +24,16 @@ public class PostController {
                 isProfane,
                 request().body().asJson().get("tags").asText());
     }
+
+    public  Result getPost(String postId){
+
+        boolean isAuthentic = request().headers().get("auth")[0].equals(null) ? false : true;
+
+        if (!isAuthentic) {
+            return badRequest("\"{\"error\":\"authorization failed\"}\"");
+        }
+
+        return new PostService().getPost(postId,request().headers().get("auth")[0]);
+
+    }
 }
