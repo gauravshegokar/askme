@@ -2,7 +2,7 @@
     <mat-card-title>Login</mat-card-title>
 <mat-card-content>
 
-<form [formGroup]="form" (ngSubmit)="submit()">
+<form [formGroup]="form" (ngSubmit)="login()">
   <p>
     <mat-form-field>
       <input type="text" matInput placeholder="Username" formControlName="username">
@@ -18,6 +18,16 @@
   <p *ngIf="error" class="error">
     {{ error }}
   </p>
+
+  <div *ngIf="submitted && form.controls.password.errors" class="error">
+    <div *ngIf="form.controls.password.errors.required">Password is required</div>
+    <div *ngIf="form.controls.password.errors.minlength">Password must be at least 4 characters</div>
+  </div>
+
+  <div *ngIf="submitted && form.controls.username.errors" class="error">
+    <div *ngIf="form.controls.username.errors.required">username is required</div>
+    <div *ngIf="form.controls.username.errors.minlength">username must be at least 4 characters</div>
+  </div>
 
   <div class="button">
     <button type="submit" mat-button>Login</button>

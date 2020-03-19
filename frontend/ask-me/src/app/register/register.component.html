@@ -35,12 +35,12 @@
       
       <div *ngIf="submitted && form.controls.password.errors" class="error">
         <div *ngIf="form.controls.password.errors.required">Password is required</div>
-        <div *ngIf="form.controls.password.errors.minlength">Password must be at least 6 characters</div>
+        <div *ngIf="form.controls.password.errors.minlength">Password must be at least 4 characters</div>
       </div>
 
       <div *ngIf="submitted && form.controls.username.errors" class="error">
         <div *ngIf="form.controls.username.errors.required">username is required</div>
-        <div *ngIf="form.controls.username.errors.minlength">username must be at least 6 characters</div>
+        <div *ngIf="form.controls.username.errors.minlength">username must be at least 4 characters</div>
       </div>
 
       <div class="button">
