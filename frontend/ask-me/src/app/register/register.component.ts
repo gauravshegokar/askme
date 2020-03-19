@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegisterService } from './register.service'
 import { Router } from '@angular/router';
 
@@ -9,12 +9,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  submitted = false;
   form: FormGroup = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
+    username: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    password: new FormControl('', [Validators.required, Validators.minLength(4)]),
     fname: new FormControl(''),
     lname: new FormControl(''),
-
+    userType: new FormControl('regular'),
   });
 
   error: string | null;
@@ -28,9 +29,13 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    this.registerService.register().subscribe(
+    this.submitted = true;
+    // stop here if form is invalid
+    if (this.form.invalid) {
+      return;
+    }
+    this.registerService.register(this.form.value).subscribe(
       response => {
-        console.log(response.status)
         if (response.status == 201) {
           this.router.navigate(['/login']);
         } else {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AuthenticationService } from '@app/_services/authentication.service';
 import { first } from 'rxjs/operators';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -31,20 +31,15 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.form.value.username)
-    console.log(this.form.value.password)
-
     this.authenticationService.login(this.form.value.username, this.form.value.password)
       .pipe(first())
       .subscribe(
         data => {
-          console.log(data)
           this.router.navigate(['/']);
         },
         error => {
           console.log(error)
           this.error = error;
-          // this.loading = false;
         });
   }
 }

@@ -21,32 +21,29 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
-        console.log("here")
         let mockLink = "http://www.mocky.io/v2/5e6d5d8a2e0000a7890eebbf"
         let apiLink = `${environment.apiUrl}/api/login`
 
         let link = mockLink
+        let jsonData = {username: username, password: username}
         // return this.http.post<any>(link, { username, password })
-        return this.http.get<any>(link)
+        return this.http.post<any>(apiLink, jsonData)
             .pipe(map(response => {
 
-                console.log("hjhuhjhj")
-                console.log(response)
-                
-                let user = new User()
-                user.id = response.auth
-                user.username = username
-                
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                this.currentUserSubject.next(user);
-                return user;
-            }));
+            let user = new User()
+            user.id = response.auth
+            user.username = username
+
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            this.currentUserSubject.next(user);
+            return user;
+        }));
     }
 
-    logout() {
-        // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
-        this.currentUserSubject.next(null);
-    }
+logout() {
+    // remove user from local storage to log user out
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
+}
 }

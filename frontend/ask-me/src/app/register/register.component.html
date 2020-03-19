@@ -1,37 +1,52 @@
 <mat-card>
-    <mat-card-title>Sign Up</mat-card-title>
-<mat-card-content>
+  <mat-card-title>Sign Up</mat-card-title>
+  <mat-card-content>
 
-<form [formGroup]="form" (ngSubmit)="register()">
-  <p>
-    <mat-form-field>
-      <input type="text" matInput placeholder="Username" formControlName="username">
-    </mat-form-field>
-  </p>
+    <form [formGroup]="form" (ngSubmit)="register()">
+      <p>
+        <mat-form-field>
+          <input type="text" matInput placeholder="Username" formControlName="username">
+        </mat-form-field>
+      </p>
 
-  <p>
-    <mat-form-field>
-      <input type="password" matInput placeholder="Password" formControlName="password">
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field>
-      <input type="text" matInput placeholder="First Name" formControlName="fname">
-    </mat-form-field>
-  </p>
-  <p>
-    <mat-form-field>
-      <input type="text" matInput placeholder="Last Name" formControlName="password">
-    </mat-form-field>
-  </p>
-  <p *ngIf="error" class="error">
-    {{ error }}
-  </p>
+      <p>
+        <mat-form-field>
+          <input type="password" matInput placeholder="Password" formControlName="password">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input type="text" matInput placeholder="First Name" formControlName="fname">
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input type="text" matInput placeholder="Last Name" formControlName="lname">
+        </mat-form-field>
+      </p>
+      <mat-radio-group formControlName="userType">
+        <mat-radio-button [checked]=true value="regular">Regular</mat-radio-button> <span>&nbsp;</span>
+        <mat-radio-button value="admin">Admin</mat-radio-button>
+      </mat-radio-group>
 
-  <div class="button">
-    <button type="submit" mat-button>Register</button>
-  </div>
+      <div *ngIf="error" class="error">
+        {{ error }}
+      </div>
+      
+      <div *ngIf="submitted && form.controls.password.errors" class="error">
+        <div *ngIf="form.controls.password.errors.required">Password is required</div>
+        <div *ngIf="form.controls.password.errors.minlength">Password must be at least 6 characters</div>
+      </div>
 
-</form>
-</mat-card-content>
+      <div *ngIf="submitted && form.controls.username.errors" class="error">
+        <div *ngIf="form.controls.username.errors.required">username is required</div>
+        <div *ngIf="form.controls.username.errors.minlength">username must be at least 6 characters</div>
+      </div>
+
+      <div class="button">
+        <button type="submit" mat-button>Register</button>
+      </div>
+
+    </form>
+  </mat-card-content>
 </mat-card>
