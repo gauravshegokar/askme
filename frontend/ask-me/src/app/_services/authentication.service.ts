@@ -26,7 +26,7 @@ export class AuthenticationService {
         let apiLink = `${environment.apiUrl}/api/login`
 
         let link = mockLink
-        let jsonData = {username: username, password: username}
+        let jsonData = {username: username, password: password}
         // return this.http.post<any>(link, { username, password })
         return this.http.post<any>(apiLink, jsonData)
             .pipe(map(response => {
