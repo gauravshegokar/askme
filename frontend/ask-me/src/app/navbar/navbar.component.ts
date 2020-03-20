@@ -21,10 +21,8 @@ export class NavbarComponent implements OnInit {
     (user) => {
       if(user){
         this.isLoggedIn = true
-        this.profileId = user.id
       }else{
         this.isLoggedIn = false
-        this.profileId = null
       }
     },
     (msg) => {
@@ -51,6 +49,7 @@ export class NavbarComponent implements OnInit {
   }
 
   profile(){
+    this.profileId = this.authenticationService.currentUserValue.id
     this.router.navigate(['profile'],{ queryParams: { profileId : this.profileId } })
   }
 
