@@ -27,6 +27,8 @@ import {MatSelectModule} from "@angular/material/select";
 import {MatRadioModule} from "@angular/material/radio";
 import { ProfileComponent } from './profile/profile.component';
 import {MatGridListModule} from "@angular/material/grid-list";
+import { PostCommentsComponent } from './post-comments/post-comments.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import {MatGridListModule} from "@angular/material/grid-list";
     FeedComponent,
     PostsComponent,
     NewPostComponent,
-    ProfileComponent
+    ProfileComponent,
+    PostCommentsComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

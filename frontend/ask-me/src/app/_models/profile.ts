@@ -1,7 +1,7 @@
 export interface Profile {
         userId: number,
-        userName: string,
-        firstName: string,
-        lastName: string,
+        username: string,
+        firstname: string,
+        lastname: string,
         dateJoined: string
 }

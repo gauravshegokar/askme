@@ -1,1 +1,55 @@
-<p>post-comments works!</p>
+<div *ngIf="postDetailsData">
+  <mat-card class="example-card" style="margin-left: 280px;margin-right: 280px;margin-top: 25px;margin-bottom: 25px;; border-radius: .5rem!important;">
+    <mat-card-header>
+      <img src="assets/images/userPosts.png" style="height: 80px;width: 80px;">
+    </mat-card-header>
+    <br>
+    <mat-card-header>
+      <mat-card-title>
+        <span>{{postDetailsData.postText}}</span>
+      </mat-card-title>
+      <mat-card-subtitle><b>Post Id : {{postDetailsData.postId}}</b></mat-card-subtitle>
+      <mat-card-subtitle><b> Created by : {{postDetailsData.author}} on : {{postDetailsData.datePosted}}</b></mat-card-subtitle>
+      <mat-card-subtitle><b>Upvotes : {{postDetailsData.likesCount}}</b></mat-card-subtitle>
+      <mat-card-subtitle><b>
+          <span *ngFor="let tag of postDetailsData.tags">
+              {{tag.tagName}}
+          </span></b></mat-card-subtitle>
+    </mat-card-header>
+
+    <div *ngIf="postCommentsData">
+      <mat-card-title style="margin-left: 18px;font-size: 14px">
+        <span>Comments : </span>
+      </mat-card-title>
+    <div *ngFor="let comment of postCommentsData.comments" style="margin-left: 18px;background-color: #a2cdd9; width: 600px; border-radius: .8rem!important;">
+      <mat-card-content style="margin-left: 18px;padding-top: 10px;">
+        <mat-card-subtitle>
+          <b>
+            {{comment.commentText}}<br>
+            <span style="float:right;margin-right: 15px">Author : {{comment.username}}</span>
+            <br>
+            <span style="float:right;margin-right: 15px">Date Posted : {{comment.date}}</span>
+            <br>
+          </b>
+        </mat-card-subtitle>
+      </mat-card-content>
+    </div>
+      <form [formGroup]="form" (ngSubmit)="submit(postDetailsData.postId)" >
+        <mat-form-field style="width: 400px;margin-left: 18px">
+          <mat-label>Post comment</mat-label>
+          <textarea matInput
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="5" formControlName="selComment" required></textarea>
+        </mat-form-field>
+        <br>
+        <mat-card-actions style="margin-left: 18px;">
+            <span>
+                <button mat-raised-button [disabled]='!form.valid'>Post Comment</button>
+            </span>
+        </mat-card-actions>
+      </form>
+    </div>
+  </mat-card>
+</div>

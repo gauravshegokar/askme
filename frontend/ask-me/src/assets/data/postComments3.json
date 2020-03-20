@@ -1,18 +1,25 @@
 {
   "comments":[
       {
-      "commentId":3,
-      "commentText": "Is dry cough one of the symptoms?",
-      "date": "27 Feb 2020",
+      "commentId":5,
+      "commentText": "Is there a stay in place issued in the bay area?",
+      "date": "12 March 2020",
       "userId": 1,
       "username": "sinhaleeza"
     },
     {
-      "commentId":4,
-      "commentText": "Is fever and body pain another symptom?",
-      "date": "28 Feb 2020",
-      "userId": 4,
-      "username": "thaorecharu"
+      "commentId":6,
+      "commentText": "Is New York the most affected of all in the USA?",
+      "date": "13 March 2020",
+      "userId": 2,
+      "username": "zhugongpu"
+    },
+    {
+      "commentId":7,
+      "commentText": "How many persons treated and how many cases are still active?",
+      "date": "13 March 2020",
+      "userId": 3,
+      "username": "gauravshegokar"
     }
   ]
 }

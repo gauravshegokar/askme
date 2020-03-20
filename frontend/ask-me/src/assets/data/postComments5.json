@@ -1,23 +1,16 @@
 {
   "comments":[
-      {
-      "commentId":8,
-      "commentText": "What are the stocks that crashed in this pandemic?",
-      "date": "02 March 2020",
-      "userId": 1,
-      "username": "sinhaleeza"
-    },
     {
-      "commentId":9,
+      "commentId":11,
       "commentText": "Is this bear already on the Wall Street?",
       "date": "03 March 2020",
       "userId": 4,
       "username": "thaorecharu"
     },
     {
-      "commentId":10,
-      "commentText": "Is USA facing yet another recession?",
-      "date": "03 March 2020",
+      "commentId":12,
+      "commentText": "Tell us the latest business shock news?",
+      "date": "04 March 2020",
       "userId": 3,
       "username": "gauravshegokar"
     }

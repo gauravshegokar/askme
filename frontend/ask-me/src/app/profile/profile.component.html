@@ -2,17 +2,17 @@
   <tr>
     <td style="padding: 20px">
       <div *ngIf="profileData">
-        <mat-card class="example-card">
+        <mat-card class="example-card" style="border-radius: .5rem!important;">
           <img src="assets/images/profileDetails.png" style="height: 80px;width: 80px;">
           <mat-card-header>
             <mat-card-title>
               <span>User Details</span>
               <br><br>
             </mat-card-title>
-            <mat-card-subtitle><b> UserName : {{profileData.userName}}</b></mat-card-subtitle>
+            <mat-card-subtitle><b> UserName : {{profileData.username}}</b></mat-card-subtitle>
             <mat-card-subtitle><b> User Id : {{profileData.userId}}</b></mat-card-subtitle>
-            <mat-card-subtitle><b> First Name : {{profileData.firstName}}</b></mat-card-subtitle>
-            <mat-card-subtitle><b> Last Name : {{profileData.lastName}}</b></mat-card-subtitle>
+            <mat-card-subtitle><b> First Name : {{profileData.firstname}}</b></mat-card-subtitle>
+            <mat-card-subtitle><b> Last Name : {{profileData.lastname}}</b></mat-card-subtitle>
             <mat-card-subtitle><b> Joined on : {{profileData.dateJoined}}</b></mat-card-subtitle>
           </mat-card-header>
         </mat-card>
@@ -20,7 +20,7 @@
     </td>
     <td style="padding: 20px">
       <div *ngIf="interestsData">
-        <mat-card class="example-card">
+        <mat-card class="example-card" style="border-radius: .5rem!important;">
           <img src="assets/images/userInterests.jpg" style="height: 80px;width: 80px;">
           <mat-card-header>
             <mat-card-title>
@@ -36,7 +36,7 @@
     </td>
     <td style="padding: 20px">
       <div *ngIf="followersData">
-        <mat-card class="example-card">
+        <mat-card class="example-card" style="border-radius: .5rem!important;">
           <img src="assets/images/userFollowers.gif" style="height: 80px;width: 80px;">
           <mat-card-header>
             <mat-card-title>
@@ -55,7 +55,7 @@
   <tr>
     <td style="padding: 20px">
       <div *ngIf="userPostsData">
-        <mat-card class="example-card">
+        <mat-card class="example-card" style="border-radius: .5rem!important;">
           <img src="assets/images/userPosts.png" style="height: 80px;width: 80px;">
           <mat-card-header>
             <mat-card-title>
@@ -73,7 +73,7 @@
     </td>
     <td style="padding: 20px">
       <div *ngIf="ownedChannelsData">
-        <mat-card class="example-card">
+        <mat-card class="example-card" style="border-radius: .5rem!important;">
           <img src="assets/images/ownedChannels.png" style="height: 80px;width: 80px;">
           <mat-card-header>
             <mat-card-title>
@@ -89,7 +89,7 @@
     </td>
     <td style="padding: 20px">
       <div *ngIf="subscribedChannelsData">
-        <mat-card class="example-card">
+        <mat-card class="example-card" style="border-radius: .5rem!important;">
           <img src="assets/images/subscribedChannels.png" style="height: 80px;width: 80px;">
           <mat-card-header>
             <mat-card-title>

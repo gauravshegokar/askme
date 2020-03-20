@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from '@app/_services/authentication.service'
 
 @Component({
@@ -10,10 +10,13 @@ import {AuthenticationService} from '@app/_services/authentication.service'
 export class NavbarComponent implements OnInit {
 
   constructor(private router: Router,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+              private activatedRoute: ActivatedRoute
     ) { }
-  
+
   isLoggedIn = false
+  public profileId : string
+
   currentUser = this.authenticationService.currentUser.subscribe(
     (user) => {
       if(user){
@@ -28,6 +31,9 @@ export class NavbarComponent implements OnInit {
   );
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.profileId = params['profileId'];
+    });
   }
 
   navigateToLogin() {
@@ -42,11 +48,15 @@ export class NavbarComponent implements OnInit {
     this.authenticationService.logout()
   }
 
-  profile(profileId){
-    this.router.navigate(['profile'],{ queryParams: { profileId : profileId } })
+  profile(){
+    this.router.navigate(['profile'],{ queryParams: { profileId : this.profileId } })
   }
 
   createPost(){
     this.router.navigate(['newPost'])
+  }
+
+  createSearch(){
+    this.router.navigate(['searchPath'])
   }
 }

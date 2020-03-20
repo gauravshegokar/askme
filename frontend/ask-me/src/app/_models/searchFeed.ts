@@ -1,4 +1,4 @@
-export interface Feed {
+export class SearchFeed {
     feed: {
         channelId: number,
         channelName: string,

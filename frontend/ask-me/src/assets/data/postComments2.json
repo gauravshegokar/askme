@@ -1,18 +1,18 @@
 {
   "comments":[
       {
-      "commentId":1,
-      "commentText": "Please provide more details here.",
-      "date": "14 March 2020",
-      "userId": 2,
-      "username": "zhugongpu"
+      "commentId":3,
+      "commentText": "Is dry cough one of the symptoms?",
+      "date": "27 Feb 2020",
+      "userId": 1,
+      "username": "sinhaleeza"
     },
     {
-      "commentId":2,
-      "commentText": "Is this a contagious disease?",
-      "date": "16 March 2020",
-      "userId": 3,
-      "username": "gauravshegokar"
+      "commentId":4,
+      "commentText": "Is fever and body pain another symptom?",
+      "date": "28 Feb 2020",
+      "userId": 4,
+      "username": "thaorecharu"
     }
   ]
 }

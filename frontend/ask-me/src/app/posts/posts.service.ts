@@ -20,6 +20,7 @@ export class PostsService {
 
     return this.http.get<Channel>(link)
   }
+
   getPosts(channelId) : Observable<Posts>{
     console.log(channelId)
     let jsonLink = 'assets/data/post'+channelId+'.json'

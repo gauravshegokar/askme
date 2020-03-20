@@ -1,42 +1,97 @@
 {
     "feed": [
-        {
-            "channelId": 1,
-            "channelName": "CoronaVirusUpdates",
-            "postId": 2,
-            "postText": "How Corona Virus Spreads?",
-            "profane": false,
-            "author": "user221",
-            "authorId": 2,
-            "likesCount": 55,
-            "datePosted": "14 March 2020",
-            "tags": [
-                {
-                    "tagId": 1,
-                    "tagName": "#CoronaVirus"
-                }
-            ]
-        },
-        {
-            "channelId": 2,
-            "channelName": "News",
-            "postId": 1,
-            "postText": "Corona Virus spread over 100 countries",
-            "profane": false,
-            "author": "newsguru",
-            "authorId": 4,
-            "likesCount": 100,
-            "datePosted": "10 March 2020",
-            "tags": [
-                {
-                    "tagId": 1,
-                    "tagName": "#CoronaVirus"
-                },
-                {
-                    "tagId": 2,
-                    "tagName": "#pandemic"
-                }
-            ]
-        }
+      {
+        "channelId": 1,
+        "channelName": "CoronaVirusUpdates",
+        "postId": 1,
+        "postText": "How Corona Virus Spreads?",
+        "profane": false,
+        "author": "Leeza",
+        "authorId": 1,
+        "likesCount": 57,
+        "datePosted": "14 March 2020",
+        "tags": [
+          {
+            "tagId": 1,
+            "tagName": "#CoronaVirus"
+          }
+        ]
+      },
+      {
+        "channelId": 1,
+        "channelName": "CoronaVirusUpdates",
+        "postId": 2,
+        "postText": "What are the coronavirus symptoms?",
+        "profane": false,
+        "author": "Gaurav",
+        "authorId": 2,
+        "likesCount": 100,
+        "datePosted": "27 Feb 2020",
+        "tags": [
+          {
+            "tagId": 1,
+            "tagName": "#CoronaVirus"
+          }
+        ]
+      },
+      {
+        "channelId": 1,
+        "channelName": "CoronaVirusUpdates",
+        "postId": 3,
+        "postText": "How many are affected so far in the USA?",
+        "profane": false,
+        "author": "Charu",
+        "authorId": 3,
+        "likesCount": 76,
+        "datePosted": "12 March 2020",
+        "tags": [
+          {
+            "tagId": 1,
+            "tagName": "#CoronaVirus"
+          }
+        ]
+      },
+      {
+        "channelId": 2,
+        "channelName": "News",
+        "postId": 4,
+        "postText": "Stock crashes post Cororavirus pandemic",
+        "profane": false,
+        "author": "Gongpu",
+        "authorId": 4,
+        "likesCount": 100,
+        "datePosted": "10 March 2020",
+        "tags": [
+          {
+            "tagId": 1,
+            "tagName": "#CoronaVirus"
+          },
+          {
+            "tagId": 2,
+            "tagName": "#stocks"
+          }
+        ]
+      },
+      {
+        "channelId": 2,
+        "channelName": "News",
+        "postId": 5,
+        "postText": "USA Economy uncertainity post COVD-19 scenario",
+        "profane": false,
+        "author": "Leeza",
+        "authorId": 1,
+        "likesCount": 97,
+        "datePosted": "2 March 2020",
+        "tags": [
+          {
+            "tagId": 1,
+            "tagName": "#CoronaVirus"
+          },
+          {
+            "tagId": 2,
+            "tagName": "#economy"
+          }
+        ]
+      }
     ]
 }

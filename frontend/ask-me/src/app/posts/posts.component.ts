@@ -11,7 +11,7 @@ import {Channel} from "@app/_models/channel";
 })
 export class PostsComponent implements OnInit {
 
-  constructor(private postsService:PostsService,private activatedRoute: ActivatedRoute) { }
+  constructor(private postsService:PostsService,private activatedRoute: ActivatedRoute,private router:Router) { }
 
   public postsData : Posts
   public channelData : Channel
@@ -46,6 +46,10 @@ export class PostsComponent implements OnInit {
         console.log(err)
       }
     )
+  }
+
+  postComments(pId){
+    this.router.navigate(['postCommentsPath'], { queryParams: { postId : pId } })
   }
 
 }
