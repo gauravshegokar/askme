@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
     (user) => {
       if(user){
         this.isLoggedIn = true
+        this.profileId = user.id
       }else{
         this.isLoggedIn = false
       }
