@@ -29,16 +29,6 @@ create table channel_tag (
   constraint pk_channel_tag primary key (channel_channel_id,tag_tag_id)
 );
 
-create table comment (
-  commend_id                    bigint auto_increment not null,
-  comment_text                  varchar(255),
-  date                          datetime(6),
-  user_id                       integer,
-  post_post_id                  integer,
-  constraint uq_comment_user_id unique (user_id),
-  constraint pk_comment primary key (commend_id)
-);
-
 create table post (
   post_id                       integer auto_increment not null,
   date_created                  datetime,
@@ -102,12 +92,6 @@ create index ix_channel_tag_channel on channel_tag (channel_channel_id);
 alter table channel_tag add constraint fk_channel_tag_tag foreign key (tag_tag_id) references tag (tag_id) on delete restrict on update restrict;
 create index ix_channel_tag_tag on channel_tag (tag_tag_id);
 
-
-alter table comment add constraint fk_comment_user_id foreign key (user_id) references user_profile (id) on delete restrict on update restrict;
-
-alter table comment add constraint fk_comment_post_post_id foreign key (post_post_id) references post (post_id) on delete restrict on update restrict;
-create index ix_comment_post_post_id on comment (post_post_id);
-
 alter table post add constraint fk_post_author foreign key (author) references user_profile (id) on delete restrict on update restrict;
 create index ix_post_author on post (author);
 
@@ -153,11 +137,6 @@ drop index ix_channel_tag_channel on channel_tag;
 alter table channel_tag drop foreign key fk_channel_tag_tag;
 drop index ix_channel_tag_tag on channel_tag;
 
-alter table comment drop foreign key fk_comment_user_id;
-
-alter table comment drop foreign key fk_comment_post_post_id;
-drop index ix_comment_post_post_id on comment;
-
 alter table post drop foreign key fk_post_author;
 drop index ix_post_author on post;
 
@@ -189,8 +168,6 @@ drop table if exists channel_post;
 drop table if exists channel_user_profile;
 
 drop table if exists channel_tag;
-
-drop table if exists comment;
 
 drop table if exists post;
 

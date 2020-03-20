@@ -36,8 +36,9 @@ public class Post extends Model {
     @JoinTable(name="post_tag_mapper")
     private List<Tag> tags;
 
-    @OneToMany
-    private List<Comment> comments;
+    // TODO
+//    @OneToMany
+//    private List<Comment> comments;
 
     public List<Tag> getTags() {
         return tags;
