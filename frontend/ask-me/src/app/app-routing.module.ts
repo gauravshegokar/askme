@@ -7,6 +7,8 @@ import { FeedComponent } from './feed/feed.component';
 import { PostsComponent } from './posts/posts.component';
 import { NewPostComponent} from "@app/new-post/new-post.component"
 import { ProfileComponent} from "@app/profile/profile.component";
+import { PostCommentsComponent } from "@app/post-comments/post-comments.component";
+import { SearchComponent } from "@app/search/search.component";
 
 const routes: Routes = [
   { path: '', component: FeedComponent},
@@ -14,7 +16,9 @@ const routes: Routes = [
   { path: 'signup', component: RegisterComponent},
   { path: 'posts', component: PostsComponent},
   { path: 'newPost', component: NewPostComponent},
-  { path: 'profile', component: ProfileComponent}
+  { path: 'profile', component: ProfileComponent},
+  { path: 'postCommentsPath', component: PostCommentsComponent},
+  { path: 'searchPath', component: SearchComponent}
 ];
 
 @NgModule({

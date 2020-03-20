@@ -1,5 +1,5 @@
 <div *ngIf="channelsData">
-  <mat-card class="example-card">
+  <mat-card class="example-card" style="margin-left: 280px;margin-right: 280px;margin-top: 25px;margin-bottom: 25px; border-radius: .5rem!important;">
     <mat-card-header>
       <img src="assets/images/userPosts.png" style="height: 80px;width: 80px;">
     </mat-card-header><br>
@@ -12,7 +12,7 @@
     <form [formGroup]="form" (ngSubmit)="submit()" >
     <mat-form-field style="margin-left: 18px">
       <mat-label>Please select Channel</mat-label>
-      <mat-select formControlName="selChannel">
+      <mat-select formControlName="selChannel" required>
         <mat-option>
           ---Select---
         </mat-option>
@@ -28,14 +28,14 @@
                 cdkTextareaAutosize
                 #autosize="cdkTextareaAutosize"
                 cdkAutosizeMinRows="1"
-                cdkAutosizeMaxRows="5" formControlName="selPostContent"></textarea>
+                cdkAutosizeMaxRows="5" formControlName="selPostContent" required></textarea>
     </mat-form-field>
     <br>
     <mat-form-field style="margin-left: 18px">
       <mat-select style="visibility: hidden">
       </mat-select>
       Profanity filtering :<br><br>
-      <mat-radio-group aria-label="Select an option" formControlName="selProfanityFiltering">
+      <mat-radio-group aria-label="Select an option" formControlName="selProfanityFiltering" required>
         <mat-radio-button value="True">True</mat-radio-button>&nbsp;
         <mat-radio-button value="False">False</mat-radio-button>
       </mat-radio-group>
@@ -47,10 +47,10 @@
                 cdkTextareaAutosize
                 #autosize="cdkTextareaAutosize"
                 cdkAutosizeMinRows="1"
-                cdkAutosizeMaxRows="5" formControlName="selTags"></textarea>
+                cdkAutosizeMaxRows="5" formControlName="selTags" required></textarea>
     </mat-form-field>
     <br>
-    <button mat-raised-button style="width: 100px;margin-left: 18px">Submit Post</button>
+    <button mat-raised-button style="width: 100px;margin-left: 18px" [disabled]='!form.valid'>Submit Post</button>
     </form>
   </mat-card>
 </div>

@@ -1,32 +1,44 @@
 <div *ngIf="feedData">
-    <div *ngFor="let feed of feedData.feed">
-        <mat-card class="example-card">
-            <mat-card-header>
+  <mat-card class="example-card" style="margin-left: 280px;margin-right: 280px;margin-top: 25px;margin-bottom: 25px;border-radius: .5rem!important;">
+    <mat-card-header>
+      <img src="assets/images/forum.jpg" style="height: 120px;width: 120px;">
+    </mat-card-header><br>
+    <mat-card-header>
+      <mat-card-title>
+        <span>Ask.me Internet Forum Feed</span>
+      </mat-card-title>
+      <mat-card-subtitle><b>This forum has contributions across channels by various authors on varied topics of discussions</b></mat-card-subtitle>
+    </mat-card-header>
+    <div *ngFor="let feed of feedData.feed" style="margin-left: 18px;background-color: #a2cdd9; width: 600px; border-radius: .8rem!important;">
+            <mat-card-header style="padding-top: 10px">
                 <!-- <div mat-card-avatar class="example-header-image"></div> -->
-                <mat-card-title>
-                    <span>{{feed.channelName}}</span>
+                <mat-card-title style="font-size: 14px">
+                    <span> Channel : {{feed.channelName}}</span>
                 </mat-card-title>
-                <mat-card-subtitle><b>{{feed.author}}</b></mat-card-subtitle>
             </mat-card-header>
-            <mat-card-content>
-                <p>
-                    {{feed.postText}}
-                </p>
-                <p *ngFor="let tag of feed.tags">
-                    <font color="blue">
-                        {{tag.tagName}}
-                    </font>
-                </p>
+            <mat-card-content style="margin-left: 18px;padding-top: 10px;">
+              <mat-card-subtitle>
+                <b>
+                  {{feed.postText}}<br>
+                  <span *ngFor="let tag of feed.tags">
+                    {{tag.tagName}}
+                  </span>
+                  <span style="float:right;margin-right: 15px">Author : {{feed.author}}</span>
+                  <br>
+                  <span style="float:right;margin-right: 15px">Date Posted : {{feed.datePosted}}</span>
+                  <br>
+                  <span style="float:right;margin-right: 15px">Upvotes {{feed.likesCount}}</span>
+                  <br>
+                </b>
+              </mat-card-subtitle>
             </mat-card-content>
-            <mat-card-actions>
+            <mat-card-actions style="margin-left: 18px;padding-top: 10px;">
                 <span>
-                    <button mat-button (click)='channelPosts(feed.channelId)'>Read More</button>
-                    <button mat-button>Upvote</button>
+                    <button mat-raised-button (click)='channelPosts(feed.channelId)'>Goto Channel</button>
+                    <button mat-raised-button>Upvote</button>
                 </span>
-                <span style="float:right;"><button mat-button>{{feed.datePosted}}</button></span>
-                <span style="float:right;"><button mat-button>Upvotes {{feed.likesCount}}</button></span>
 
             </mat-card-actions>
-        </mat-card>
     </div>
+  </mat-card>
 </div>

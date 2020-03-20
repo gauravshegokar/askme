@@ -1,5 +1,5 @@
 <div *ngIf="postsData">
-  <mat-card class="example-card" style="margin-left: 25px;margin-right: 25px;margin-top: 25px;">
+  <mat-card class="example-card" style="margin-left: 280px;margin-right: 280px;margin-top: 25px;margin-bottom: 25px;border-radius: .5rem!important;">
     <mat-card-header>
       <img src="assets/images/subscribedChannels.png" style="height: 80px;width: 80px;">
     </mat-card-header>
@@ -11,9 +11,10 @@
     <mat-card-subtitle><b> Created by : {{channelData.channelOwner}} on : {{channelData.dateCreated}}</b></mat-card-subtitle>
   </mat-card-header>
 
-  <div *ngFor="let post of postsData.posts" style="margin-left: 18px;background-color: lightblue; width: 500px">
+  <div *ngFor="let post of postsData.posts" style="margin-left: 18px;background-color: #a2cdd9; width: 600px;border-radius: .8rem!important;">
       <mat-card-content style="margin-left: 18px;padding-top: 10px;">
         <mat-card-subtitle>
+          <b>
           {{post.postText}}<br>
           <span *ngFor="let tag of post.tags">
               {{tag.tagName}}
@@ -24,11 +25,12 @@
           <br>
           <span style="float:right;margin-right: 15px">Upvotes {{post.likesCount}}</span>
           <br>
-
+          </b>
         </mat-card-subtitle>
 
         <mat-card-actions>
           <span>
+              <button mat-raised-button (click)='postComments(post.postId)'>Read More</button>
               <button mat-raised-button>Upvote</button>
           </span>
         </mat-card-actions>

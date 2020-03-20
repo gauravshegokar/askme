@@ -2,50 +2,32 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { Observable } from 'rxjs';
-import {PostComments} from "@app/_models/postComments";
-import {PostDetails} from "@app/_models/postDetails";
 import {map} from "rxjs/operators";
 import {NewPost} from "@app/_models/newPost";
+import {Feed} from "@app/_models/feed";
+import {SearchFeed} from "@app/_models/searchFeed";
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostCommentsService {
+export class SearchService {
 
   constructor(private http: HttpClient) { }
 
-  getPostDetails(postId) : Observable<PostDetails>{
-    console.log(postId)
-    let jsonLink = 'assets/data/postDetails'+postId+'.json'
-    let apiLink = `${environment.apiUrl}/api/posts/`+postId
-    let link = jsonLink
-
-    return this.http.get<PostDetails>(link)
-  }
-
-  getComments(postId) : Observable<PostComments>{
-    console.log(postId)
-    let jsonLink = 'assets/data/postComments'+postId+'.json'
-    let apiLink = `${environment.apiUrl}/api/posts/`+postId+`/comments`
-    let link = jsonLink
-
-    return this.http.get<PostComments>(link)
-  }
-
-  newCommentPublish(selComment: string,postId: string) {
-    console.log(postId)
-    let mockLink = "http://www.mocky.io/v2/5e70f6df30000029007a3374"
-    let apiLink = `${environment.apiUrl}/api/posts/`+postId+`/comments`
+  search(selKey: string,feedData: Feed) {
+    console.log(selKey)
+    console.log(feedData)
+    let mockLink = "http://www.mocky.io/v2/5e72ac8f3300008c0044ca04"
+    let apiLink = `${environment.apiUrl}/api/search?keywords=`+selKey
 
     let link = mockLink
     return this.http.get<any>(link)
       .pipe(map(response => {
-        console.log(response)
+        let searchFeed = new SearchFeed()
+        searchFeed = response
 
-        let newPost = new NewPost()
-        newPost.id = response.auth
-
-        return newPost;
+        return searchFeed;
       }));
   }
+
 }

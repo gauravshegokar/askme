@@ -36,6 +36,8 @@ export class NewPostsService {
     let mockLink = "http://www.mocky.io/v2/5e70f6df30000029007a3374"
     let apiLink = `${environment.apiUrl}/api/channels/`+selChannel+`/post`
 
+    console.log()
+
     let link = mockLink
     return this.http.get<any>(link)
       .pipe(map(response => {

@@ -20,6 +20,7 @@ export class ProfileService {
     console.log(profileId)
     let jsonLink = 'assets/data/profile'+profileId+'.json'
     let apiLink = `${environment.apiUrl}/api/users/`+profileId
+    console.log(apiLink);
     let link = jsonLink
 
     return this.http.get<Profile>(link)

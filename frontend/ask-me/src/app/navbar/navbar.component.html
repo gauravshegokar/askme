@@ -4,17 +4,12 @@
     <!-- This fills the remaining space of the current row -->
     <span class="fill-remaining-space">
     </span>
-    <mat-form-field>
-        <mat-label></mat-label>
-        <input matInput placeholder="Search">
-        <button mat-button matSuffix mat-icon-button>
-            <mat-icon>search</mat-icon>
-        </button>
-    </mat-form-field>
+
 
     <div [hidden]="!isLoggedIn">
+        <button (click)='createSearch()' mat-button>Search</button>
         <button (click)='createPost()' mat-button>New Post</button>
-        <button (click)='profile(1)' mat-button>Profile</button>
+        <button (click)='profile()' mat-button>Profile</button>
         <button (click)='logout()' mat-button>Logout</button>
     </div>
     <div [hidden]="isLoggedIn">

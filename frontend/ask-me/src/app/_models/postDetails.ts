@@ -1,5 +1,4 @@
-export interface Posts {
-    posts: {
+export interface PostDetails {
         postId: number,
         postText: string,
         profane: boolean,
@@ -12,4 +11,3 @@ export interface Posts {
             tagName: string
         }
     }
-}
