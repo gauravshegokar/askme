@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit {
         this.profileId = user.id
       }else{
         this.isLoggedIn = false
+        this.profileId = null
       }
     },
     (msg) => {
