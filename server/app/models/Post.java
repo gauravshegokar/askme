@@ -2,7 +2,9 @@ package models;
 
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import play.data.validation.Constraints;
 import play.libs.Json;
 
@@ -10,6 +12,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class Post extends Model {
@@ -47,6 +50,32 @@ public class Post extends Model {
      */
     public static Post findById(int postId) {
         return find.where().eq("post_id", postId).findUnique();
+    }
+
+    /**
+     * Search posts by keywords
+     *
+     * @param keywords
+     * @return
+     */
+    public static List<Post> searchByKeywords(List<String> keywords) {
+        // @see https://stackoverflow.com/a/7566973
+        String where = "text REGEXP '" + String.join("|", keywords) + "'";
+
+        return find.query().where(where).findList();
+    }
+
+    /**
+     * Convert a list of posts to JsonNode
+     *
+     * @param posts
+     * @return
+     */
+    public static JsonNode toJson(List<Post> posts) {
+        return Json.toJson(
+                posts.stream()
+                        .map(Post::toJson)
+                        .collect(Collectors.toList()));
     }
 
     public List<Tag> getTags() {
@@ -137,5 +166,19 @@ public class Post extends Model {
         this.getComments().forEach(comment -> array.add(comment.toJson()));
 
         return array;
+    }
+
+    public JsonNode toJson() {
+        ObjectNode json = Json.newObject();
+
+        json.put("postId", this.postId)
+                .put("postText", this.text)
+                .put("profane", this.isProfane)
+                .put("author", this.author.getUsername())
+                .put("authorId", this.author.getId());
+
+        json.set("tags", Tag.toJson(this.tags));
+
+        return json;
     }
 }

@@ -32,4 +32,7 @@ GET         /api/posts/:postId                   controllers.PostController.getP
 POST        /api/posts/:postId/comments          controllers.PostController.createComment(postId: Int)
 
 # get comments for a post
-GET        /api/posts/:postId/comments          controllers.PostController.getComments(postId: Int)
+GET         /api/posts/:postId/comments          controllers.PostController.getComments(postId: Int)
+
+# Search hashtags and posts
+GET         /api/search                          controllers.SearchController.search(keywords: String)
