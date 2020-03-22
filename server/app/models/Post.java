@@ -2,7 +2,9 @@ package models;
 
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import play.data.validation.Constraints;
+import play.libs.Json;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -13,16 +15,14 @@ import java.util.List;
 public class Post extends Model {
 
     public static final Finder<Long, Post> find = new Finder<>(Post.class);
-    @Id
-    @GeneratedValue
-    private int postId;
-
     @Constraints.Required
     @Column(columnDefinition = "datetime")
     public Timestamp date_created;
-
+    @Id
+    @GeneratedValue
+    private int postId;
     @ManyToOne
-    @JoinColumn(name="author",referencedColumnName = "id")
+    @JoinColumn(name = "author", referencedColumnName = "id")
     private UserProfile author;
 
     private boolean isProfane;
@@ -33,12 +33,21 @@ public class Post extends Model {
     private String text;
 
     @ManyToMany
-    @JoinTable(name="post_tag_mapper")
+    @JoinTable(name = "post_tag_mapper")
     private List<Tag> tags;
 
-    // TODO
-//    @OneToMany
-//    private List<Comment> comments;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "post")
+    private List<Comment> comments = new ArrayList<>();
+
+    /**
+     * Find post by id
+     *
+     * @param postId
+     * @return
+     */
+    public static Post findById(int postId) {
+        return find.where().eq("post_id", postId).findUnique();
+    }
 
     public List<Tag> getTags() {
         return tags;
@@ -101,5 +110,32 @@ public class Post extends Model {
 
     public void setDate_created(Timestamp date_created) {
         this.date_created = date_created;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public Post addComment(Comment comment) {
+        this.comments.add(comment);
+
+        return this;
+    }
+
+    /**
+     * Get all comments in JSON format.
+     *
+     * @return
+     */
+    public ArrayNode getCommentsJson() {
+        ArrayNode array = Json.newArray();
+
+        this.getComments().forEach(comment -> array.add(comment.toJson()));
+
+        return array;
     }
 }

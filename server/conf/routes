@@ -17,7 +17,7 @@ POST        /api/signup                          controllers.SignupController.ad
 GET         /api/users/:userId                   controllers.UserInformationController.getUserBasicInfo(userId: String)
 
 # user posts info
-GET         /api/users/:userId/posts              controllers.UserInformationController.getUserPosts(userId: String)
+GET         /api/users/:userId/posts             controllers.UserInformationController.getUserPosts(userId: String)
 
 # user interests
 GET         /api/users/:userId/interests         controllers.UserInformationController.getUserInterests(userId: String)
@@ -27,3 +27,9 @@ POST        /api/channels/:channelId/post        controllers.PostController.addP
 
 # get post
 GET         /api/posts/:postId                   controllers.PostController.getPost(postId: String)
+
+# create comment for a post
+POST        /api/posts/:postId/comments          controllers.PostController.createComment(postId: Int)
+
+# get comments for a post
+GET        /api/posts/:postId/comments          controllers.PostController.getComments(postId: Int)
