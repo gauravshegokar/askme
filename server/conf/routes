@@ -39,3 +39,6 @@ GET         /api/search                          controllers.SearchController.se
 
 # Get feed
 GET         /api/feed                            controllers.FeedController.getFeed(limit: Int ?= 1)
+
+# Get channel detail
+GET         /api/channels/:channelId             controllers.ChannelController.getChannel(channelId: Int)

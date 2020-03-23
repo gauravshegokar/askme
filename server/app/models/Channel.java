@@ -1,7 +1,10 @@
 package models;
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import play.data.validation.Constraints;
+import play.libs.Json;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -38,6 +41,16 @@ public class Channel extends Model {
 
     public static Finder<Long, Channel> getFind() {
         return find;
+    }
+
+    /**
+     * Find channel by id
+     *
+     * @param channelId
+     * @return
+     */
+    public static Channel findById(int channelId) {
+        return find.byId((long) channelId);
     }
 
     public UserProfile getChannelOwner() {
@@ -110,5 +123,18 @@ public class Channel extends Model {
         }
 
         this.posts.add(post);
+    }
+
+    public JsonNode toJson() {
+        ObjectNode json = Json.newObject();
+
+        json.put("channelId", this.channelId)
+                .put("channelName", this.channelName)
+                .put("channelDescription", this.channelDescription)
+                .put("channelOwner", this.channelOwner != null ? this.channelOwner.getUsername() : null)
+                .put("ownerId", this.channelOwner != null ? this.channelOwner.getId() : null)
+                .put("dateCreated", this.dateCreated.toString());
+
+        return json;
     }
 }
