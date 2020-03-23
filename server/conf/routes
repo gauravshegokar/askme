@@ -42,3 +42,6 @@ GET         /api/feed                            controllers.FeedController.getF
 
 # Get channel detail
 GET         /api/channels/:channelId             controllers.ChannelController.getChannel(channelId: Int)
+
+# GET all posts in the channel
+GET         /api/channels/:channelId/posts             controllers.ChannelController.getPosts(channelId: Int)
