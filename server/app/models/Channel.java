@@ -3,6 +3,7 @@ package models;
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.gson.JsonObject;
 import play.data.validation.Constraints;
 import play.libs.Json;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class Channel extends Model {
@@ -51,6 +53,27 @@ public class Channel extends Model {
      */
     public static Channel findById(int channelId) {
         return find.byId((long) channelId);
+    }
+
+    /**
+     * Get all channels
+     * @return
+     */
+    public static List<Channel> getAllChannels() {
+        return find.all();
+    }
+
+    /**
+     * Convert a list of channels to JsonNode
+     *
+     * @param channels
+     * @return
+     */
+    public static JsonNode toJson(List<Channel> channels) {
+        return Json.toJson(
+                channels.stream()
+                        .map(Channel::toJson)
+                        .collect(Collectors.toList()));
     }
 
     public UserProfile getChannelOwner() {

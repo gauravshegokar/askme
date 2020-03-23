@@ -42,4 +42,19 @@ public class ChannelController extends Controller {
 
         return ok(json);
     }
+
+    /**
+     * Get all channels
+     *
+     * @return
+     */
+    @Security.Authenticated(Secured.class)
+    public Result getAllChannels() {
+        List<Channel> channels = Channel.getAllChannels();
+        ObjectNode json = Json.newObject();
+
+        json.set("channels", Channel.toJson(channels));
+
+        return ok(json);
+    }
 }
