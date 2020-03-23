@@ -2,6 +2,7 @@ package models;
 
 
 import com.avaje.ebean.Model;
+import com.avaje.ebean.OrderBy;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -63,6 +64,20 @@ public class Post extends Model {
         String where = "text REGEXP '" + String.join("|", keywords) + "'";
 
         return find.query().where(where).findList();
+    }
+
+    /**
+     * Get most recent posts.
+     *
+     * @param limit
+     * @return
+     */
+    public static List<Post> getMostRecentPosts(int limit) {
+        return Post.find
+                .query()
+                .orderBy("date_created desc")
+                .setMaxRows(limit)
+                .findList();
     }
 
     /**
@@ -175,7 +190,10 @@ public class Post extends Model {
                 .put("postText", this.text)
                 .put("profane", this.isProfane)
                 .put("author", this.author.getUsername())
-                .put("authorId", this.author.getId());
+                .put("authorId", this.author.getId())
+                .put("channelId", this.channel.getChannelId())
+                .put("channelName", this.channel.getChannelName())
+                .put("datePosted", this.date_created.toString());
 
         json.set("tags", Tag.toJson(this.tags));
 
