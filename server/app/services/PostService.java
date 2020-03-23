@@ -8,6 +8,8 @@ import models.Tag;
 import models.UserProfile;
 import play.mvc.Result;
 
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -60,12 +62,15 @@ public class PostService {
                 try {
                     //create Post bean
                     Post newPost = new Post();
+
                     newPost.setAuthor(dbUserMapped.get(0));
                     newPost.setChannel(dbChannelMapped.get(0));
                     newPost.setProfane(isProfane);
                     newPost.setText(text);
                     newPost.setTags(postTags);
+                    newPost.setDate_created(Timestamp.from(Instant.now()));
                     newPost.save();
+
                     return status(201, String.valueOf(newPost.getPostId()));
                 } catch (Exception e) {
                     e.printStackTrace();
