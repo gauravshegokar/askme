@@ -24,7 +24,11 @@ public class Secured extends Security.Authenticator {
             String userId = auth[0];
             UserProfile user = UserProfile.findById(Integer.parseInt(userId));
 
-            return user.getId() + "";
+            if (user == null) {
+                return null;
+            } else {
+                return user.getId() + "";
+            }
         } else {
             return null;
         }
