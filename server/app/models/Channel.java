@@ -29,7 +29,7 @@ public class Channel extends Model {
     private List<Post> posts;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<UserProfile> members;
+    private List<UserProfile> members = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Tag> tags;
@@ -99,6 +99,12 @@ public class Channel extends Model {
 
     public void setMembers(List<UserProfile> members) {
         this.members = members;
+    }
+
+    public Channel addMembers(UserProfile user) {
+        this.members.add(user);
+
+        return this;
     }
 
     public List<Tag> getTags() {
