@@ -3,7 +3,6 @@ package models;
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.google.gson.JsonObject;
 import play.data.validation.Constraints;
 import play.libs.Json;
 
@@ -56,7 +55,17 @@ public class Channel extends Model {
     }
 
     /**
+     * Get the default channel which is loaded when the database is initiated.
+     *
+     * @return
+     */
+    public static Channel getDefaultChannel() {
+        return Channel.findById(1);
+    }
+
+    /**
      * Get all channels
+     *
      * @return
      */
     public static List<Channel> getAllChannels() {
