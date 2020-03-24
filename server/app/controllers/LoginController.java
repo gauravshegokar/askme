@@ -10,7 +10,7 @@ import java.util.List;
 
 public class LoginController extends Controller {
     // POST api/login
-    public Result postUser() {
+    public Result login() {
         String username = null;
         String password = null;
 

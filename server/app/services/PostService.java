@@ -68,7 +68,6 @@ public class PostService {
                     newPost.setProfane(isProfane);
                     newPost.setText(text);
                     newPost.setTags(postTags);
-                    newPost.setDate_created(Timestamp.from(Instant.now()));
                     newPost.save();
 
                     return status(201, String.valueOf(newPost.getPostId()));
@@ -112,7 +111,7 @@ public class PostService {
             resultJson.addProperty("profane", post.get(0).isProfane());
             resultJson.addProperty("authorId", post.get(0).getAuthor().getId());
             resultJson.addProperty("authorName", post.get(0).getAuthor().getUsername());
-            resultJson.addProperty("datePosted", String.valueOf(post.get(0).getDate_created()));
+            resultJson.addProperty("datePosted", String.valueOf(post.get(0).getDateCreated()));
             resultJson.addProperty("channelId",post.get(0).getChannel().getChannelId());
             resultJson.addProperty("channelName",post.get(0).getChannel().getChannelName());
             resultJson.add("tags", tagArray);

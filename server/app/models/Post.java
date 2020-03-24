@@ -2,7 +2,6 @@ package models;
 
 
 import com.avaje.ebean.Model;
-import com.avaje.ebean.OrderBy;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -10,8 +9,8 @@ import play.data.validation.Constraints;
 import play.libs.Json;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,8 +19,8 @@ public class Post extends Model {
 
     public static final Finder<Long, Post> find = new Finder<>(Post.class);
     @Constraints.Required
-    @Column(columnDefinition = "datetime")
-    public Timestamp date_created;
+    @Column(columnDefinition = "datetime", updatable = false)
+    public Date dateCreated;
     @Id
     @GeneratedValue
     private int postId;
@@ -148,14 +147,6 @@ public class Post extends Model {
         this.text = text;
     }
 
-    public Timestamp getDate_created() {
-        return date_created;
-    }
-
-    public void setDate_created(Timestamp date_created) {
-        this.date_created = date_created;
-    }
-
     public List<Comment> getComments() {
         return comments;
     }
@@ -168,6 +159,21 @@ public class Post extends Model {
         this.comments.add(comment);
 
         return this;
+    }
+
+    @PrePersist
+    void dateCreated() {
+        this.dateCreated = new Date();
+    }
+
+    public Date getDateCreated() {
+        return dateCreated;
+    }
+
+    @Override
+    public void save() {
+        dateCreated();
+        super.save();
     }
 
     /**
@@ -193,7 +199,7 @@ public class Post extends Model {
                 .put("authorId", this.author.getId())
                 .put("channelId", this.channel.getChannelId())
                 .put("channelName", this.channel.getChannelName())
-                .put("datePosted", this.date_created.toString());
+                .put("datePosted", this.dateCreated.toString());
 
         json.set("tags", Tag.toJson(this.tags));
 
