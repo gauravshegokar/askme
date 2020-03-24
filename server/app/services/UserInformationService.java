@@ -113,7 +113,7 @@ public class UserInformationService {
                 postJson.addProperty("postText", post.getText());
                 postJson.addProperty("channelName", post.getChannel().getChannelName());
                 postJson.addProperty("channelId", post.getChannel().getChannelId());
-                postJson.addProperty("datePosted", String.valueOf(post.getDate_created()));
+                postJson.addProperty("datePosted", String.valueOf(post.getDateCreated()));
 
                 postsJsonArray.add(postJson);
             }

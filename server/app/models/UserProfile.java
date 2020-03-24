@@ -2,20 +2,19 @@ package models;
 
 
 import com.avaje.ebean.Model;
-import com.mysql.cj.x.protobuf.MysqlxCrud;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 public class UserProfile extends Model {
     public static final Finder<Long, UserProfile> find = new Finder<>(UserProfile.class);
     @Constraints.Required
-    @Column(columnDefinition = "datetime")
-    public Timestamp date_created;
+    @Column(columnDefinition = "datetime", updatable = false)
+    public Date dateCreated;
     @Id
     @GeneratedValue
     private int id;
@@ -43,6 +42,7 @@ public class UserProfile extends Model {
 
     /**
      * A helper method of #findById(int userId)
+     *
      * @param userId
      * @return
      */
@@ -71,7 +71,7 @@ public class UserProfile extends Model {
                 ", interests=" + interests +
                 ", lname='" + lname + '\'' +
                 ", accessLevel='" + accessLevel + '\'' +
-                ", date_created=" + date_created +
+                ", date_created=" + dateCreated +
                 '}';
     }
 
@@ -107,6 +107,10 @@ public class UserProfile extends Model {
         this.password = password;
     }
 
+    public Date getDate_created() {
+        return dateCreated;
+    }
+
     public String getFname() {
         return fname;
     }
@@ -123,19 +127,22 @@ public class UserProfile extends Model {
         this.lname = lname;
     }
 
-    public Timestamp getDate_created() {
-        return date_created;
-    }
-
-    public void setDate_created(Timestamp date_created) {
-        this.date_created = date_created;
-    }
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    @PrePersist
+    void dateCreated() {
+        this.dateCreated = new Date();
+    }
+
+    @Override
+    public void save() {
+        dateCreated();
+        super.save();
     }
 }
