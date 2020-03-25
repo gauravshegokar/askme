@@ -2,6 +2,7 @@ package services;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import models.Channel;
 import models.Post;
 import models.Tag;
 import models.UserProfile;
@@ -36,7 +37,7 @@ public class UserInformationService {
             resultJson.addProperty("username", user.getUsername());
             resultJson.addProperty("firstname", user.getFname());
             resultJson.addProperty("lastname", user.getLname());
-            resultJson.addProperty("dateJoined", String.valueOf(user.getDate_created()));
+            resultJson.addProperty("dateJoined", String.valueOf(user.getDateCreated()));
 
             return status(200, resultJson.toString()).withHeader("auth", String.valueOf(user.getId()));
         }
@@ -130,5 +131,35 @@ public class UserInformationService {
         }
 
 
+    }
+
+    //TODO: change it for multiple channels in future sprints
+    public Result getUserSubscribedChannels(String userId){
+
+    try{
+        //default channel
+        Channel channel = Channel.findById(1);
+
+        //creating subscribed channel object
+        JsonObject subscribedChannel = new JsonObject();
+        subscribedChannel.addProperty("channelId", channel.getChannelId());
+        subscribedChannel.addProperty("channelName", channel.getChannelName());
+
+        //creating subscribed channels array
+        JsonArray subscribedChannels = new JsonArray();
+        subscribedChannels.add(subscribedChannel);
+
+        //creating result json
+        JsonObject resultJson= new JsonObject();
+        resultJson.add("subscribedChannels", subscribedChannels);
+
+        return status(200, resultJson.toString()).withHeader("auth",userId);
+
+
+    }
+    catch (Exception e){
+        e.printStackTrace();
+        return internalServerError("{\"error\":\"Couldn't fetch user subscribed channels \"}");
+    }
     }
 }

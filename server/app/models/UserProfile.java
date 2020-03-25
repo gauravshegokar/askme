@@ -107,7 +107,7 @@ public class UserProfile extends Model {
         this.password = password;
     }
 
-    public Date getDate_created() {
+    public Date getDateCreated() {
         return dateCreated;
     }
 

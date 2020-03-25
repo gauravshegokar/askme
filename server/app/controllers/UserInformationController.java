@@ -13,7 +13,7 @@ public class UserInformationController extends Controller {
         if (request().headers().get("auth")[0].equals(userId)) {
             return new UserInformationService().getUserBasicInfo(userId);
         } else {
-            return badRequest("\"{\"error\":\"authorization failed\"}\"");
+            return badRequest("\"{\"error\":\"Authentication failed, Please login again\"}\"");
         }
     }
 
@@ -26,10 +26,21 @@ public class UserInformationController extends Controller {
 
         boolean isAuthentic = request().headers().get("auth")[0].equals(userId) ? true : false;
         if (!isAuthentic) {
-            return badRequest("\"{\"error\":\"authorization failed\"}\"");
+            return badRequest("\"{\"error\":\"Authentication failed, Please login again\"}\"");
         }
 
         return new UserInformationService().getUserPosts(userId);
 
+    }
+
+    //TODO: by default returning channel with id 1, change it in future sprints
+    public Result getUserSubscribedChannels(String userId){
+
+        boolean isAuthentic = request().headers().get("auth")[0].equals(userId) ? true : false;
+        if (!isAuthentic) {
+            return badRequest("\"{\"error\":\"Authentication failed, Please login again\"}\"");
+        }
+
+        return  new UserInformationService().getUserSubscribedChannels(userId);
     }
 }
