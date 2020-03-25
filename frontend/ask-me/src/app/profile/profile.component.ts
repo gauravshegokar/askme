@@ -1,12 +1,12 @@
-import {Router, ActivatedRoute, Params} from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from "@app/profile/profile.service";
 import { Profile } from '@app/_models/profile';
-import {Interests} from "@app/_models/interests";
-import {Followers} from "@app/_models/followers";
-import {UserPosts} from "@app/_models/userPosts";
-import {OwnedChannels} from "@app/_models/ownedChannels";
-import {SubscribedChannels} from "@app/_models/subscribedChannels";
+import { Interests } from "@app/_models/interests";
+import { Followers } from "@app/_models/followers";
+import { UserPosts } from "@app/_models/userPosts";
+import { OwnedChannels } from "@app/_models/ownedChannels";
+import { SubscribedChannels } from "@app/_models/subscribedChannels";
 
 @Component({
   selector: 'app-profile',
@@ -15,14 +15,14 @@ import {SubscribedChannels} from "@app/_models/subscribedChannels";
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private profileService:ProfileService, private activatedRoute:ActivatedRoute) { }
+  constructor(private profileService: ProfileService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   public profileData: Profile
   public interestsData: Interests
   public followersData: Followers
-  public userPostsData : UserPosts
-  public ownedChannelsData : OwnedChannels
-  public subscribedChannelsData : SubscribedChannels
+  public userPostsData: UserPosts
+  public ownedChannelsData: OwnedChannels
+  public subscribedChannelsData: SubscribedChannels
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
@@ -36,76 +36,80 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  loadProfileDetails(profileId){
+  loadProfileDetails(profileId) {
     this.profileService.getProfileDetails(profileId).subscribe(
-      response=>{
-        console.log(response)
-        this.profileData=response
+      response => {
+        // console.log(response)
+        this.profileData = response
       },
-      err=>{
+      err => {
         console.log(err)
       }
     )
   }
 
-  loadInterests(profileId){
+  loadInterests(profileId) {
     this.profileService.getInterests(profileId).subscribe(
-      response=>{
-        console.log(response)
-        this.interestsData=response
+      response => {
+        // console.log(response)
+        this.interestsData = response
       },
-      err=>{
+      err => {
         console.log(err)
       }
     )
   }
 
-  loadFollowers(profileId){
+  loadFollowers(profileId) {
     this.profileService.getFollowers(profileId).subscribe(
-      response=>{
-        console.log(response)
-        this.followersData=response
+      response => {
+        // console.log(response)
+        this.followersData = response
       },
-      err=>{
+      err => {
         console.log(err)
       }
     )
   }
 
-  loadUserPosts(profileId){
+  loadUserPosts(profileId) {
     this.profileService.getUserPosts(profileId).subscribe(
-      response=>{
-        console.log(response)
-        this.userPostsData=response
+      response => {
+        // console.log(response)
+        this.userPostsData = response
       },
-      err=>{
+      err => {
         console.log(err)
       }
     )
   }
 
-  loadOwnedChannels(profileId){
+  loadOwnedChannels(profileId) {
     this.profileService.getOwnedChannels(profileId).subscribe(
-      response=>{
-        console.log(response)
-        this.ownedChannelsData=response
+      response => {
+        // console.log(response)
+        this.ownedChannelsData = response
       },
-      err=>{
+      err => {
         console.log(err)
       }
     )
   }
 
-  loadSubscribedChannels(profileId){
+  loadSubscribedChannels(profileId) {
     this.profileService.getSubscribedChannels(profileId).subscribe(
-      response=>{
-        console.log(response)
-        this.subscribedChannelsData=response
+      response => {
+        // console.log(response)
+        this.subscribedChannelsData = response
       },
-      err=>{
+      err => {
         console.log(err)
       }
     )
+  }
+
+  postDetails(pId) {
+    this.router.navigate(['postCommentsPath'], { queryParams: { postId: pId } })
   }
 
 }

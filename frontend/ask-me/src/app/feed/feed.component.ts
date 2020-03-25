@@ -22,7 +22,7 @@ export class FeedComponent implements OnInit {
   loadFeed(){
     this.feedService.getFeed().subscribe(
       response => {
-        console.log(response)
+        // console.log(response)
         this.feedData = response
       },
       err => {

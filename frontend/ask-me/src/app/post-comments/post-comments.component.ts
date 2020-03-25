@@ -1,10 +1,10 @@
-import {Router, ActivatedRoute, Params} from '@angular/router';
-import { FormGroup,FormControl } from '@angular/forms';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { PostDetails } from "@app/_models/postDetails";
 import { PostComments } from "@app/_models/postComments";
 import { PostCommentsService } from "@app/post-comments/post-comments.service";
-import {first} from "rxjs/operators";
+import { first } from "rxjs/operators";
 
 @Component({
   selector: 'app-post-comments',
@@ -14,14 +14,14 @@ import {first} from "rxjs/operators";
 export class PostCommentsComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
-    selComment : new FormControl('')
+    selComment: new FormControl('')
   });
 
-  error:string|null
-  constructor(private postCommentsService:PostCommentsService,private activatedRoute: ActivatedRoute,private router:Router) { }
+  error: string | null
+  constructor(private postCommentsService: PostCommentsService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
-  public postDetailsData : PostDetails
-  public postCommentsData : PostComments
+  public postDetailsData: PostDetails
+  public postCommentsData: PostComments
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
@@ -31,45 +31,44 @@ export class PostCommentsComponent implements OnInit {
     });
   }
 
-  loadPostDetails(postId){
+  loadPostDetails(postId) {
     this.postCommentsService.getPostDetails(postId).subscribe(
-      response=>{
-        console.log(response)
-        this.postDetailsData=response
+      response => {
+        // console.log(response)
+        this.postDetailsData = response
       },
-      err=>{
+      err => {
         console.log(err)
       }
     )
   }
 
-  loadPostComments(postId){
+  loadPostComments(postId) {
     this.postCommentsService.getComments(postId).subscribe(
-      response=>{
-        console.log(response)
-        this.postCommentsData=response
+      response => {
+        // console.log(response)
+        this.postCommentsData = response
       },
-      err=>{
+      err => {
         console.log(err)
       }
     )
   }
 
-  submit(pId){
-    console.log(this.form.value.selComment);
+  submit(pId) {
 
-    this.postCommentsService.newCommentPublish(this.form.value.selComment,pId)
-      .pipe(first())
-      .subscribe(
-        data => {
-          console.log(data);
-          this.router.navigate(['/postCommentsPath'],{ queryParams: { postId : pId } });
-        },
-        error => {
-          console.log(error);
-          this.error=error;
+    this.postCommentsService.newCommentPublish(this.form.value.selComment, pId).subscribe(
+      response => {
+        if (response.status == 201) {
+          this.loadPostComments(pId)
+        } else {
+          this.error = "Something went wrong"
         }
-      );
+      },
+      err => {
+        this.error = err.error.error
+        console.log(err)
+      }
+    )
   }
-
 }

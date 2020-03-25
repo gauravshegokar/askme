@@ -13,19 +13,19 @@ export class PostsService {
   constructor(private http: HttpClient) { }
 
   getChannelDetails(channelId) : Observable<Channel>{
-    console.log(channelId)
+    // console.log(channelId)
     let jsonLink = 'assets/data/channel'+channelId+'.json'
     let apiLink = `${environment.apiUrl}/api/channels/`+channelId
-    let link = jsonLink
+    let link = apiLink
 
     return this.http.get<Channel>(link)
   }
 
   getPosts(channelId) : Observable<Posts>{
-    console.log(channelId)
+    // console.log(channelId)
     let jsonLink = 'assets/data/post'+channelId+'.json'
     let apiLink = `${environment.apiUrl}/api/channels/`+channelId+`/posts`
-    let link = jsonLink
+    let link = apiLink
 
     return this.http.get<Posts>(link)
   }

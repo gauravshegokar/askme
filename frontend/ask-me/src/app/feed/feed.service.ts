@@ -16,7 +16,7 @@ export class FeedService {
   getFeed() : Observable<Feed>{
     let jsonLink = 'assets/data/feed.json'
     let apiLink = `${environment.apiUrl}/api/feed`
-    let link = jsonLink
+    let link = apiLink
 
     return this.http.get<Feed>(link)
   }

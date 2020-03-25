@@ -1,8 +1,8 @@
-import {Router, ActivatedRoute, Params} from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { PostsService } from "@app/posts/posts.service";
 import { Posts } from "@app/_models/posts";
-import {Channel} from "@app/_models/channel";
+import { Channel } from "@app/_models/channel";
 
 @Component({
   selector: 'app-posts',
@@ -11,10 +11,10 @@ import {Channel} from "@app/_models/channel";
 })
 export class PostsComponent implements OnInit {
 
-  constructor(private postsService:PostsService,private activatedRoute: ActivatedRoute,private router:Router) { }
+  constructor(private postsService: PostsService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
-  public postsData : Posts
-  public channelData : Channel
+  public postsData: Posts
+  public channelData: Channel
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
@@ -24,32 +24,32 @@ export class PostsComponent implements OnInit {
     });
   }
 
-  loadChannelDetails(channelId){
+  loadChannelDetails(channelId) {
     this.postsService.getChannelDetails(channelId).subscribe(
-      response=>{
-        console.log(response)
-        this.channelData=response
+      response => {
+        // console.log(response)
+        this.channelData = response
       },
-      err=>{
+      err => {
         console.log(err)
       }
     )
   }
 
-  loadPosts(channelId){
+  loadPosts(channelId) {
     this.postsService.getPosts(channelId).subscribe(
-      response=>{
-        console.log(response)
-        this.postsData=response
+      response => {
+        // console.log(response)
+        this.postsData = response
       },
-      err=>{
+      err => {
         console.log(err)
       }
     )
   }
 
-  postComments(pId){
-    this.router.navigate(['postCommentsPath'], { queryParams: { postId : pId } })
+  postComments(pId) {
+    this.router.navigate(['postCommentsPath'], { queryParams: { postId: pId } })
   }
 
 }
