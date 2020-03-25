@@ -3,48 +3,51 @@
 # ~~~~
 
 # Home page
-GET         /                                     controllers.Application.index()
+GET         /                                            controllers.Application.index()
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file                         controllers.Assets.versioned(path="/public", file:Asset)
+GET         /assets/*file                                controllers.Assets.versioned(path="/public", file:Asset)
 
 # Login
-POST        /api/login                            controllers.LoginController.login()
+POST        /api/login                                   controllers.LoginController.login()
 # Signup
-POST        /api/signup                           controllers.SignupController.addUser()
+POST        /api/signup                                  controllers.SignupController.addUser()
 
 # user basic info
-GET         /api/users/:userId                    controllers.UserInformationController.getUserBasicInfo(userId: String)
+GET         /api/users/:userId                           controllers.UserInformationController.getUserBasicInfo(userId: String)
 
 # user posts info
-GET         /api/users/:userId/posts              controllers.UserInformationController.getUserPosts(userId: String)
+GET         /api/users/:userId/posts                     controllers.UserInformationController.getUserPosts(userId: String)
 
 # user interests
-GET         /api/users/:userId/interests          controllers.UserInformationController.getUserInterests(userId: String)
+GET         /api/users/:userId/interests                 controllers.UserInformationController.getUserInterests(userId: String)
 
 # add post
-POST        /api/channels/:channelId/post         controllers.PostController.addPost(channelId: String)
+POST        /api/channels/:channelId/post                controllers.PostController.addPost(channelId: String)
 
 # get post
-GET         /api/posts/:postId                    controllers.PostController.getPost(postId: String)
+GET         /api/posts/:postId                           controllers.PostController.getPost(postId: String)
 
 # create comment for a post
-POST        /api/posts/:postId/comments           controllers.PostController.createComment(postId: Int)
+POST        /api/posts/:postId/comments                  controllers.PostController.createComment(postId: Int)
 
 # get comments for a post
-GET         /api/posts/:postId/comments           controllers.PostController.getComments(postId: Int)
+GET         /api/posts/:postId/comments                  controllers.PostController.getComments(postId: Int)
 
 # Search hashtags and posts
-GET         /api/search                           controllers.SearchController.search(keywords: String)
+GET         /api/search                                  controllers.SearchController.search(keywords: String)
 
 # Get feed
-GET         /api/feed                             controllers.FeedController.getFeed(limit: Int ?= 1)
+GET         /api/feed                                    controllers.FeedController.getFeed(limit: Int ?= 1)
 
 # Get channel detail
-GET         /api/channels/:channelId              controllers.ChannelController.getChannel(channelId: Int)
+GET         /api/channels/:channelId                     controllers.ChannelController.getChannel(channelId: Int)
 
 # GET all posts in the channel
-GET         /api/channels/:channelId/posts        controllers.ChannelController.getPosts(channelId: Int)
+GET         /api/channels/:channelId/posts               controllers.ChannelController.getPosts(channelId: Int)
 
 # Get all channels
-GET         /api/channels                         controllers.ChannelController.getAllChannels
+GET         /api/channels                                controllers.ChannelController.getAllChannels
+
+# Get channels subscribed by a user
+GET         /api/users/:userId/subscribedchannels        controllers.UserInformationController.getUserSubscribedChannels(userId : String)
