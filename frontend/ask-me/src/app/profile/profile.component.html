@@ -18,6 +18,23 @@
         </mat-card>
       </div>
     </td>
+    <td style="padding: 20px">
+      <div *ngIf="subscribedChannelsData">
+        <mat-card class="example-card" style="border-radius: .5rem!important;">
+          <img src="assets/images/subscribedChannels.png" style="height: 80px;width: 80px;">
+          <mat-card-header>
+            <mat-card-title>
+              <span>User Subscribed Channels</span>
+              <br><br>
+            </mat-card-title>
+            <mat-card-subtitle *ngFor="let subscribedChannel of subscribedChannelsData.subscribedChannels">
+              <a href="/posts?channelId={{subscribedChannel.channelId}}">{{ subscribedChannel.channelName}}</a>
+              <!-- <b> {{subscribedChannel.channelName}}</b><br> -->
+            </mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </td>
     <td style="padding: 20px" hidden=true>
       <div *ngIf="interestsData">
         <mat-card class="example-card" style="border-radius: .5rem!important;">
@@ -52,26 +69,11 @@
     </td>
   </tr>
 
-  <tr>
-    <td style="padding: 20px">
-      <div *ngIf="userPostsData">
-        <mat-card class="example-card" style="border-radius: .5rem!important;">
-          <img src="assets/images/userPosts.png" style="height: 80px;width: 80px;">
-          <mat-card-header>
-            <mat-card-title>
-              <span>User Posts</span>
-              <br><br>
-            </mat-card-title>
-            <mat-card-subtitle *ngFor="let userPost of userPostsData.posts">
-              <b> Post Id :{{userPost.postId}} &nbsp;&nbsp;&nbsp; Date posted :{{userPost.datePosted}}</b><br>
-              <b> Channel Name :{{userPost.channelName}}</b><br>
-              <b> Post Text : {{userPost.postText}}</b><br>
-            </mat-card-subtitle>
-          </mat-card-header>
-        </mat-card>
-      </div>
-    </td>
-    <td style="padding: 20px" hidden=true>
+  <!-- <tr>
+    <td style="padding: 20px"> -->
+
+  <!-- </td> -->
+  <!-- <td style="padding: 20px" hidden=true>
       <div *ngIf="ownedChannelsData">
         <mat-card class="example-card" style="border-radius: .5rem!important;">
           <img src="assets/images/ownedChannels.png" style="height: 80px;width: 80px;">
@@ -86,22 +88,36 @@
           </mat-card-header>
         </mat-card>
       </div>
-    </td>
-    <td style="padding: 20px">
-      <div *ngIf="subscribedChannelsData">
-        <mat-card class="example-card" style="border-radius: .5rem!important;">
-          <img src="assets/images/subscribedChannels.png" style="height: 80px;width: 80px;">
+    </td> -->
+
+  <!-- </tr> -->
+</table>
+
+<div *ngIf="userPostsData">
+  <mat-card style="border-radius: .5rem!important;">
+    <img src="assets/images/userPosts.png" style="height: 80px;width: 80px;">
+    <mat-card-header>
+      <mat-card-title>
+        <span>User Posts</span>
+        <br><br>
+      </mat-card-title>
+      
+      <mat-card-subtitle *ngFor="let userPost of userPostsData.posts">
+        <mat-card style="border-radius: .5rem!important;">
           <mat-card-header>
             <mat-card-title>
-              <span>User Subscribed Channels</span>
-              <br><br>
+              <span>Channel: <b>{{ userPost.channelName}}</b></span>
             </mat-card-title>
-            <mat-card-subtitle *ngFor="let subscribedChannel of subscribedChannelsData.subscribedChannels">
-              <b> Channel Id :{{subscribedChannel.channelId}} &nbsp;&nbsp;&nbsp; Channel Name :{{subscribedChannel.channelName}}</b><br>
-            </mat-card-subtitle>
           </mat-card-header>
+          <mat-card-content>
+            <b> Post: {{userPost.postText}}</b><br>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button (click)='postDetails(userPost.postId)'>View Post</button>
+            {{userPost.datePosted}}
+          </mat-card-actions>
         </mat-card>
-      </div>
-    </td>
-  </tr>
-</table>
+      </mat-card-subtitle>
+    </mat-card-header>
+  </mat-card>
+</div>
