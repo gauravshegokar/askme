@@ -13,8 +13,7 @@ import services.PostService;
 import java.util.Date;
 
 import static play.mvc.Http.Context.Implicit.request;
-import static play.mvc.Results.badRequest;
-import static play.mvc.Results.ok;
+import static play.mvc.Results.*;
 
 public class PostController {
     public Result addPost(String channelId) {
@@ -81,6 +80,6 @@ public class PostController {
 
         ObjectNode json = Json.newObject().put("_id", comment.getCommentId());
 
-        return ok(json);
+        return status(201, json.toString());
     }
 }

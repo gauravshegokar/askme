@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit {
   loadProfileDetails(profileId){
     this.profileService.getProfileDetails(profileId).subscribe(
       response=>{
-        console.log(response)
+        // console.log(response)
         this.profileData=response
       },
       err=>{
@@ -51,7 +51,7 @@ export class ProfileComponent implements OnInit {
   loadInterests(profileId){
     this.profileService.getInterests(profileId).subscribe(
       response=>{
-        console.log(response)
+        // console.log(response)
         this.interestsData=response
       },
       err=>{
@@ -63,7 +63,7 @@ export class ProfileComponent implements OnInit {
   loadFollowers(profileId){
     this.profileService.getFollowers(profileId).subscribe(
       response=>{
-        console.log(response)
+        // console.log(response)
         this.followersData=response
       },
       err=>{
@@ -75,7 +75,7 @@ export class ProfileComponent implements OnInit {
   loadUserPosts(profileId){
     this.profileService.getUserPosts(profileId).subscribe(
       response=>{
-        console.log(response)
+        // console.log(response)
         this.userPostsData=response
       },
       err=>{
@@ -87,7 +87,7 @@ export class ProfileComponent implements OnInit {
   loadOwnedChannels(profileId){
     this.profileService.getOwnedChannels(profileId).subscribe(
       response=>{
-        console.log(response)
+        // console.log(response)
         this.ownedChannelsData=response
       },
       err=>{
@@ -99,7 +99,7 @@ export class ProfileComponent implements OnInit {
   loadSubscribedChannels(profileId){
     this.profileService.getSubscribedChannels(profileId).subscribe(
       response=>{
-        console.log(response)
+        // console.log(response)
         this.subscribedChannelsData=response
       },
       err=>{

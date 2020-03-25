@@ -27,7 +27,7 @@ export class PostsComponent implements OnInit {
   loadChannelDetails(channelId){
     this.postsService.getChannelDetails(channelId).subscribe(
       response=>{
-        console.log(response)
+        // console.log(response)
         this.channelData=response
       },
       err=>{
@@ -39,7 +39,7 @@ export class PostsComponent implements OnInit {
   loadPosts(channelId){
     this.postsService.getPosts(channelId).subscribe(
       response=>{
-        console.log(response)
+        // console.log(response)
         this.postsData=response
       },
       err=>{

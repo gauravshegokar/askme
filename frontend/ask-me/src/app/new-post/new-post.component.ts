@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl } from '@angular/forms';
-import { NewPostsService} from "@app/new-post/new-posts.service";
+import { FormGroup, FormControl } from '@angular/forms';
+import { NewPostsService } from "@app/new-post/new-posts.service";
 import { first } from 'rxjs/operators'
-import { Channels} from "@app/_models/channels";
+import { Channels } from "@app/_models/channels";
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,15 +13,15 @@ import { Router } from '@angular/router';
 export class NewPostComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
-    selChannel : new FormControl(''),
-    selPostContent : new FormControl(''),
-    selProfanityFiltering : new FormControl(''),
-    selTags : new FormControl('')
+    selChannel: new FormControl(''),
+    selPostContent: new FormControl(''),
+    selProfanityFiltering: new FormControl(''),
+    selTags: new FormControl('')
   });
 
-  error:string|null
-  constructor(private newPostsService:NewPostsService,
-              private router:Router) { }
+  error: string | null
+  constructor(private newPostsService: NewPostsService,
+    private router: Router) { }
 
   public channelsData: Channels
 
@@ -29,35 +29,48 @@ export class NewPostComponent implements OnInit {
     this.loadChannels()
   }
 
-  loadChannels(){
+  loadChannels() {
     this.newPostsService.getChannels().subscribe(
-      response=>{
-        console.log(response)
-        this.channelsData=response
+      response => {
+        this.channelsData = response
       },
-      err=>{
+      err => {
         console.log(err)
       }
     )
   }
 
-  submit(){
-    console.log(this.form.value.selChannel);
-    console.log(this.form.value.selPostContent);
-    console.log(this.form.value.selProfanityFiltering);
-    console.log(this.form.value.selTags);
+  findHashtags(hashtagsText) {
+    var regexp = /(\s|^)\#\w\w+\b/gm
+    let result = hashtagsText.match(regexp);
+    if (result) {
+      result = result.map(function(s){ return s.trim();});
+      // console.log(result);
+      return String(result);
+    } else {
+      return '';
+    }
+  }
 
-    this.newPostsService.newPostPublish(this.form.value.selChannel,this.form.value.selPostContent,this.form.value.selProfanityFiltering,this.form.value.selTags)
-      .pipe(first())
-      .subscribe(
-        data => {
-          console.log(data);
+  submit() {
+    // console.log(this.form.value.selChannel);
+    // console.log(this.form.value.selPostContent);
+    // console.log(this.form.value.selProfanityFiltering);
+    // console.log(this.form.value.selTags);
+
+    let hashtags = this.findHashtags(this.form.value.selTags)
+    this.newPostsService.newPostPublish(this.form.value.selChannel, this.form.value.selPostContent, this.form.value.selProfanityFiltering, hashtags).subscribe(
+      response => {
+        if (response.status == 201) {
           this.router.navigate(['/']);
-        },
-        error => {
-          console.log(error);
-          this.error=error;
+        } else {
+          this.error = "Something went wrong"
         }
-      );
+      },
+      err => {
+        this.error = err.error.error
+        console.log(err)
+      }
+    )
   }
 }

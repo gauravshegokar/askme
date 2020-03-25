@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
       }
     },
     (msg) => {
-      console.log('Error Getting Location: ', msg);
+      console.log('Error ', msg);
     }
   );
 

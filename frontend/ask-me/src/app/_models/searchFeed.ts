@@ -1,5 +1,5 @@
 export class SearchFeed {
-    feed: {
+    posts: {
         channelId: number,
         channelName: string,
         postId: number,
@@ -7,11 +7,15 @@ export class SearchFeed {
         profane: boolean,
         author: string,
         authorId: number,
-        likesCount: number,
+        // likesCount: number,
         datePosted: string,
         tags:{
             tagId: number,
             tagName: string
         }
+    }
+    tags:{
+        tagId: number,
+        tagName: string
     }
 }

@@ -15,18 +15,15 @@ export class SearchService {
   constructor(private http: HttpClient) { }
 
   search(selKey: string,feedData: Feed) {
-    console.log(selKey)
-    console.log(feedData)
+    // console.log(feedData)
     let mockLink = "http://www.mocky.io/v2/5e72ac8f3300008c0044ca04"
     let apiLink = `${environment.apiUrl}/api/search?keywords=`+selKey
 
-    let link = mockLink
-    return this.http.get<any>(link)
+    let link = apiLink
+    return this.http.get<SearchFeed>(link)
       .pipe(map(response => {
-        let searchFeed = new SearchFeed()
-        searchFeed = response
-
-        return searchFeed;
+        console.log(response)
+        return response;
       }));
   }
 
