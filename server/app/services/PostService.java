@@ -8,8 +8,6 @@ import models.Tag;
 import models.UserProfile;
 import play.mvc.Result;
 
-import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -60,14 +58,16 @@ public class PostService {
                 }
 
                 try {
-                    //create Post bean
+                    // create Post bean
                     Post newPost = new Post();
 
-                    newPost.setAuthor(dbUserMapped.get(0));
-                    newPost.setChannel(dbChannelMapped.get(0));
-                    newPost.setProfane(isProfane);
-                    newPost.setText(text);
-                    newPost.setTags(postTags);
+                    // [Builder Pattern]
+                    newPost.setAuthor(dbUserMapped.get(0))
+                            .setChannel(dbChannelMapped.get(0))
+                            .setProfane(isProfane)
+                            .setText(text)
+                            .setTags(postTags);
+
                     newPost.save();
 
                     return status(201, String.valueOf(newPost.getPostId()));
@@ -113,18 +113,16 @@ public class PostService {
             resultJson.addProperty("authorId", post.get(0).getAuthor().getId());
             resultJson.addProperty("authorName", post.get(0).getAuthor().getUsername());
             resultJson.addProperty("datePosted", String.valueOf(post.get(0).getDateCreated()));
-            resultJson.addProperty("channelId",post.get(0).getChannel().getChannelId());
-            resultJson.addProperty("channelName",post.get(0).getChannel().getChannelName());
+            resultJson.addProperty("channelId", post.get(0).getChannel().getChannelId());
+            resultJson.addProperty("channelName", post.get(0).getChannel().getChannelName());
             resultJson.add("tags", tagArray);
 
-            return status(200, resultJson.toString()).withHeader("auth",userId);
+            return status(200, resultJson.toString()).withHeader("auth", userId);
 
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return internalServerError("{\"error\": \"Unable to fetch post\"}");
         }
-
 
 
     }

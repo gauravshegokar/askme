@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * [Builder Pattern]
+ */
 @Entity
 public class Post extends Model implements Jsonable {
     /**
@@ -104,24 +107,30 @@ public class Post extends Model implements Jsonable {
         this.tags.add(tag);
     }
 
-    public void setTags(List<Tag> tags) {
+    public Post setTags(List<Tag> tags) {
         this.tags = tags;
+
+        return this;
     }
 
     public boolean isProfane() {
         return isProfane;
     }
 
-    public void setProfane(boolean profane) {
+    public Post setProfane(boolean profane) {
         isProfane = profane;
+
+        return this;
     }
 
     public UserProfile getAuthor() {
         return author;
     }
 
-    public void setAuthor(UserProfile author) {
+    public Post setAuthor(UserProfile author) {
         this.author = author;
+
+        return this;
     }
 
     public int getPostId() {
@@ -136,16 +145,20 @@ public class Post extends Model implements Jsonable {
         return channel;
     }
 
-    public void setChannel(Channel channel) {
+    public Post setChannel(Channel channel) {
         this.channel = channel;
+
+        return this;
     }
 
     public String getText() {
         return text;
     }
 
-    public void setText(String text) {
+    public Post setText(String text) {
         this.text = text;
+
+        return this;
     }
 
     public List<Comment> getComments() {
