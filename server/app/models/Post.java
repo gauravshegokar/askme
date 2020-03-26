@@ -16,11 +16,17 @@ import java.util.stream.Collectors;
 
 @Entity
 public class Post extends Model {
+    /**
+     * Used to do queries.
+     */
+    private static final Finder<Long, Post> FINDER = new Finder<>(Post.class);
 
-    public static final Finder<Long, Post> find = new Finder<>(Post.class);
     @Constraints.Required
     @Column(columnDefinition = "datetime", updatable = false)
     public Date dateCreated;
+    /**
+     * Post Id
+     */
     @Id
     @GeneratedValue
     private int postId;
@@ -43,13 +49,22 @@ public class Post extends Model {
     private List<Comment> comments = new ArrayList<>();
 
     /**
+     * [Singleton Pattern]
+     *
+     * @return
+     */
+    public static Find<Long, Post> getFinder() {
+        return FINDER;
+    }
+
+    /**
      * Find post by id
      *
      * @param postId
      * @return
      */
     public static Post findById(int postId) {
-        return find.where().eq("post_id", postId).findUnique();
+        return FINDER.where().eq("post_id", postId).findUnique();
     }
 
     /**
@@ -62,7 +77,7 @@ public class Post extends Model {
         // @see https://stackoverflow.com/a/7566973
         String where = "text REGEXP '" + String.join("|", keywords) + "'";
 
-        return find.query().where(where).findList();
+        return getFinder().query().where(where).findList();
     }
 
     /**
@@ -72,7 +87,7 @@ public class Post extends Model {
      * @return
      */
     public static List<Post> getMostRecentPosts(int limit) {
-        return Post.find
+        return getFinder()
                 .query()
                 .orderBy("date_created desc")
                 .setMaxRows(limit)
@@ -189,6 +204,11 @@ public class Post extends Model {
         return array;
     }
 
+    /**
+     * Convert the post object to JSON.
+     *
+     * @return
+     */
     public JsonNode toJson() {
         ObjectNode json = Json.newObject();
 

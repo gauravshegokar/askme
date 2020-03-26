@@ -14,7 +14,10 @@ import java.util.stream.Collectors;
 
 @Entity
 public class Channel extends Model {
-    public static final Finder<Long, Channel> find = new Finder<>(Channel.class);
+    /**
+     * Used to do queries of Channel.
+     */
+    private static final Finder<Long, Channel> FINDER = new Finder<>(Channel.class);
     @Id
     @GeneratedValue
     private int channelId;
@@ -40,8 +43,13 @@ public class Channel extends Model {
     @Column(columnDefinition = "datetime")
     private Date dateCreated;
 
-    public static Finder<Long, Channel> getFind() {
-        return find;
+    /**
+     * [Singleton Pattern]
+     *
+     * @return
+     */
+    public static Finder<Long, Channel> getFinder() {
+        return FINDER;
     }
 
     /**
@@ -51,7 +59,7 @@ public class Channel extends Model {
      * @return
      */
     public static Channel findById(int channelId) {
-        return find.byId((long) channelId);
+        return getFinder().byId((long) channelId);
     }
 
     /**
@@ -69,7 +77,7 @@ public class Channel extends Model {
      * @return
      */
     public static List<Channel> getAllChannels() {
-        return find.all();
+        return getFinder().all();
     }
 
     /**
@@ -163,6 +171,11 @@ public class Channel extends Model {
         this.posts.add(post);
     }
 
+    /**
+     * Convert Channel object into JSON.
+     *
+     * @return
+     */
     public JsonNode toJson() {
         ObjectNode json = Json.newObject();
 

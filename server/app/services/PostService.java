@@ -29,7 +29,7 @@ public class PostService {
 
 
             //check if channel present
-            List<Channel> dbChannelMapped = Channel.find.query().where().ilike("channelId", channelId).findList();
+            List<Channel> dbChannelMapped = Channel.getFinder().query().where().ilike("channelId", channelId).findList();
 
             if (dbChannelMapped.size() == 0) {
                 return badRequest("\"{\"error\":\"channel not found\"}\"").withHeader("auth", userId);
@@ -84,8 +84,9 @@ public class PostService {
 
 
     public Result getPost(String postId, String userId) {
+        // NOTE: Singleton Pattern
+        List<Post> post = Post.getFinder().query().where().eq("postId", postId).findList();
 
-        List<Post> post = Post.find.query().where().eq("postId", postId).findList();
         if (post.size() == 0) {
             return badRequest("\"{\"error\":\"Post doesn't exist\"}\"").withHeader("auth", userId);
         }
