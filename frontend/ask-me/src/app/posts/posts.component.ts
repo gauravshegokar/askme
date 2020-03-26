@@ -52,4 +52,8 @@ export class PostsComponent implements OnInit {
     this.router.navigate(['postCommentsPath'], { queryParams: { postId: pId } })
   }
 
+  postDetails(pId) {
+    this.router.navigate(['postCommentsPath'], { queryParams: { postId: pId } })
+  }
+
 }
