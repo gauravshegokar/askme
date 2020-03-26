@@ -12,10 +12,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
-public class Post extends Model {
+public class Post extends Model implements Jsonable {
     /**
      * Used to do queries.
      */
@@ -92,19 +91,6 @@ public class Post extends Model {
                 .orderBy("date_created desc")
                 .setMaxRows(limit)
                 .findList();
-    }
-
-    /**
-     * Convert a list of posts to JsonNode
-     *
-     * @param posts
-     * @return
-     */
-    public static JsonNode toJson(List<Post> posts) {
-        return Json.toJson(
-                posts.stream()
-                        .map(Post::toJson)
-                        .collect(Collectors.toList()));
     }
 
     public List<Tag> getTags() {
@@ -209,6 +195,7 @@ public class Post extends Model {
      *
      * @return
      */
+    @Override
     public JsonNode toJson() {
         ObjectNode json = Json.newObject();
 
@@ -221,7 +208,7 @@ public class Post extends Model {
                 .put("channelName", this.channel.getChannelName())
                 .put("datePosted", this.dateCreated.toString());
 
-        json.set("tags", Tag.toJson(this.tags));
+        json.set("tags", Jsonable.toJson(this.tags));
 
         return json;
     }

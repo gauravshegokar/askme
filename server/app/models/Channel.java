@@ -10,10 +10,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
-public class Channel extends Model {
+public class Channel extends Model implements Jsonable {
     /**
      * Used to do queries of Channel.
      */
@@ -78,19 +77,6 @@ public class Channel extends Model {
      */
     public static List<Channel> getAllChannels() {
         return getFinder().all();
-    }
-
-    /**
-     * Convert a list of channels to JsonNode
-     *
-     * @param channels
-     * @return
-     */
-    public static JsonNode toJson(List<Channel> channels) {
-        return Json.toJson(
-                channels.stream()
-                        .map(Channel::toJson)
-                        .collect(Collectors.toList()));
     }
 
     public UserProfile getChannelOwner() {
@@ -176,6 +162,7 @@ public class Channel extends Model {
      *
      * @return
      */
+    @Override
     public JsonNode toJson() {
         ObjectNode json = Json.newObject();
 

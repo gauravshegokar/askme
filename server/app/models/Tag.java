@@ -1,6 +1,5 @@
 package models;
 
-
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -9,10 +8,9 @@ import play.libs.Json;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
-public class Tag extends Model {
+public class Tag extends Model implements Jsonable {
     public static final Finder<Long, Tag> find = new Finder<>(Tag.class);
     @Id
     @GeneratedValue
@@ -35,18 +33,6 @@ public class Tag extends Model {
         String where = "tag_name REGEXP '" + String.join("|", keywords) + "'";
 
         return find.query().where(where).findList();
-    }
-
-    /**
-     * Convert a list of tags to JsonNode
-     *
-     * @param tags
-     * @return
-     */
-    public static JsonNode toJson(List<Tag> tags) {
-        return Json.toJson(tags.stream()
-                .map(Tag::toJson)
-                .collect(Collectors.toList()));
     }
 
     public List<Post> getPosts() {
@@ -84,6 +70,12 @@ public class Tag extends Model {
         this.tagName = tagName;
     }
 
+    /**
+     * Convert an instance into JsonNode.
+     *
+     * @return
+     */
+    @Override
     public JsonNode toJson() {
         ObjectNode json = Json.newObject();
 

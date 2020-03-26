@@ -2,14 +2,15 @@ package controllers;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import middlewares.Secured;
-import models.Post;
-import models.Tag;
+import models.Jsonable;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import services.search.SearchService;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class SearchController extends Controller {
@@ -17,18 +18,21 @@ public class SearchController extends Controller {
      * Search hashtags and posts.
      *
      * @param keywordsString `+` separated keywords
+     * @param searchType     'all'|'posts'|'hashtags'
      * @return
      */
     @Security.Authenticated(Secured.class)
-    public Result search(String keywordsString) {
+    public Result search(String keywordsString, String searchType) {
         List<String> keywords = Arrays.asList(keywordsString.split("\\+"));
         ObjectNode json = Json.newObject();
-        List<Post> posts = Post.searchByKeywords(keywords);
-        List<Tag> tags = Tag.searchByKeywords(keywords);
+        SearchService searchService = new SearchService(searchType);
+        HashMap<String, List<? extends Jsonable>> result = searchService.search(keywords);
 
-        json.set("posts", Post.toJson(posts));
-        json.set("tags", Tag.toJson(tags));
+        result.forEach((key, value) -> {
+            json.set(key, Jsonable.toJson(value));
+        });
 
         return ok(json);
     }
+
 }

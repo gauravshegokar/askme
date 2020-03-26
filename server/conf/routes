@@ -35,7 +35,7 @@ POST        /api/posts/:postId/comments                  controllers.PostControl
 GET         /api/posts/:postId/comments                  controllers.PostController.getComments(postId: Int)
 
 # Search hashtags and posts
-GET         /api/search                                  controllers.SearchController.search(keywords: String)
+GET         /api/search                                  controllers.SearchController.search(keywords: String, searchType: String ?= "all")
 
 # Get feed
 GET         /api/feed                                    controllers.FeedController.getFeed(limit: Int ?= 1)

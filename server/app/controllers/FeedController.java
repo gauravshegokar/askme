@@ -2,6 +2,7 @@ package controllers;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import middlewares.Secured;
+import models.Jsonable;
 import models.Post;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -16,7 +17,7 @@ public class FeedController extends Controller {
     public Result getFeed(int limit) {
         ObjectNode json = Json.newObject();
 
-        json.set("feed", Post.toJson(
+        json.set("feed", Jsonable.toJson(
                 Post.getMostRecentPosts(limit)
         ));
 

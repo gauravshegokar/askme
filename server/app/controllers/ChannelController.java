@@ -3,6 +3,7 @@ package controllers;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import middlewares.Secured;
 import models.Channel;
+import models.Jsonable;
 import models.Post;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -38,7 +39,7 @@ public class ChannelController extends Controller {
         List<Post> posts = channel.getPosts();
         ObjectNode json = Json.newObject();
 
-        json.set("posts", Post.toJson(posts));
+        json.set("posts", Jsonable.toJson(posts));
 
         return ok(json);
     }
@@ -53,7 +54,7 @@ public class ChannelController extends Controller {
         List<Channel> channels = Channel.getAllChannels();
         ObjectNode json = Json.newObject();
 
-        json.set("channels", Channel.toJson(channels));
+        json.set("channels", Jsonable.toJson(channels));
 
         return ok(json);
     }
