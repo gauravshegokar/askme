@@ -35,4 +35,8 @@ export class FeedComponent implements OnInit {
     this.router.navigate(['posts'], { queryParams: { channelId : chId } })
   }
 
+  postDetails(pId) {
+    this.router.navigate(['postCommentsPath'], { queryParams: { postId: pId } })
+  }
+
 }
