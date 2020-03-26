@@ -23,7 +23,7 @@ GET         /api/users/:userId/posts                     controllers.UserInforma
 GET         /api/users/:userId/interests                 controllers.UserInformationController.getUserInterests(userId: String)
 
 # add post
-POST        /api/channels/:channelId/post                controllers.PostController.addPost(channelId: String)
+POST        /api/channels/:channelId/post                controllers.ChannelController.addPost(channelId: String)
 
 # get post
 GET         /api/posts/:postId                           controllers.PostController.getPost(postId: String)
