@@ -13,30 +13,26 @@
             <mat-card-header style="padding-top: 10px">
                 <!-- <div mat-card-avatar class="example-header-image"></div> -->
                 <mat-card-title style="font-size: 14px">
-                    <span> Channel : {{feed.channelName}}</span>
+                  Channel:<a href="/posts?channelId={{feed.channelId}}">{{feed.channelName}}</a>
                 </mat-card-title>
             </mat-card-header>
             <mat-card-content style="margin-left: 18px;padding-top: 10px;">
-              <mat-card-subtitle>
+              <!-- <mat-card-subtitle> -->
+                <p><b>Post:&nbsp;</b> {{feed.postText}}</p>
                 <b>
-                  {{feed.postText}}<br>
                   <span *ngFor="let tag of feed.tags">
                     {{tag.tagName}}
                   </span>
-                  <span style="float:right;margin-right: 15px">Author : {{feed.author}}</span>
-                  <br>
-                  <span style="float:right;margin-right: 15px">Date Posted : {{feed.datePosted}}</span>
-                  <br>
-                  <span style="float:right;margin-right: 15px">Upvotes {{feed.likesCount}}</span>
-                  <br>
+                  <span style="float:right;margin-right: 15px">By User: <a href="/profile?profileId={{feed.authorId}}">{{feed.author}}</a></span>
                 </b>
-              </mat-card-subtitle>
+              <!-- </mat-card-subtitle> -->
             </mat-card-content>
             <mat-card-actions style="margin-left: 18px;padding-top: 10px;">
                 <span>
-                    <button mat-raised-button (click)='channelPosts(feed.channelId)'>Goto Channel</button>
-                    <button mat-raised-button>Upvote</button>
-                </span>
+                    <button mat-raised-button (click)='channelPosts(feed.channelId)'>View Post</button>
+                    <!-- <button mat-raised-button>Upvote</button> -->
+                    <span style="float:right;margin-right: 15px">Date Posted : {{feed.datePosted}}</span>
+                  </span>
 
             </mat-card-actions>
     </div>
