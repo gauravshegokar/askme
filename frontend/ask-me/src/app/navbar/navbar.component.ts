@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {AuthenticationService} from '@app/_services/authentication.service'
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthenticationService } from '@app/_services/authentication.service'
 
 @Component({
   selector: 'app-navbar',
@@ -11,17 +11,17 @@ export class NavbarComponent implements OnInit {
 
   constructor(private router: Router,
     private authenticationService: AuthenticationService,
-              private activatedRoute: ActivatedRoute
-    ) { }
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   isLoggedIn = false
-  public profileId : string
+  public profileId: string
 
   currentUser = this.authenticationService.currentUser.subscribe(
     (user) => {
-      if(user){
+      if (user) {
         this.isLoggedIn = true
-      }else{
+      } else {
         this.isLoggedIn = false
       }
     },
@@ -44,20 +44,20 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['signup'])
   }
 
-  logout(){
+  logout() {
     this.authenticationService.logout()
   }
 
-  profile(){
+  profile() {
     this.profileId = this.authenticationService.currentUserValue.id
-    this.router.navigate(['profile'],{ queryParams: { profileId : this.profileId } })
+    this.router.navigate(['profile'], { queryParams: { profileId: this.profileId } })
   }
 
-  createPost(){
+  createPost() {
     this.router.navigate(['newPost'])
   }
 
-  createSearch(){
+  createSearch() {
     this.router.navigate(['searchPath'])
   }
 }
