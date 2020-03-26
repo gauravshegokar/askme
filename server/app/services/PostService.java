@@ -1,7 +1,5 @@
 package services;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import models.Channel;
 import models.Post;
 import models.Tag;
@@ -10,13 +8,17 @@ import play.mvc.Result;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
-import static play.mvc.Results.*;
+import static play.mvc.Results.badRequest;
+import static play.mvc.Results.status;
 
 public class PostService {
+    // [Flyweight Pattern]
+    private static HashMap<Integer, Post> cachedPosts = new HashMap<>();
 
-    public Result addPost(String channelId, String userId, String text, boolean isProfane, String tags) {
+    public static Result addPost(String channelId, String userId, String text, boolean isProfane, String tags) {
 
         // Check if user exits
         List<UserProfile> dbUserMapped = UserProfile.find.query().where().ilike("id", userId).findList();
@@ -70,61 +72,40 @@ public class PostService {
 
                     newPost.save();
 
+                    cachedPosts.put(newPost.getPostId(), newPost);
+
                     return status(201, String.valueOf(newPost.getPostId()));
                 } catch (Exception e) {
                     e.printStackTrace();
                     return badRequest("\"{\"error\":\"couldn't save new post\"}\"").withHeader("auth", userId);
                 }
-
-
             }
         }
-
     }
 
 
-    public Result getPost(String postId, String userId) {
-        // NOTE: Singleton Pattern
-        List<Post> post = Post.getFinder().query().where().eq("postId", postId).findList();
+    /**
+     * Get post by id.
+     * <p>
+     * [Singleton, Flyweight, and Factory Patterns]
+     *
+     * @param postIdString
+     * @return
+     */
+    public static Post getPost(String postIdString) {
+        int postId = Integer.parseInt(postIdString);
 
-        if (post.size() == 0) {
-            return badRequest("\"{\"error\":\"Post doesn't exist\"}\"").withHeader("auth", userId);
+        Post post = cachedPosts.get(postId);
+
+        // [Flyweight Pattern]
+        if (post == null) {
+            // [Singleton Pattern]
+            post = Post.getFinder().where().eq("postId", postId).findUnique();
+
+            cachedPosts.put(postId, post);
         }
 
-        try {
-
-            //creating tag array
-            JsonArray tagArray = new JsonArray();
-            List<Tag> tags = post.get(0).getTags();
-
-            for (Tag tag : tags) {
-                JsonObject tagJsonObject = new JsonObject();
-                tagJsonObject.addProperty("tagId", tag.getTagId());
-                tagJsonObject.addProperty("tagName", tag.getTagName());
-                tagArray.add(tagJsonObject);
-            }
-
-            //creating result json
-            JsonObject resultJson = new JsonObject();
-
-            resultJson.addProperty("postId", post.get(0).getPostId());
-            resultJson.addProperty("postText", post.get(0).getText());
-            resultJson.addProperty("profane", post.get(0).isProfane());
-            resultJson.addProperty("authorId", post.get(0).getAuthor().getId());
-            resultJson.addProperty("authorName", post.get(0).getAuthor().getUsername());
-            resultJson.addProperty("datePosted", String.valueOf(post.get(0).getDateCreated()));
-            resultJson.addProperty("channelId", post.get(0).getChannel().getChannelId());
-            resultJson.addProperty("channelName", post.get(0).getChannel().getChannelName());
-            resultJson.add("tags", tagArray);
-
-            return status(200, resultJson.toString()).withHeader("auth", userId);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return internalServerError("{\"error\": \"Unable to fetch post\"}");
-        }
-
-
+        return post;
     }
 
 }

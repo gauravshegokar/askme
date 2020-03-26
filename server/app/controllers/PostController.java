@@ -16,6 +16,12 @@ import static play.mvc.Http.Context.Implicit.request;
 import static play.mvc.Results.*;
 
 public class PostController {
+    /**
+     * Create a new post in the channel.
+     *
+     * @param channelId
+     * @return
+     */
     public Result addPost(String channelId) {
         boolean isAuthentic = request().headers().get("auth")[0].equals(null) ? false : true;
 
@@ -33,14 +39,17 @@ public class PostController {
                 request().body().asJson().get("tags").asText());
     }
 
+    /**
+     * Get post by id.
+     *
+     * @param postId
+     * @return
+     */
+    @Security.Authenticated(Secured.class)
     public Result getPost(String postId) {
-        boolean isAuthentic = request().headers().get("auth")[0].equals(null) ? false : true;
+        Post post = new PostService().getPost(postId);
 
-        if (!isAuthentic) {
-            return badRequest("\"{\"error\":\"authorization failed\"}\"");
-        }
-
-        return new PostService().getPost(postId, request().headers().get("auth")[0]);
+        return ok(post.toJson());
     }
 
     /**
