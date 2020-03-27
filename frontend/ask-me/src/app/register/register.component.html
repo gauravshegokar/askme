@@ -41,12 +41,19 @@
       <div *ngIf="submitted && form.controls.username.errors" class="error">
         <div *ngIf="form.controls.username.errors.required">username is required</div>
         <div *ngIf="form.controls.username.errors.minlength">username must be at least 4 characters</div>
+        <br>
       </div>
-
+      <br>
+      <br>
+      
       <div class="button">
-        <button type="submit" mat-button>Register</button>
+        <button type="button" mat-raised-button (click)="resetForm()">Reset</button> &nbsp;
+        <button type="button" mat-raised-button (click)="saveForm()">Save</button> &nbsp;
+        <button type="button" mat-raised-button (click)="undoForm()">Undo</button> &nbsp;
+        <button type="submit" color="primary" mat-raised-button>Register</button>
       </div>
 
     </form>
+    &nbsp;&nbsp;
   </mat-card-content>
 </mat-card>
