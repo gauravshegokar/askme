@@ -11,5 +11,6 @@ export interface Posts {
             tagId: number,
             tagName: string
         }
+        reverse()
     }
 }
