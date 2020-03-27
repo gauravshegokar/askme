@@ -9,11 +9,13 @@
         <span>{{channelData.channelName}}</span>
       </mat-card-title>
       <mat-card-subtitle><b>{{channelData.channelDescription}}</b></mat-card-subtitle>
-      <mat-card-subtitle><b> Created by : {{channelData.channelOwner}} on : {{channelData.dateCreated}}</b>
-      </mat-card-subtitle>
+      <!-- <mat-card-subtitle><b> Created by : {{channelData.channelOwner}} -->
+      <p>
+        Created On: <b>{{channelData.dateCreated}} </b>
+      </p>
     </mat-card-header>
 
-    <div *ngFor="let post of postsData.posts"
+    <div *ngFor="let post of postsData.posts.reverse()"
       style="margin-left: 18px;background-color: #a2cdd9; width: 600px;border-radius: .8rem!important;">
       <!-- <mat-card-content style="margin-left: 18px;padding-top: 10px;">
         <mat-card-subtitle>
