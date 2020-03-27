@@ -1,4 +1,5 @@
-<mat-card class="example-card" style="margin-left: 280px;margin-right: 280px;margin-top: 25px;margin-bottom: 25px;; border-radius: .5rem!important;">
+<mat-card class="example-card"
+  style="margin-left: 280px;margin-right: 280px;margin-top: 25px;margin-bottom: 25px;; border-radius: .5rem!important;">
   <mat-card-header>
     <img src="assets/images/searchIcon.jpg" style="height: 100px;width: 100px;">
   </mat-card-header>
@@ -9,53 +10,66 @@
     </mat-card-title>
   </mat-card-header>
   <br>
-  <form [formGroup]="form" (ngSubmit)="search()" >
+  <form [formGroup]="form" (ngSubmit)="search()">
     <mat-form-field style="width: 400px;margin-left: 18px">
       <mat-label>Search</mat-label>
-      <textarea matInput
-                cdkTextareaAutosize
-                #autosize="cdkTextareaAutosize"
-                cdkAutosizeMinRows="1"
-                cdkAutosizeMaxRows="5" formControlName="selKey" required></textarea>
+      <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="5" formControlName="selKey" required></textarea>
     </mat-form-field>
     <br>
     <mat-card-actions style="margin-left: 18px;">
-              <span>
-                  <button mat-raised-button [disabled]='!form.valid'>Search</button>
-              </span>
+      <span>
+        <button mat-raised-button [disabled]='!form.valid'>Search</button>
+      </span>
     </mat-card-actions>
   </form>
   <div *ngIf="searchData">
-    <div *ngFor="let post of searchData.posts" style="margin-left: 18px;background-color: #a2cdd9; width: 600px; border-radius: .8rem!important;">
+    <h1>Posts</h1>
+    <div *ngFor="let post of searchData.posts"
+      style="margin-left: 18px;background-color: #a2cdd9; width: 600px; border-radius: .8rem!important;">
       <mat-card-header style="padding-top: 10px">
-        <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title style="font-size: 14px">
-          <span> Channel : {{post.channelName}}</span>
+          Channel:<a href="/posts?channelId={{post.channelId}}">{{post.channelName}}</a>
         </mat-card-title>
       </mat-card-header>
       <mat-card-content style="margin-left: 18px;padding-top: 10px;">
-        <mat-card-subtitle>
-          <b>
-            {{post.postText}}<br>
-            <span *ngFor="let tag of post.tags">
-                    {{tag.tagName}}
-                  </span>
-            <span style="float:right;margin-right: 15px">Author : {{post.author}}</span>
-            <br>
-            <span style="float:right;margin-right: 15px">Date Posted : {{post.datePosted}}</span>
-            <br>
-            <span style="float:right;margin-right: 15px">Upvotes {{post.likesCount}}</span>
-            <br>
-          </b>
-        </mat-card-subtitle>
+        <p><b>Post:&nbsp;</b> {{post.postText}}</p>
+        <b>
+          <span *ngFor="let tag of post.tags">
+            <a class="twitter-timeline" href="https://twitter.com/hashtag/askMeCMUApp?src=hashtag_click"
+              data-widget-id="673710543212052480">{{tag.tagName}}</a>
+            <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
+
+          </span>
+          <span style="float:right;margin-right: 15px">By User : <a
+              href="/profile?profileId={{post.authorId}}">{{post.author}}</a></span>
+        </b>
       </mat-card-content>
       <mat-card-actions style="margin-left: 18px;padding-top: 10px;">
-                <span>
-                    <button mat-raised-button (click)='channelPosts(post.channelId)'>Goto Channel</button>
-                    <button mat-raised-button>Upvote</button>
-                </span>
-
+        <span>
+          <button mat-raised-button (click)='postDetails(post.postId)'>View Post</button>
+          <!-- <button mat-raised-button>Upvote</button> -->
+          <span style="float:right;margin-right: 15px">Date Posted : {{post.datePosted}}</span>
+        </span>
       </mat-card-actions>
+    </div>
+
+    <!-- Hashtags -->
+    <br>
+    <h1>Hashtags</h1>
+    <div *ngIf="searchData.tags">
+      <mat-list>
+        <div *ngFor="let hashtag of searchData.tags">
+          <mat-list-item>
+            <a class="twitter-timeline" href="https://twitter.com/hashtag/askMeCMUApp?src=hashtag_click"
+              data-widget-id="673710543212052480">{{hashtag.tagName}}</a>
+            <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
+          </mat-list-item>
+        </div>
+      </mat-list>
+    </div>
+    <div *ngIf="!searchData.tags">
+      <p>No hashtags found for the search</p>
     </div>
   </div>
 </mat-card>
