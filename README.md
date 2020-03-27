@@ -1,6 +1,6 @@
 # 18653-Team8
-#❖	Users from across countries should be able to use this forum for discussion purposes.
-#❖	The forum mandates user authentication before accessing any listed functionality.
+❖	Users from across countries should be able to use this forum for discussion purposes.
+❖	The forum mandates user authentication before accessing any listed functionality.
   ➢	Login
       Allow users to log in using username and password.
   ➢	Registration
