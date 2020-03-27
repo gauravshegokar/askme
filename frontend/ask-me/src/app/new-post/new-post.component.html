@@ -47,8 +47,17 @@
                 cdkTextareaAutosize
                 #autosize="cdkTextareaAutosize"
                 cdkAutosizeMinRows="1"
-                cdkAutosizeMaxRows="5" formControlName="selTags" required></textarea>
+                cdkAutosizeMaxRows="5" formControlName="selTags"  id="tags" required></textarea>
     </mat-form-field>
+      <a class="twitter-share-button"
+         href="https://twitter.com/intent/tweet"
+         data-size="large"
+         data-text="custom share text"
+         data-url="https://dev.twitter.com/web/tweet-button"
+         data-hashtags="askMeCMUApp"
+         data-via="twitterdev"
+         data-related="twitterapi,twitter">
+        <img src="assets/images/tweet.JPG" style="height: 20px;width: 20px;"></a>
     <br>
     <button mat-raised-button style="width: 100px;margin-left: 18px" [disabled]='!form.valid'>Submit Post</button>
     </form>

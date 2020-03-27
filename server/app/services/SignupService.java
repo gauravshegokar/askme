@@ -1,33 +1,29 @@
 package services;
 
+import com.google.gson.JsonObject;
 import domains.Admin;
 import domains.RegularUser;
 import domains.interfaces.User;
 import play.mvc.Result;
+import services.factory.UserFactory;
+
+import javax.jws.soap.SOAPBinding;
 
 import static play.mvc.Results.badRequest;
 import static play.mvc.Results.internalServerError;
 
 public class SignupService {
 
-    public static Result addUser(String username, String pwd, String userType, String fname, String lname) {
+    public static JsonObject addUser(String username, String pwd, String userType, String fname, String lname) {
 
-        User user;
+        //get user object from factory
+        UserFactory userFactory = new UserFactory();
 
-        if (userType.equals(null)) {
-            return badRequest("{\"error\":\"Missing required parameter user type\"}");
-        }
-        if(userType.equalsIgnoreCase("regular")){
-            user=new RegularUser();
-            return user.addUser(username, pwd, userType, fname, lname);
-        }
-        if(userType.equalsIgnoreCase("admin")){
-            user=new Admin();
-            return user.addUser(username, pwd, userType, fname, lname);
-        }
+        User user = userFactory.getUser(userType);
 
-        return badRequest("{\"error\":\" error while adding user\"}");
+        //return created user id or error message
+        return user.addUser(username, pwd, fname, lname);
+
     }
-
 
 }

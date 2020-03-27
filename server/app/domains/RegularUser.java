@@ -13,7 +13,10 @@ import static play.mvc.Results.status;
 
 public class RegularUser implements User {
     @Override
-    public Result addUser(String username, String pwd, String userType, String fname, String lname) {
+    public JsonObject addUser(String username, String pwd,String fname, String lname) {
+
+        JsonObject resultJson = new JsonObject();
+        resultJson.addProperty("success", false);
         // creating user bean
         UserProfile user = new UserProfile();
         user.setUsername(username);
@@ -35,18 +38,21 @@ public class RegularUser implements User {
             defaultChannel.addMembers(user)
                     .save();
 
-            JsonObject resultJson = new JsonObject();
-            resultJson.addProperty("auth", String.valueOf(user.getId()));
-            return status(201, resultJson.toString());
+
+            resultJson.addProperty("userId", String.valueOf(user.getId()));
+            resultJson.addProperty("success", true);
+
         } else if (dbUserMapped.size() > 0) {
-            return badRequest("{\"error\":\"username already exists\"}");
+            resultJson.addProperty("msg", "username already exists");
+
         }
 
-        return badRequest("{\"error\":\"Unable to perform operation\"}");
+
+        return resultJson;
     }
 
     @Override
-    public Result getUser() {
+    public JsonObject getUser() {
         return null;
     }
 }
