@@ -1,12 +1,15 @@
 # 18653-Team8
+# AskMe
+# Functional requirements
+
 ❖	Users from across countries should be able to use this forum for discussion purposes.
 
 ❖	The forum mandates user authentication before accessing any listed functionality.
 
-  ➢	Login
+  ➢	Login : 
       Allow users to log in using username and password.
       
-  ➢	Registration
+  ➢	Registration : 
     ■	Users will enter the desired username and password along with optional fields - first name and last name. 
     ■	Specify if admin or not. 
     ■	The system should notify the user if the username is available or not. 
@@ -29,7 +32,7 @@
     
 ❖	Feed should be visible to all users - logged in/anonymous. This will show latest post and top posts (as filtered by the algorithm/specified by the moderators)
 
-  ➢	Home screen
+  ➢	Home screen : 
   On the landing screen, the user should see the posts from the channel the user is subscribed to. For this sprint, there is only one channel. 
   
 ❖	Any logged in user should be able to view his profile details and site related activities.
@@ -47,4 +50,18 @@
 
   ➢	Search
       The user should be able to search through the posts and hashtags.
+      
+# Design patterns
+1.	Observer
+2.	Memento
+3.	Facade
+4.	Mediator
+5.	Command Pattern
+6.	Filter
+7.	Flyweight and Factory
+8.	Builder
+9.	Template
+10.	Singleton
+11.	Factory
 
+ 
