@@ -34,7 +34,6 @@ export class PostCommentsComponent implements OnInit {
   loadPostDetails(postId) {
     this.postCommentsService.getPostDetails(postId).subscribe(
       response => {
-        // console.log(response)
         this.postDetailsData = response
       },
       err => {
@@ -46,7 +45,6 @@ export class PostCommentsComponent implements OnInit {
   loadPostComments(postId) {
     this.postCommentsService.getComments(postId).subscribe(
       response => {
-        // console.log(response)
         this.postCommentsData = response
       },
       err => {

@@ -9,17 +9,16 @@ import { Feed } from '@app/_models/feed';
 })
 export class FeedComponent implements OnInit {
 
-  constructor(private feedService: FeedService,private router:Router) { }
+  constructor(private feedService: FeedService, private router: Router) { }
 
-  public feedData : Feed
+  public feedData: Feed
 
   ngOnInit(): void {
     this.loadFeed()
   }
 
-
-
-  loadFeed(){
+  // loads feed from the service
+  loadFeed() {
     this.feedService.getFeed().subscribe(
       response => {
         // console.log(response)
@@ -31,8 +30,8 @@ export class FeedComponent implements OnInit {
     )
   }
 
-  channelPosts(chId){
-    this.router.navigate(['posts'], { queryParams: { channelId : chId } })
+  channelPosts(chId) {
+    this.router.navigate(['posts'], { queryParams: { channelId: chId } })
   }
 
   postDetails(pId) {

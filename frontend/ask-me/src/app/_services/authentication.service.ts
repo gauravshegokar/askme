@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
+
+    // observable object. Other components are subscribed to this object, whenever the value changes
+    // it gets notified to subscribed components real time 
     public currentUser: Observable<User>;
 
     constructor(private http: HttpClient, private router: Router) {
@@ -25,10 +28,9 @@ export class AuthenticationService {
         let mockLink = "http://www.mocky.io/v2/5e6d5d8a2e0000a7890eebbf"
         let apiLink = `${environment.apiUrl}/api/login`
 
-        let link = mockLink
+        let link = apiLink
         let jsonData = { username: username, password: password }
-        // return this.http.post<any>(link, { username, password })
-        return this.http.post<any>(apiLink, jsonData)
+        return this.http.post<any>(link, jsonData)
             .pipe(map(response => {
 
                 let user = new User()
