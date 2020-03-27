@@ -9,8 +9,11 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import services.PostService;
 
 import java.util.List;
+
+import static play.mvc.Http.Context.Implicit.request;
 
 public class ChannelController extends Controller {
 
@@ -57,5 +60,28 @@ public class ChannelController extends Controller {
         json.set("channels", Jsonable.toJson(channels));
 
         return ok(json);
+    }
+
+    /**
+     * Create a new post in the channel.
+     *
+     * @param channelId
+     * @return
+     */
+    public Result addPost(String channelId) {
+        boolean isAuthentic = request().headers().get("auth")[0].equals(null) ? false : true;
+
+        if (!isAuthentic) {
+            return badRequest("\"{\"error\":\"authorization failed\"}\"");
+        }
+
+        boolean isProfane = request().body().asJson().get("profane").asText().
+                equalsIgnoreCase("true") ? true : false;
+
+        return new PostService().addPost(channelId,
+                request().headers().get("auth")[0],
+                request().body().asJson().get("postText").asText(),
+                isProfane,
+                request().body().asJson().get("tags").asText());
     }
 }
