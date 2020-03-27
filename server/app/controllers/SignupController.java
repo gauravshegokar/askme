@@ -1,6 +1,7 @@
 package controllers;
 
 
+import com.google.gson.JsonObject;
 import play.mvc.Controller;
 import play.mvc.Result;
 import services.SignupService;
@@ -39,10 +40,30 @@ public class SignupController extends Controller {
             lname = "";
         }
 
-        if(!(userType.equalsIgnoreCase("admin")|userType.equalsIgnoreCase("regular"))){
+        if (!(userType.equalsIgnoreCase("admin") | userType.equalsIgnoreCase("regular"))) {
             return badRequest("{\"error\":\"Incorrect user type\"}");
         }
 
-        return SignupService.addUser(username, password, userType, fname, lname);
+        JsonObject userJson;
+        try {
+
+            userJson = SignupService.addUser(username, password, userType, fname, lname);
+
+
+            if (userJson.get("success").getAsBoolean() == true) {
+
+
+                return status(201, userJson.get("userId").getAsString());
+            } else {
+
+                return badRequest("{error: " +
+                        userJson.get("msg") + "}");
+            }
+        } catch (Exception e) {
+
+            return internalServerError("{\"error\":\"Couldn't create new user \"}");
+        }
+
+
     }
 }
