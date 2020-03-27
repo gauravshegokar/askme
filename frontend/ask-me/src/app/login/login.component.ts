@@ -47,7 +47,12 @@ export class LoginComponent implements OnInit {
         },
         error => {
           console.log(error)
-          this.error = "Something went wrong";
+          try {
+            this.error = error.error.error;
+          }
+          catch (e) {
+            this.error = "Something went wrong";
+          }
         });
   }
 }

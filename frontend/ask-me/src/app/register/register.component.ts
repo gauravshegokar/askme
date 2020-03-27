@@ -31,7 +31,8 @@ export class RegisterComponent implements OnInit {
 
   initialize() {
 
-    // saving 
+    // initialize the form 
+    // store the form object using memento design pattern
     this.form = this.getFormInstance()
 
     this.caretaker = new Caretaker();
@@ -43,6 +44,7 @@ export class RegisterComponent implements OnInit {
   }
 
   getFormInstance() {
+    // returns FormGroup object with default fields
     return new FormGroup({
       username: new FormControl('', [Validators.required, Validators.minLength(4)]),
       password: new FormControl('', [Validators.required, Validators.minLength(4)]),
@@ -52,24 +54,24 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  // resets the form
   resetForm() {
-    console.log("resetting the form")
     this.form = this.clonerService.deepClone(this.caretaker.getMemento(0).getState())
   }
 
   saveForm() {
-    console.log("saving the form")
     // let currentSnapshot = Object.assign({}, this.form)
     let currentSnapshot = this.clonerService.deepClone(this.form)
     this.originator.setState(currentSnapshot)
     this.caretaker.addMemento(this.originator.commit())
   }
 
+  // undo the form
   undoForm() {
-    console.log("undo the form")
     this.form = this.clonerService.deepClone(this.caretaker.getMemento(-1).getState())
   }
 
+  // register the user
   register() {
     this.submitted = true;
     // stop here if form is invalid
