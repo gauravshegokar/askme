@@ -1,5 +1,8 @@
 # 18653-Team8
 # AskMe
+* [ATAM](https://drive.google.com/open?id=1DBdHQdeko5G_63ZAR2x4Ot52fxxOgNLxWEsyBYzU8Ng)
+* [API Specification](https://drive.google.com/open?id=1pTtn7knjzpbAbVUFs--CvBJJm4JUCDqP)
+* [Iteration 1 recording](https://drive.google.com/open?id=1SQxIeoqaEXmk3kdzDr2isTb-6oJv4YQk)
 # Functional requirements
 
 ❖	Users from across countries should be able to use this forum for discussion purposes.
