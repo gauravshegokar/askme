@@ -8,7 +8,9 @@
 
     <div [hidden]="!isLoggedIn">
         <button (click)='createSearch()' mat-button>Search</button>
+        <button (click)='createChannel()' mat-button>New Channel</button>
         <button (click)='createPost()' mat-button>New Post</button>
+        <button (click)='channelsList()' mat-button>Channels List</button>
         <button (click)='profile()' mat-button>Profile</button>
         <button (click)='logout()' mat-button>Logout</button>
     </div>
