@@ -12,7 +12,7 @@ export class NewChannelComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
     selChannelName: new FormControl(''),
-    selChannelDesc: new FormControl('')
+    selChannelDescription: new FormControl('')
   });
 
   error: string | null
@@ -23,7 +23,7 @@ export class NewChannelComponent implements OnInit {
   }
 
   submit() {
-    this.newChannelService.newChannelPublish(this.form.value.selChannelName, this.form.value.selChannelDesc).subscribe(
+    this.newChannelService.newChannelPublish(this.form.value.selChannelName, this.form.value.selChannelDescription).subscribe(
       response => {
         if (response.status == 201 || response.status == 200) {
           this.router.navigate(['/']);
