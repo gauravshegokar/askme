@@ -63,3 +63,6 @@ GET           /api/channels/:channelId/subscribers         controllers.ChannelCo
 
 # Delete a channel
 DELETE        /api/channels/:channelId                     controllers.ChannelController.deleteChannel(channelId)
+
+# Subscribe to a channel
+POST          /api/channels/:channelId/subscribers         controllers.ChannelController.subscribe(channelId)

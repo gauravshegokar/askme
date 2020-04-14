@@ -143,4 +143,22 @@ public class ChannelController extends Controller {
 
         return ok(Json.newObject());
     }
+
+    /**
+     * Add the current user as a member of the channel.
+     *
+     * @param channelId
+     * @return
+     */
+    @Security.Authenticated(Secured.class)
+    public Result subscribe(String channelId) {
+        String userId = request().username();
+        UserProfile user = UserProfile.findById(userId);
+        Channel channel = Channel.findById(channelId);
+
+        channel.addMembers(user)
+                .save();
+
+        return ok(Json.newObject());
+    }
 }
