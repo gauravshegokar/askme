@@ -94,8 +94,10 @@ public class Channel extends Model implements Jsonable {
         return channelOwner;
     }
 
-    public void setChannelOwner(UserProfile channelOwner) {
+    public Channel setChannelOwner(UserProfile channelOwner) {
         this.channelOwner = channelOwner;
+
+        return this;
     }
 
     public List<UserProfile> getMembers() {
@@ -124,16 +126,20 @@ public class Channel extends Model implements Jsonable {
         return channelDescription;
     }
 
-    public void setChannelDescription(String channelDescription) {
+    public Channel setChannelDescription(String channelDescription) {
         this.channelDescription = channelDescription;
+
+        return this;
     }
 
     public Date getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
+    public Channel setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
+
+        return this;
     }
 
     public int getChannelId() {
@@ -148,8 +154,10 @@ public class Channel extends Model implements Jsonable {
         return channelName;
     }
 
-    public void setChannelName(String channelName) {
+    public Channel setChannelName(String channelName) {
         this.channelName = channelName;
+
+        return this;
     }
 
     public List<Post> getPosts() {
