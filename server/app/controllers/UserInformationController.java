@@ -3,6 +3,7 @@ package controllers;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import middlewares.Secured;
 import models.Channel;
+import models.Jsonable;
 import models.UserProfile;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -62,7 +63,7 @@ public class UserInformationController extends Controller {
         List<Channel> channels = UserProfile.findById(userId).getOwnChannels();
         ObjectNode json = Json.newObject();
 
-        json.set("ownedChannels", Json.toJson(channels));
+        json.set("ownedChannels", Jsonable.toJson(channels));
 
         return ok(json);
     }
