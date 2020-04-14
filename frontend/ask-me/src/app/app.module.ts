@@ -30,8 +30,8 @@ import { MatGridListModule } from "@angular/material/grid-list";
 import { PostCommentsComponent } from './post-comments/post-comments.component';
 import { SearchComponent } from './search/search.component';
 import { MatListModule } from '@angular/material/list';
-import {NewChannelComponent} from "@app/new-channel/new-channel.component";
-import {ChannelsListComponent} from "@app/channels-list/channels-list.component";
+import { NewChannelComponent } from "@app/new-channel/new-channel.component";
+import { ChannelsListComponent } from "@app/channels-list/channels-list.component";
 
 @NgModule({
   declarations: [

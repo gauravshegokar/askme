@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { FeedService } from '@app/feed/feed.service';
-import { SearchService } from "@app/search/search.service";
+// import { SearchService } from "@app/search/search.service";
 import { Feed } from '@app/_models/feed';
 import { first } from "rxjs/operators";
 import { FormControl, FormGroup } from "@angular/forms";
 import { SearchFeed } from "@app/_models/searchFeed";
+import { SearchResultAdapter } from "./search-adapter/SearchResultsAdapter"
 
 @Component({
   selector: 'app-search',
@@ -14,12 +15,12 @@ import { SearchFeed } from "@app/_models/searchFeed";
 })
 export class SearchComponent implements OnInit {
 
-  constructor(private feedService: FeedService, private router: Router, private searchService: SearchService, private activatedRoute: ActivatedRoute) { }
+  constructor(private feedService: FeedService, private router: Router, private searchResultAdapter: SearchResultAdapter, private activatedRoute: ActivatedRoute) { }
 
   public feedData: Feed
   public searchData: SearchFeed
   form: FormGroup = new FormGroup({
-    selKey: new FormControl('')
+    searchKeywords: new FormControl('')
   });
 
   error: string | null
@@ -43,12 +44,10 @@ export class SearchComponent implements OnInit {
 
   search() {
 
-    this.searchService.search(this.form.value.selKey, this.feedData)
-      .pipe(first())
+    this.searchResultAdapter.getSearchResults(this.form.value.searchKeywords)
       .subscribe(
         data => {
           this.searchData = data
-          // console.log(this.searchData)
         },
         error => {
           console.log(error);

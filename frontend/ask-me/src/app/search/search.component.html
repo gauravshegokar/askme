@@ -14,7 +14,7 @@
     <mat-form-field style="width: 400px;margin-left: 18px">
       <mat-label>Search</mat-label>
       <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
-        cdkAutosizeMaxRows="5" formControlName="selKey" required></textarea>
+        cdkAutosizeMaxRows="5" formControlName="searchKeywords" required></textarea>
     </mat-form-field>
     <br>
     <mat-card-actions style="margin-left: 18px;">
@@ -49,7 +49,7 @@
         <span>
           <button mat-raised-button (click)='postDetails(post.postId)'>View Post</button>
           <!-- <button mat-raised-button>Upvote</button> -->
-          <span style="float:right;margin-right: 15px">Date Posted : {{post.datePosted}}</span>
+          <span style="float:right;margin-right: 15px">Date Posted : {{post.datePosted | date:"short"}}</span>
         </span>
       </mat-card-actions>
     </div>
