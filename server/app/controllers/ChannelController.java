@@ -111,4 +111,23 @@ public class ChannelController extends Controller {
                 isProfane,
                 request().body().asJson().get("tags").asText());
     }
+
+    /**
+     * Get channel subscribers.
+     *
+     * @param channelId
+     * @return
+     */
+    @Security.Authenticated(Secured.class)
+    public Result getSubscribers(String channelId) {
+        Channel channel = Channel
+                .findById(channelId);
+        List<UserProfile> members = channel.getMembers();
+        ObjectNode jsonNode = Json.newObject();
+
+        jsonNode.set("subscribers", Jsonable.toJson(members));
+
+        return ok(jsonNode);
+    }
+
 }

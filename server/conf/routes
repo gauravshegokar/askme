@@ -57,3 +57,6 @@ GET         /api/users/:userId/ownedchannels             controllers.UserInforma
 
 # Create a channel
 POST        /api/channels                                controllers.ChannelController.createChannel
+
+# Get channel subscribers
+GET         /api/channels/:channelId/subscribers         controllers.ChannelController.getSubscribers(channelId)

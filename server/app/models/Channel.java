@@ -3,6 +3,7 @@ package models;
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.ebeaninternal.server.lib.util.Str;
 import play.data.validation.Constraints;
 import play.libs.Json;
 
@@ -60,6 +61,16 @@ public class Channel extends Model implements Jsonable {
      */
     public static Channel findById(int channelId) {
         return getFinder().byId((long) channelId);
+    }
+
+    /**
+     * Find channel by id
+     *
+     * @param channelId
+     * @return
+     */
+    public static Channel findById(String channelId) {
+        return findById(Integer.parseInt(channelId));
     }
 
     /**

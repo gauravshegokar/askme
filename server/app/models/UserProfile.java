@@ -1,7 +1,10 @@
 package models;
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import play.data.validation.Constraints;
+import play.libs.Json;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -9,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class UserProfile extends Model {
+public class UserProfile extends Model implements Jsonable {
     public static final Finder<Long, UserProfile> find = new Finder<>(UserProfile.class);
     @Constraints.Required
     @Column(columnDefinition = "datetime", updatable = false)
@@ -152,5 +155,18 @@ public class UserProfile extends Model {
     public void save() {
         dateCreated();
         super.save();
+    }
+
+    @Override
+    public JsonNode toJson() {
+        ObjectNode json = Json.newObject();
+
+        json.put("userId", this.id)
+                .put("username", this.username)
+                .put("firstName", this.fname)
+                .put("lastName", this.lname)
+                .put("dateJoined", this.dateCreated.toString());
+
+        return json;
     }
 }
