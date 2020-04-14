@@ -1,6 +1,5 @@
 package models;
 
-
 import com.avaje.ebean.Model;
 import play.data.validation.Constraints;
 
@@ -48,6 +47,15 @@ public class UserProfile extends Model {
      */
     public static final UserProfile findById(String userId) {
         return findById(Integer.parseInt(userId));
+    }
+
+    /**
+     * Get owned channels of a user.
+     *
+     * @return
+     */
+    public List<Channel> getOwnChannels() {
+        return Channel.getOwnedChannels(this);
     }
 
     public List<Post> getPosts() {

@@ -25,6 +25,7 @@ public class Channel extends Model implements Jsonable {
     private String channelName;
 
     @Constraints.Required
+    @ManyToOne
     private UserProfile channelOwner;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -77,6 +78,16 @@ public class Channel extends Model implements Jsonable {
      */
     public static List<Channel> getAllChannels() {
         return getFinder().all();
+    }
+
+    /**
+     * Get owned channels of a user.
+     *
+     * @param userProfile
+     * @return
+     */
+    public static List<Channel> getOwnedChannels(UserProfile userProfile) {
+        return getFinder().where().eq("channelOwner.id", userProfile.getId()).findList();
     }
 
     public UserProfile getChannelOwner() {
