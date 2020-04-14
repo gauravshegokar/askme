@@ -130,4 +130,17 @@ public class ChannelController extends Controller {
         return ok(jsonNode);
     }
 
+    /**
+     * Delete a channel.
+     *
+     * @param channelId
+     * @return
+     */
+    @Security.Authenticated(Secured.class)
+    public Result deleteChannel(String channelId) {
+        // TODO: only channel owner or system admin can delete the channel
+        Channel.findById(channelId).delete();
+
+        return ok(Json.newObject());
+    }
 }
