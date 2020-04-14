@@ -31,16 +31,24 @@ export class ChannelsListService {
     return this.http.get<Channels>(link)
   }
 
-  subscribeChannel(selChannel: string) {
+  subscribeChannel(selChannel: string,selAction: string) {
     console.log(selChannel)
+    console.log(selAction)
     let mockLink = "http://www.mocky.io/v2/5e70f6df30000029007a3374"
-    let apiLink = `${environment.apiUrl}/api/channels/` + selChannel + `/subscribe`
+
 
     let jsonData = {
     }
 
-    let link = mockLink
-    return this.http.post<any>(link, jsonData, { observe: 'response' })
+    if(selAction == "Subscribe"){
+      let apiLink = `${environment.apiUrl}/api/channels/` + selChannel + `/subscribe`
+      let link = mockLink
+      return this.http.post<any>(link, jsonData, { observe: 'response' })
+    }else{
+      let apiLink = `${environment.apiUrl}/api/channels/` + selChannel
+      let link = mockLink
+      return this.http.delete(link, { observe: 'response' })
+    }
   }
 
 }

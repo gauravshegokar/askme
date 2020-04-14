@@ -12,7 +12,8 @@ import { Router } from '@angular/router';
 export class ChannelsListComponent implements OnInit {
 
   form: FormGroup = new FormGroup({
-    selChannel: new FormControl('')
+    selChannel: new FormControl(''),
+    selAction: new FormControl('')
   });
 
   error: string | null
@@ -37,7 +38,7 @@ export class ChannelsListComponent implements OnInit {
   }
 
   submit() {
-    this.channelsListService.subscribeChannel(this.form.value.selChannel).subscribe(
+    this.channelsListService.subscribeChannel(this.form.value.selChannel,this.form.value.selAction).subscribe(
       response => {
         if (response.status == 201 || response.status == 200) {
           this.router.navigate(['/']);

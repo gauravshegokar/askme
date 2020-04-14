@@ -87,7 +87,7 @@ export class ProfileComponent implements OnInit {
   loadOwnedChannels(profileId) {
     this.profileService.getOwnedChannels(profileId).subscribe(
       response => {
-        // console.log(response)
+        console.log(response)
         this.ownedChannelsData = response
       },
       err => {
@@ -99,7 +99,7 @@ export class ProfileComponent implements OnInit {
   loadSubscribedChannels(profileId) {
     this.profileService.getSubscribedChannels(profileId).subscribe(
       response => {
-        // console.log(response)
+        console.log(response)
         this.subscribedChannelsData = response
       },
       err => {

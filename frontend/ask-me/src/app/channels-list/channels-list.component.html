@@ -33,7 +33,21 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button mat-raised-button style="width: 100px;margin-left: 18px" [disabled]='!form.valid'>Subscribe</button>
+      <mat-form-field style="margin-left: 18px">
+        <mat-label>Please select Action</mat-label>
+        <mat-select formControlName="selAction" required>
+          <mat-option>
+            ---Select---
+          </mat-option>
+          <mat-option value="Subscribe" >
+            Subscribe Channel
+          </mat-option>
+          <mat-option value="Delete" >
+            Delete Channel
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    <button mat-raised-button style="width: 100px;margin-left: 18px" [disabled]='!form.valid'>Submit</button>
     </form>
   </mat-card>
 </div>

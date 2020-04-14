@@ -51,6 +51,30 @@
         </mat-card>
       </div>
     </td>
+    <td style="padding: 20px">
+      <div *ngIf="ownedChannelsData">
+        <mat-card class="example-card" style="border-radius: .5rem!important;">
+          <img src="assets/images/ownedChannels.png" style="height: 80px;width: 80px;">
+          <mat-card-header>
+            <mat-card-title>
+              <span>User Owned Channels</span>
+              <br><br>
+            </mat-card-title>
+            <mat-card-subtitle *ngFor="let ownedChannel of ownedChannelsData.ownedChannels">
+              <a href="/posts?channelId={{ownedChannel.channelId}}">{{ ownedChannel.channelName}}</a>
+              <!--b> Channel Id :{{ownedChannel.channelId}} &nbsp;&nbsp;&nbsp; Channel Name :{{ownedChannel.channelName}}</b--><br>
+            </mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </td>
+
+  </tr>
+
+  <tr>
+    <td style="padding: 20px">
+
+  </td>
     <td style="padding: 20px" hidden=true>
       <div *ngIf="followersData">
         <mat-card class="example-card" style="border-radius: .5rem!important;">
@@ -67,30 +91,9 @@
         </mat-card>
       </div>
     </td>
+
+
   </tr>
-
-  <!-- <tr>
-    <td style="padding: 20px"> -->
-
-  <!-- </td> -->
-  <!-- <td style="padding: 20px" hidden=true>
-      <div *ngIf="ownedChannelsData">
-        <mat-card class="example-card" style="border-radius: .5rem!important;">
-          <img src="assets/images/ownedChannels.png" style="height: 80px;width: 80px;">
-          <mat-card-header>
-            <mat-card-title>
-              <span>User Owned Channels</span>
-              <br><br>
-            </mat-card-title>
-            <mat-card-subtitle *ngFor="let ownedChannel of ownedChannelsData.ownedChannels">
-              <b> Channel Id :{{ownedChannel.channelId}} &nbsp;&nbsp;&nbsp; Channel Name :{{ownedChannel.channelName}}</b><br>
-            </mat-card-subtitle>
-          </mat-card-header>
-        </mat-card>
-      </div>
-    </td> -->
-
-  <!-- </tr> -->
 </table>
 
 <div *ngIf="userPostsData">
@@ -101,7 +104,7 @@
         <span>User Posts</span>
         <br><br>
       </mat-card-title>
-      
+
       <mat-card-subtitle *ngFor="let userPost of userPostsData.posts">
         <mat-card style="border-radius: .5rem!important;">
           <mat-card-header>
