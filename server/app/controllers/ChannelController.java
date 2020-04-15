@@ -138,8 +138,14 @@ public class ChannelController extends Controller {
      */
     @Security.Authenticated(Secured.class)
     public Result deleteChannel(String channelId) {
-        // TODO: only channel owner or system admin can delete the channel
-        Channel.findById(channelId).delete();
+        UserProfile user = UserProfile.findById(request().username());
+        Channel channel = Channel.findById(channelId);
+
+        // only channel owner or system admin can delete the channel
+        if ("admin".equals(user.getAccessLevel())
+                || channel.getChannelOwner().getId() == user.getId()) {
+            channel.delete();
+        }
 
         return ok(Json.newObject());
     }
