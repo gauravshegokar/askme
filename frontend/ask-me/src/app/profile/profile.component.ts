@@ -7,6 +7,8 @@ import { Followers } from "@app/_models/followers";
 import { UserPosts } from "@app/_models/userPosts";
 import { OwnedChannels } from "@app/_models/ownedChannels";
 import { SubscribedChannels } from "@app/_models/subscribedChannels";
+import { Proxy } from './proxy-pattern/proxy'
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +17,14 @@ import { SubscribedChannels } from "@app/_models/subscribedChannels";
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private profileService: ProfileService, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(
+    private profileService: ProfileService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private _snackBar: MatSnackBar) {
+    this.paymentProxy = new Proxy()
+  }
+
 
   public profileData: Profile
   public interestsData: Interests
@@ -23,6 +32,8 @@ export class ProfileComponent implements OnInit {
   public userPostsData: UserPosts
   public ownedChannelsData: OwnedChannels
   public subscribedChannelsData: SubscribedChannels
+  public paymentAmount: number
+  public paymentProxy: Proxy
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
@@ -33,6 +44,7 @@ export class ProfileComponent implements OnInit {
       this.loadUserPosts(profileId);
       this.loadOwnedChannels(profileId)
       this.loadSubscribedChannels(profileId)
+      this.loadPaymentDetails()
     });
   }
 
@@ -112,4 +124,21 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['postCommentsPath'], { queryParams: { postId: pId } })
   }
 
+  loadPaymentDetails() {
+    this.paymentAmount = 10
+  }
+
+  performPayment() {
+    this.paymentProxy.performTransaction(this.paymentAmount)
+
+    // this._snackBar.open(message, action, {
+    //   duration: 2000,
+    // });
+
+
+    this._snackBar.open("Payment Performed for " + this.paymentAmount, "Okay", {
+      duration: 2000,
+
+    });
+  }
 }

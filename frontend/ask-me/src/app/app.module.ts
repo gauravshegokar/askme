@@ -32,6 +32,7 @@ import { SearchComponent } from './search/search.component';
 import { MatListModule } from '@angular/material/list';
 import { NewChannelComponent } from "@app/new-channel/new-channel.component";
 import { ChannelsListComponent } from "@app/channels-list/channels-list.component";
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { ChannelsListComponent } from "@app/channels-list/channels-list.componen
     MatSelectModule,
     MatRadioModule,
     MatGridListModule,
-    MatListModule
+    MatListModule,
+    MatSnackBarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

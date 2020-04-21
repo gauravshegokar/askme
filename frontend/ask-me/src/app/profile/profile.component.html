@@ -69,12 +69,30 @@
       </div>
     </td>
 
+    <td style="padding: 20px">
+      <div *ngIf="ownedChannelsData">
+        <mat-card class="example-card" style="border-radius: .5rem!important;">
+          <mat-card-header>
+            <mat-card-title>
+              <span>Subscription Payment</span>
+              <br><br>
+            </mat-card-title>
+            <mat-card-subtitle>
+            payment to be made: ${{paymentAmount}}
+          </mat-card-subtitle>
+          </mat-card-header>
+          <button mat-raised-button (click)='performPayment()'>Pay amount</button>
+        </mat-card>
+
+      </div>
+    </td>
+
   </tr>
 
   <tr>
     <td style="padding: 20px">
 
-  </td>
+    </td>
     <td style="padding: 20px" hidden=true>
       <div *ngIf="followersData">
         <mat-card class="example-card" style="border-radius: .5rem!important;">
