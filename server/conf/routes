@@ -68,4 +68,4 @@ DELETE        /api/channels/:channelId                     controllers.ChannelCo
 POST          /api/channels/:channelId/subscribers         controllers.ChannelController.subscribe(channelId)
 
 #Get monthly subscription tax amount of a user
-GET         /api/users/:userId/subscriptionAmount      controllers.UserInformationController.getMonthlySubscriptionAmount(userId : String)
+GET           /api/users/:userId/subscriptionAmount        controllers.UserInformationController.getMonthlySubscriptionAmount(userId : String)

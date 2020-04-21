@@ -27,6 +27,7 @@ public class Admin implements User, Visitable {
         user.setFname(fname);
         user.setLname(lname);
         user.setAccessLevel("admin");
+        user.setMonthlySubscriptionPrice(monthlySubscriptionPrice);
 
         // Check if user exits
         List<UserProfile> dbUserMapped = UserProfile.find.query().where().ilike("username", user.getUsername()).findList();

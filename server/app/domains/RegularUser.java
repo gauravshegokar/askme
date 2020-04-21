@@ -28,6 +28,7 @@ public class RegularUser implements User, Visitable {
         user.setFname(fname);
         user.setLname(lname);
         user.setAccessLevel("regular");
+        user.setMonthlySubscriptionPrice(monthlySubscriptionPrice);
         System.out.println(user.toString());
 
 
