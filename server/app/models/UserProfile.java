@@ -31,6 +31,7 @@ public class UserProfile extends Model implements Jsonable {
     private List<Tag> interests = new ArrayList<>();
     private String lname;
     private String accessLevel;
+    private double monthlySubscriptionPrice;
 
     /**
      * Find user by id
@@ -84,6 +85,14 @@ public class UserProfile extends Model implements Jsonable {
                 ", accessLevel='" + accessLevel + '\'' +
                 ", date_created=" + dateCreated +
                 '}';
+    }
+
+    public double getMonthlySubscriptionPrice() {
+        return monthlySubscriptionPrice;
+    }
+
+    public void setMonthlySubscriptionPrice(double monthlySubscriptionPrice) {
+        this.monthlySubscriptionPrice = monthlySubscriptionPrice;
     }
 
     public List<Tag> getInterests() {
