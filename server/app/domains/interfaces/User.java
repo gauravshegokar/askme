@@ -6,5 +6,5 @@ import play.mvc.Result;
 
 public interface User {
     public JsonObject addUser(String username, String pwd, String fname, String lname);
-    public JsonObject getUser();
+    public UserProfile getUser(int id);
 }

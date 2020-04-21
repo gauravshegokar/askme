@@ -1,6 +1,7 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.gson.JsonObject;
 import middlewares.Secured;
 import models.Channel;
 import models.Jsonable;
@@ -66,5 +67,25 @@ public class UserInformationController extends Controller {
         json.set("ownedChannels", Jsonable.toJson(channels));
 
         return ok(json);
+    }
+
+    public Result getMonthlySubscriptionAmount(String  userId){
+
+        UserProfile user = UserProfile.findById(userId);
+        String userType = user.getAccessLevel();
+        Double subscriptionAmount = user.getMonthlySubscriptionPrice();
+
+        if(!userType.equals("admin") && !(userType.equals("regular"))){
+            return badRequest("{\"error\":\"User type not found\"}");
+        }
+
+        Double tax= UserInformationService.getTaxValue(Integer.parseInt(userId),userType);
+
+        JsonObject result= new JsonObject();
+        result.addProperty("tax",tax);
+        result.addProperty("amount",subscriptionAmount);
+
+
+        return status(200, result.toString()).withHeader("auth", userId);
     }
 }

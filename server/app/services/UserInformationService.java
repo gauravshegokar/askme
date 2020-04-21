@@ -2,6 +2,9 @@ package services;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import domains.Admin;
+import domains.RegularUser;
+import domains.TaxVisitor;
 import models.Channel;
 import models.Post;
 import models.Tag;
@@ -162,4 +165,21 @@ public class UserInformationService {
         return internalServerError("{\"error\":\"Couldn't fetch user subscribed channels \"}");
     }
     }
+
+    public static double getTaxValue(int id, String userType){
+
+        TaxVisitor taxCalculator = new TaxVisitor();
+        double tax=0.0;
+        if(userType.equals("admin")){
+            Admin admin = new Admin();
+            tax=taxCalculator.visit(admin,id);
+        }
+        else{
+            RegularUser user = new RegularUser();
+            tax=taxCalculator.visit(user,id);
+        }
+        return tax;
+    }
+
+
 }
