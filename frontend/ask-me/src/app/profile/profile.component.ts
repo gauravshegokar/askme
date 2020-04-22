@@ -7,6 +7,7 @@ import { Followers } from "@app/_models/followers";
 import { UserPosts } from "@app/_models/userPosts";
 import { OwnedChannels } from "@app/_models/ownedChannels";
 import { SubscribedChannels } from "@app/_models/subscribedChannels";
+import { SubscribedAmount } from "@app/_models/subscribedAmount"
 import { Proxy } from './proxy-pattern/proxy'
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -32,7 +33,7 @@ export class ProfileComponent implements OnInit {
   public userPostsData: UserPosts
   public ownedChannelsData: OwnedChannels
   public subscribedChannelsData: SubscribedChannels
-  public paymentAmount: number
+  public paymentAmount: SubscribedAmount
   public paymentProxy: Proxy
 
   ngOnInit(): void {
@@ -44,7 +45,7 @@ export class ProfileComponent implements OnInit {
       this.loadUserPosts(profileId);
       this.loadOwnedChannels(profileId)
       this.loadSubscribedChannels(profileId)
-      this.loadPaymentDetails()
+      this.loadPaymentDetails(profileId)
     });
   }
 
@@ -124,21 +125,25 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['postCommentsPath'], { queryParams: { postId: pId } })
   }
 
-  loadPaymentDetails() {
-    this.paymentAmount = 10
+  loadPaymentDetails(pId) {
+    this.profileService.getPaymentDetails(pId).subscribe(
+      response => {
+        this.paymentAmount = response
+      },
+      err => {
+        console.log(err)
+      }
+    )
   }
 
   performPayment() {
     this.paymentProxy.performTransaction(this.paymentAmount)
 
-    // this._snackBar.open(message, action, {
-    //   duration: 2000,
-    // });
-
-
-    this._snackBar.open("Payment Performed for " + this.paymentAmount, "Okay", {
+    this._snackBar.open("Payment Performed for $" + (this.paymentAmount.amount + this.paymentAmount.tax).toFixed(2), "Okay", {
       duration: 2000,
-
     });
+
+    // communicate payment to the server 
+
   }
 }
