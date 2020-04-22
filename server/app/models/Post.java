@@ -2,6 +2,7 @@ package models;
 
 
 import com.avaje.ebean.Model;
+import com.avaje.ebean.QueryIterator;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -84,16 +85,17 @@ public class Post extends Model implements Jsonable {
 
     /**
      * Get most recent posts.
+     * [Iterator Pattern]
      *
      * @param limit
      * @return
      */
-    public static List<Post> getMostRecentPosts(int limit) {
+    public static QueryIterator<Post> getMostRecentPosts(int limit) {
         return getFinder()
                 .query()
                 .orderBy("date_created desc")
                 .setMaxRows(limit)
-                .findList();
+                .findIterate();
     }
 
     public List<Tag> getTags() {

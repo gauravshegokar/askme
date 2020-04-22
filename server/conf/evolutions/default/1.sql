@@ -75,6 +75,7 @@ create table user_profile (
   fname                         varchar(255),
   lname                         varchar(255),
   access_level                  varchar(255),
+  monthly_subscription_price    double,
   constraint pk_user_profile primary key (id)
 );
 
