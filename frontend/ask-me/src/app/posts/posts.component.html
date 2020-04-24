@@ -53,7 +53,7 @@
         <span>
           <button mat-raised-button (click)='postDetails(post.postId)'>View Post</button>
           <!-- <button mat-raised-button>Upvote</button> -->
-          <span style="float:right;margin-right: 15px">Date Posted : {{post.datePosted}}</span>
+          <span style="float:right;margin-right: 15px">Date Posted : {{post.datePosted | date:"short"}}</span>
         </span>
       </mat-card-actions>
       <!-- </mat-card-content> -->

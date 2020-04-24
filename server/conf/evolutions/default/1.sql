@@ -6,6 +6,7 @@
 create table channel (
   channel_id                    integer auto_increment not null,
   channel_name                  varchar(255),
+  channel_owner_id              integer,
   channel_description           varchar(255),
   date_created                  datetime,
   constraint pk_channel primary key (channel_id)
@@ -74,8 +75,12 @@ create table user_profile (
   fname                         varchar(255),
   lname                         varchar(255),
   access_level                  varchar(255),
+  monthly_subscription_price    double,
   constraint pk_user_profile primary key (id)
 );
+
+alter table channel add constraint fk_channel_channel_owner_id foreign key (channel_owner_id) references user_profile (id) on delete restrict on update restrict;
+create index ix_channel_channel_owner_id on channel (channel_owner_id);
 
 alter table channel_user_profile add constraint fk_channel_user_profile_channel foreign key (channel_channel_id) references channel (channel_id) on delete restrict on update restrict;
 create index ix_channel_user_profile_channel on channel_user_profile (channel_channel_id);
@@ -121,6 +126,9 @@ create index ix_interest_followers_user_profile on interest_followers (user_prof
 
 
 # --- !Downs
+
+alter table channel drop foreign key fk_channel_channel_owner_id;
+drop index ix_channel_channel_owner_id on channel;
 
 alter table channel_user_profile drop foreign key fk_channel_user_profile_channel;
 drop index ix_channel_user_profile_channel on channel_user_profile;

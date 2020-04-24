@@ -9,6 +9,8 @@ import { NewPostComponent} from "@app/new-post/new-post.component"
 import { ProfileComponent} from "@app/profile/profile.component";
 import { PostCommentsComponent } from "@app/post-comments/post-comments.component";
 import { SearchComponent } from "@app/search/search.component";
+import {NewChannelComponent} from "@app/new-channel/new-channel.component";
+import {ChannelsListComponent} from "@app/channels-list/channels-list.component";
 
 const routes: Routes = [
   { path: '', component: FeedComponent},
@@ -18,7 +20,9 @@ const routes: Routes = [
   { path: 'newPost', component: NewPostComponent},
   { path: 'profile', component: ProfileComponent},
   { path: 'postCommentsPath', component: PostCommentsComponent},
-  { path: 'searchPath', component: SearchComponent}
+  { path: 'searchPath', component: SearchComponent},
+  { path: 'newChannel', component: NewChannelComponent},
+  { path: 'channelsList', component: ChannelsListComponent}
 ];
 
 @NgModule({

@@ -33,7 +33,7 @@
               <span style="float:right;margin-right: 15px">Author : <a
                   href="/profile?profileId={{comment.userId}}">{{comment.username}}</a> </span>
               <br>
-              <span style="float:right;margin-right: 15px">Date Posted: {{comment.date}}</span>
+              <span style="float:right;margin-right: 15px">Date Posted: {{comment.date | date:"short"}}</span>
               <br>
             </b>
           </mat-card-subtitle>

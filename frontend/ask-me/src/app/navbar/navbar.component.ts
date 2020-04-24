@@ -57,6 +57,14 @@ export class NavbarComponent implements OnInit {
     this.router.navigate(['newPost'])
   }
 
+  createChannel() {
+    this.router.navigate(['newChannel'])
+  }
+
+  channelsList() {
+    this.router.navigate(['channelsList'])
+  }
+
   createSearch() {
     this.router.navigate(['searchPath'])
   }

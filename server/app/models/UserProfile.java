@@ -1,8 +1,10 @@
 package models;
 
-
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import play.data.validation.Constraints;
+import play.libs.Json;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class UserProfile extends Model {
+public class UserProfile extends Model implements Jsonable {
     public static final Finder<Long, UserProfile> find = new Finder<>(UserProfile.class);
     @Constraints.Required
     @Column(columnDefinition = "datetime", updatable = false)
@@ -29,6 +31,7 @@ public class UserProfile extends Model {
     private List<Tag> interests = new ArrayList<>();
     private String lname;
     private String accessLevel;
+    private double monthlySubscriptionPrice;
 
     /**
      * Find user by id
@@ -48,6 +51,15 @@ public class UserProfile extends Model {
      */
     public static final UserProfile findById(String userId) {
         return findById(Integer.parseInt(userId));
+    }
+
+    /**
+     * Get owned channels of a user.
+     *
+     * @return
+     */
+    public List<Channel> getOwnChannels() {
+        return Channel.getOwnedChannels(this);
     }
 
     public List<Post> getPosts() {
@@ -73,6 +85,14 @@ public class UserProfile extends Model {
                 ", accessLevel='" + accessLevel + '\'' +
                 ", date_created=" + dateCreated +
                 '}';
+    }
+
+    public double getMonthlySubscriptionPrice() {
+        return monthlySubscriptionPrice;
+    }
+
+    public void setMonthlySubscriptionPrice(double monthlySubscriptionPrice) {
+        this.monthlySubscriptionPrice = monthlySubscriptionPrice;
     }
 
     public List<Tag> getInterests() {
@@ -144,5 +164,30 @@ public class UserProfile extends Model {
     public void save() {
         dateCreated();
         super.save();
+    }
+
+    @Override
+    public JsonNode toJson() {
+        ObjectNode json = Json.newObject();
+
+        json.put("userId", this.id)
+                .put("username", this.username)
+                .put("firstName", this.fname)
+                .put("lastName", this.lname)
+                .put("dateJoined", this.dateCreated.toString());
+
+        return json;
+    }
+
+    /**
+     * List all subscribed channels of the user.
+     *
+     * @return
+     */
+    public List<Channel> getSubscribedChannels() {
+        return Channel.getFinder()
+                .where()
+                .contains("members.id", this.getId() + "")
+                .findList();
     }
 }

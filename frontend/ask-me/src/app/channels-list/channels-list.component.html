@@ -1,0 +1,53 @@
+<div *ngIf="channelsData">
+  <mat-card class="example-card" style="margin-left: 280px;margin-right: 280px;margin-top: 25px;margin-bottom: 25px; border-radius: .5rem!important;">
+    <mat-card-header>
+      <img src="assets/images/subscribedChannels.png" style="height: 80px;width: 80px;">
+    </mat-card-header><br>
+    <mat-card-header>
+      <mat-card-title>
+        <span>Subscribe Channel</span>
+      </mat-card-title>
+      <mat-card-subtitle><b>Please select the channel that you wish to subscribe to</b></mat-card-subtitle>
+    </mat-card-header>
+    <div *ngFor="let channel of channelsData.channels"
+         style="margin-left: 18px;background-color: #a2cdd9; width: 600px; border-radius: .8rem!important;">
+      <mat-card-header style="padding-top: 10px">
+        <mat-card-title style="font-size: 14px">
+          Channel:<a href="/posts?channelId={{channel.channelId}}" target="_blank">{{channel.channelName}}</a>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content style="margin-left: 18px;padding-top: 10px;">
+        <p><b>Description:&nbsp;</b> {{channel.channelDescription}}</p>
+      </mat-card-content>
+    </div>
+    <br>
+    <form [formGroup]="form" (ngSubmit)="submit()" >
+    <mat-form-field style="margin-left: 18px">
+      <mat-label>Please select Channel</mat-label>
+      <mat-select formControlName="selChannel" required>
+        <mat-option>
+          ---Select---
+        </mat-option>
+        <mat-option *ngFor="let channel of channelsData.channels" [value]="channel.channelId" >
+          {{channel.channelName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+      <mat-form-field style="margin-left: 18px">
+        <mat-label>Please select Action</mat-label>
+        <mat-select formControlName="selAction" required>
+          <mat-option>
+            ---Select---
+          </mat-option>
+          <mat-option value="Subscribe" >
+            Subscribe Channel
+          </mat-option>
+          <mat-option value="Delete" >
+            Delete Channel
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    <button mat-raised-button style="width: 100px;margin-left: 18px" [disabled]='!form.valid'>Submit</button>
+    </form>
+  </mat-card>
+</div>

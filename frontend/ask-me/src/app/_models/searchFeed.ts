@@ -1,5 +1,5 @@
 export class SearchFeed {
-    posts: {
+    posts: [{
         channelId: number,
         channelName: string,
         postId: number,
@@ -8,14 +8,14 @@ export class SearchFeed {
         author: string,
         authorId: number,
         // likesCount: number,
-        datePosted: string,
+        datePosted: any,
         tags:{
             tagId: number,
             tagName: string
         }
-    }
-    tags:{
+    }]
+    tags:[{
         tagId: number,
         tagName: string
-    }
+    }]
 }

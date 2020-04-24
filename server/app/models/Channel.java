@@ -25,6 +25,7 @@ public class Channel extends Model implements Jsonable {
     private String channelName;
 
     @Constraints.Required
+    @ManyToOne
     private UserProfile channelOwner;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -62,6 +63,16 @@ public class Channel extends Model implements Jsonable {
     }
 
     /**
+     * Find channel by id
+     *
+     * @param channelId
+     * @return
+     */
+    public static Channel findById(String channelId) {
+        return findById(Integer.parseInt(channelId));
+    }
+
+    /**
      * Get the default channel which is loaded when the database is initiated.
      *
      * @return
@@ -79,12 +90,24 @@ public class Channel extends Model implements Jsonable {
         return getFinder().all();
     }
 
+    /**
+     * Get owned channels of a user.
+     *
+     * @param userProfile
+     * @return
+     */
+    public static List<Channel> getOwnedChannels(UserProfile userProfile) {
+        return getFinder().where().eq("channelOwner.id", userProfile.getId()).findList();
+    }
+
     public UserProfile getChannelOwner() {
         return channelOwner;
     }
 
-    public void setChannelOwner(UserProfile channelOwner) {
+    public Channel setChannelOwner(UserProfile channelOwner) {
         this.channelOwner = channelOwner;
+
+        return this;
     }
 
     public List<UserProfile> getMembers() {
@@ -95,10 +118,30 @@ public class Channel extends Model implements Jsonable {
         this.members = members;
     }
 
+    /**
+     * Add a member if not exist.
+     *
+     * @param user
+     * @return
+     */
     public Channel addMembers(UserProfile user) {
-        this.members.add(user);
+        if (!containsMember(user)) {
+            this.members.add(user);
+        }
 
         return this;
+    }
+
+    /**
+     * Check if the user is already a member.
+     *
+     * @param user
+     * @return
+     */
+    public boolean containsMember(UserProfile user) {
+        return this.members
+                .stream()
+                .anyMatch(member -> member.getId() == user.getId());
     }
 
     public List<Tag> getTags() {
@@ -113,16 +156,20 @@ public class Channel extends Model implements Jsonable {
         return channelDescription;
     }
 
-    public void setChannelDescription(String channelDescription) {
+    public Channel setChannelDescription(String channelDescription) {
         this.channelDescription = channelDescription;
+
+        return this;
     }
 
     public Date getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Date dateCreated) {
+    public Channel setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
+
+        return this;
     }
 
     public int getChannelId() {
@@ -137,8 +184,10 @@ public class Channel extends Model implements Jsonable {
         return channelName;
     }
 
-    public void setChannelName(String channelName) {
+    public Channel setChannelName(String channelName) {
         this.channelName = channelName;
+
+        return this;
     }
 
     public List<Post> getPosts() {

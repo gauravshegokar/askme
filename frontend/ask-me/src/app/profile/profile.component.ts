@@ -7,6 +7,9 @@ import { Followers } from "@app/_models/followers";
 import { UserPosts } from "@app/_models/userPosts";
 import { OwnedChannels } from "@app/_models/ownedChannels";
 import { SubscribedChannels } from "@app/_models/subscribedChannels";
+import { SubscribedAmount } from "@app/_models/subscribedAmount"
+import { Proxy } from './proxy-pattern/proxy'
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +18,14 @@ import { SubscribedChannels } from "@app/_models/subscribedChannels";
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private profileService: ProfileService, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(
+    private profileService: ProfileService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private _snackBar: MatSnackBar) {
+    this.paymentProxy = new Proxy()
+  }
+
 
   public profileData: Profile
   public interestsData: Interests
@@ -23,6 +33,8 @@ export class ProfileComponent implements OnInit {
   public userPostsData: UserPosts
   public ownedChannelsData: OwnedChannels
   public subscribedChannelsData: SubscribedChannels
+  public paymentAmount: SubscribedAmount
+  public paymentProxy: Proxy
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
@@ -33,6 +45,7 @@ export class ProfileComponent implements OnInit {
       this.loadUserPosts(profileId);
       this.loadOwnedChannels(profileId)
       this.loadSubscribedChannels(profileId)
+      this.loadPaymentDetails(profileId)
     });
   }
 
@@ -87,7 +100,7 @@ export class ProfileComponent implements OnInit {
   loadOwnedChannels(profileId) {
     this.profileService.getOwnedChannels(profileId).subscribe(
       response => {
-        // console.log(response)
+        console.log(response)
         this.ownedChannelsData = response
       },
       err => {
@@ -99,7 +112,7 @@ export class ProfileComponent implements OnInit {
   loadSubscribedChannels(profileId) {
     this.profileService.getSubscribedChannels(profileId).subscribe(
       response => {
-        // console.log(response)
+        console.log(response)
         this.subscribedChannelsData = response
       },
       err => {
@@ -112,4 +125,25 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['postCommentsPath'], { queryParams: { postId: pId } })
   }
 
+  loadPaymentDetails(pId) {
+    this.profileService.getPaymentDetails(pId).subscribe(
+      response => {
+        this.paymentAmount = response
+      },
+      err => {
+        console.log(err)
+      }
+    )
+  }
+
+  performPayment() {
+    this.paymentProxy.performTransaction(this.paymentAmount)
+
+    this._snackBar.open("Payment Performed for $" + (this.paymentAmount.amount + this.paymentAmount.tax).toFixed(2), "Okay", {
+      duration: 2000,
+    });
+
+    // communicate payment to the server 
+
+  }
 }

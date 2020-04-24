@@ -8,6 +8,7 @@ import { Followers } from "@app/_models/followers";
 import { UserPosts } from "@app/_models/userPosts";
 import { OwnedChannels } from "@app/_models/ownedChannels";
 import { SubscribedChannels } from "@app/_models/subscribedChannels";
+import { SubscribedAmount } from '@app/_models/subscribedAmount';
 
 @Injectable({
   providedIn: 'root'
@@ -58,7 +59,7 @@ export class ProfileService {
     // console.log(profileId)
     let jsonLink = 'assets/data/ownedChannels' + profileId + '.json'
     let apiLink = `${environment.apiUrl}/api/users/` + profileId + `/ownedchannels`
-    let link = jsonLink
+    let link = apiLink
 
     return this.http.get<OwnedChannels>(link)
   }
@@ -70,5 +71,10 @@ export class ProfileService {
     let link = apiLink
 
     return this.http.get<SubscribedChannels>(link)
+  }
+
+  getPaymentDetails(profileId){
+    let apiLink = `${environment.apiUrl}/api/users/` + profileId + `/subscriptionAmount`
+    return this.http.get<SubscribedAmount>(apiLink)
   }
 }

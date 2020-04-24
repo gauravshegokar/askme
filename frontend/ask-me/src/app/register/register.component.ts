@@ -4,6 +4,7 @@ import { RegisterService } from './register.service'
 import { Router } from '@angular/router';
 import { Caretaker, Originator } from './register-memento'
 import { ClonerService } from '../_services/cloner.service'
+import { Prototype } from "./register-prototype"
 
 @Component({
   selector: 'app-register',
@@ -16,6 +17,7 @@ export class RegisterComponent implements OnInit {
 
   private originator: Originator
   private caretaker: Caretaker
+  private prototype: Prototype
 
   error: string | null;
 
@@ -32,12 +34,14 @@ export class RegisterComponent implements OnInit {
   initialize() {
 
     // initialize the form 
-    // store the form object using memento design pattern
-    this.form = this.getFormInstance()
-
     this.caretaker = new Caretaker();
     this.originator = new Originator();
+    this.prototype = new Prototype();
 
+    // get form using Prototype Design Pattern
+    this.form = this.getFormInstance()
+
+    // store the form object using memento design pattern
     this.originator.setState(this.clonerService.deepClone(this.form))
     this.caretaker.addMemento(this.originator.commit())
 
@@ -45,13 +49,16 @@ export class RegisterComponent implements OnInit {
 
   getFormInstance() {
     // returns FormGroup object with default fields
-    return new FormGroup({
-      username: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      fname: new FormControl(''),
-      lname: new FormControl(''),
-      userType: new FormControl('regular'),
-    });
+    // return new FormGroup({
+    //   username: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    //   password: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    //   fname: new FormControl(''),
+    //   lname: new FormControl(''),
+    //   userType: new FormControl('regular'),
+    // });
+  
+    // getting form from prototype Design Pattern  
+    return this.prototype.getForm("default-form")
   }
 
   // resets the form
