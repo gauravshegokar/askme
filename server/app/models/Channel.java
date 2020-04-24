@@ -3,7 +3,6 @@ package models;
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import io.ebeaninternal.server.lib.util.Str;
 import play.data.validation.Constraints;
 import play.libs.Json;
 
@@ -119,10 +118,30 @@ public class Channel extends Model implements Jsonable {
         this.members = members;
     }
 
+    /**
+     * Add a member if not exist.
+     *
+     * @param user
+     * @return
+     */
     public Channel addMembers(UserProfile user) {
-        this.members.add(user);
+        if (!containsMember(user)) {
+            this.members.add(user);
+        }
 
         return this;
+    }
+
+    /**
+     * Check if the user is already a member.
+     *
+     * @param user
+     * @return
+     */
+    public boolean containsMember(UserProfile user) {
+        return this.members
+                .stream()
+                .anyMatch(member -> member.getId() == user.getId());
     }
 
     public List<Tag> getTags() {

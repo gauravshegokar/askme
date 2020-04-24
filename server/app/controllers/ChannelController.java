@@ -162,8 +162,10 @@ public class ChannelController extends Controller {
         UserProfile user = UserProfile.findById(userId);
         Channel channel = Channel.findById(channelId);
 
-        channel.addMembers(user)
-                .save();
+        if(!channel.containsMember(user)) {
+            channel.addMembers(user)
+                    .save();
+        }
 
         return ok(Json.newObject());
     }
