@@ -1,5 +1,7 @@
 package services;
 
+import domains.HashTagsInterpreterContext;
+import domains.TagsExpression;
 import models.Channel;
 import models.Post;
 import models.Tag;
@@ -27,6 +29,7 @@ public class PostService {
             return status(401, "User not found");
         } else {
 
+            List<Tag> postTags = new ArrayList<>();
 
             //check if channel present
             List<Channel> dbChannelMapped = Channel.getFinder().query().where().ilike("channelId", channelId).findList();
@@ -35,28 +38,20 @@ public class PostService {
                 return badRequest("\"{\"error\":\"channel not found\"}\"").withHeader("auth", userId);
             } else {
 
-                List<Tag> postTags = new ArrayList<>();
-                List<String> tagNames = Arrays.asList(tags.split(","));
+                //[interpreter pattern]
+                //initialize interpreter engine
+                HashTagsInterpreterContext ic = null;
 
-                for (String tagName : tagNames) {
+                //check if string has #(rule), if yes then choose HashTagsInterpreterContext to extract tags for the string
+                if(tags.contains("#")){
+                    //it is a HashTag
+                    ic= new HashTagsInterpreterContext();
 
+                    //interpret tags using TagsExpression
+                    postTags.addAll(new TagsExpression().interpret(ic, tags));
 
-                    List<Tag> existingTag = Tag.find.query().where().eq("tagName", tagName).findList();
+                }
 
-                    if (existingTag.size() == 0) {
-
-
-                        Tag newTag = new Tag();
-                        newTag.setTagName(tagName);
-                        newTag.save();
-                        postTags.add(newTag);
-                    } else {
-
-
-                        postTags.add(existingTag.get(0));
-
-
-                    }
                 }
 
                 try {
@@ -81,7 +76,7 @@ public class PostService {
                 }
             }
         }
-    }
+
 
 
     /**
