@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
-import { Channels } from "@app/_models/channels";
+import { SubscribedChannels } from "@app/_models/subscribedChannels";
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, NgZone, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { User } from "@app/_models";
 import { NewPost } from "@app/_models/newPost";
+import { AuthenticationService } from '@app/_services/authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewPostsService {
 
-  constructor(private http: HttpClient, private _ngZone: NgZone) { }
+  constructor(private http: HttpClient, private _ngZone: NgZone,
+    private authenticationService: AuthenticationService) { }
 
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
@@ -24,12 +26,15 @@ export class NewPostsService {
       .subscribe(() => this.autosize.resizeToFitContent(true));
   }
 
-  getChannels(): Observable<Channels> {
+  getChannels(): Observable<SubscribedChannels> {
     let jsonLink = 'assets/data/channels.json'
     let apiLink = `${environment.apiUrl}/api/channels`
-    let link = apiLink
+    let apiSubscribedChannels = `${environment.apiUrl}/api/users/` + this.authenticationService.currentUserValue.id + `/subscribedchannels`
+    let link = apiSubscribedChannels
 
-    return this.http.get<Channels>(link)
+    console.log(apiSubscribedChannels)
+
+    return this.http.get<SubscribedChannels>(apiSubscribedChannels)
   }
 
   newPostPublish(selChannel: string, selPostContent: string, selProfanityFiltering: string, selTags: string) {

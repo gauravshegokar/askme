@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NewPostsService } from "@app/new-post/new-posts.service";
 import { first } from 'rxjs/operators'
-import { Channels } from "@app/_models/channels";
+import { SubscribedChannels } from "@app/_models/subscribedChannels";
 import { Router } from '@angular/router';
 
 @Component({
@@ -23,7 +23,7 @@ export class NewPostComponent implements OnInit {
   constructor(private newPostsService: NewPostsService,
     private router: Router) { }
 
-  public channelsData: Channels
+  public channelsData: SubscribedChannels
 
   ngOnInit(): void {
     this.loadChannels()

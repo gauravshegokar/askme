@@ -16,7 +16,7 @@
         <mat-option>
           ---Select---
         </mat-option>
-        <mat-option *ngFor="let channel of channelsData.channels" [value]="channel.channelId" >
+        <mat-option *ngFor="let channel of channelsData.subscribedChannels" [value]="channel.channelId" >
           {{channel.channelName}}
         </mat-option>
       </mat-select>
