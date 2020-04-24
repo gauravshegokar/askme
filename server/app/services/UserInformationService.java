@@ -1,14 +1,13 @@
 package services;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import domains.Admin;
 import domains.RegularUser;
 import domains.TaxVisitor;
-import models.Channel;
-import models.Post;
-import models.Tag;
-import models.UserProfile;
+import models.*;
+import play.libs.Json;
 import play.mvc.Result;
 
 import java.util.List;
@@ -16,6 +15,20 @@ import java.util.List;
 import static play.mvc.Results.*;
 
 public class UserInformationService {
+
+    public static double getTaxValue(int id, String userType) {
+
+        TaxVisitor taxCalculator = new TaxVisitor();
+        double tax = 0.0;
+        if (userType.equals("admin")) {
+            Admin admin = new Admin();
+            tax = taxCalculator.visit(admin, id);
+        } else {
+            RegularUser user = new RegularUser();
+            tax = taxCalculator.visit(user, id);
+        }
+        return tax;
+    }
 
     public Result getUserBasicInfo(String id) {
 
@@ -92,7 +105,6 @@ public class UserInformationService {
 
     }
 
-
     public Result getUserPosts(String userId) {
 
         try {
@@ -136,50 +148,17 @@ public class UserInformationService {
 
     }
 
-    //TODO: change it for multiple channels in future sprints
-    public Result getUserSubscribedChannels(String userId){
+    /**
+     * List all subscribed channels of the user.
+     *
+     * @param userId
+     * @return
+     */
+    public Result getUserSubscribedChannels(int userId) {
+        List<Channel> channels = UserProfile.findById(userId).getSubscribedChannels();
+        JsonNode resultJson = Json.newObject()
+                .set("subscribedChannels", Jsonable.toJson(channels));
 
-    try{
-        //default channel
-        Channel channel = Channel.findById(1);
-
-        //creating subscribed channel object
-        JsonObject subscribedChannel = new JsonObject();
-        subscribedChannel.addProperty("channelId", channel.getChannelId());
-        subscribedChannel.addProperty("channelName", channel.getChannelName());
-
-        //creating subscribed channels array
-        JsonArray subscribedChannels = new JsonArray();
-        subscribedChannels.add(subscribedChannel);
-
-        //creating result json
-        JsonObject resultJson= new JsonObject();
-        resultJson.add("subscribedChannels", subscribedChannels);
-
-        return status(200, resultJson.toString()).withHeader("auth",userId);
-
-
+        return ok(resultJson);
     }
-    catch (Exception e){
-        e.printStackTrace();
-        return internalServerError("{\"error\":\"Couldn't fetch user subscribed channels \"}");
-    }
-    }
-
-    public static double getTaxValue(int id, String userType){
-
-        TaxVisitor taxCalculator = new TaxVisitor();
-        double tax=0.0;
-        if(userType.equals("admin")){
-            Admin admin = new Admin();
-            tax=taxCalculator.visit(admin,id);
-        }
-        else{
-            RegularUser user = new RegularUser();
-            tax=taxCalculator.visit(user,id);
-        }
-        return tax;
-    }
-
-
 }

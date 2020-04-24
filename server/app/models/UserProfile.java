@@ -178,4 +178,16 @@ public class UserProfile extends Model implements Jsonable {
 
         return json;
     }
+
+    /**
+     * List all subscribed channels of the user.
+     *
+     * @return
+     */
+    public List<Channel> getSubscribedChannels() {
+        return Channel.getFinder()
+                .where()
+                .contains("members.id", this.getId() + "")
+                .findList();
+    }
 }

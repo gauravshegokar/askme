@@ -50,7 +50,7 @@ GET           /api/channels/:channelId/posts               controllers.ChannelCo
 GET           /api/channels                                controllers.ChannelController.getAllChannels
 
 # Get channels subscribed by a user
-GET           /api/users/:userId/subscribedchannels        controllers.UserInformationController.getUserSubscribedChannels(userId : String)
+GET           /api/users/:userId/subscribedchannels        controllers.UserInformationController.getUserSubscribedChannels(userId : Int)
 
 # Get owned channels of a user
 GET           /api/users/:userId/ownedchannels             controllers.UserInformationController.getOwnedChannels(userId)

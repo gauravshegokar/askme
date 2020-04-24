@@ -42,14 +42,14 @@ public class UserInformationController extends Controller {
 
     }
 
-    //TODO: by default returning channel with id 1, change it in future sprints
-    public Result getUserSubscribedChannels(String userId) {
-
-//        boolean isAuthentic = request().headers().get("auth")[0].equals(userId) ? true : false;
-//        if (!isAuthentic) {
-//            return badRequest("\"{\"error\":\"Authentication failed, Please login again\"}\"");
-//        }
-        // any user can check any users profile
+    /**
+     * List all subscribed channels of the user.
+     *
+     * @param userId
+     * @return
+     */
+    @Security.Authenticated(Secured.class)
+    public Result getUserSubscribedChannels(int userId) {
         return new UserInformationService().getUserSubscribedChannels(userId);
     }
 
@@ -69,21 +69,21 @@ public class UserInformationController extends Controller {
         return ok(json);
     }
 
-    public Result getMonthlySubscriptionAmount(String  userId){
+    public Result getMonthlySubscriptionAmount(String userId) {
 
         UserProfile user = UserProfile.findById(userId);
         String userType = user.getAccessLevel();
         Double subscriptionAmount = user.getMonthlySubscriptionPrice();
 
-        if(!userType.equals("admin") && !(userType.equals("regular"))){
+        if (!userType.equals("admin") && !(userType.equals("regular"))) {
             return badRequest("{\"error\":\"User type not found\"}");
         }
 
-        Double tax= UserInformationService.getTaxValue(Integer.parseInt(userId),userType);
+        Double tax = UserInformationService.getTaxValue(Integer.parseInt(userId), userType);
 
-        JsonObject result= new JsonObject();
-        result.addProperty("tax",tax);
-        result.addProperty("amount",subscriptionAmount);
+        JsonObject result = new JsonObject();
+        result.addProperty("tax", tax);
+        result.addProperty("amount", subscriptionAmount);
 
 
         return status(200, result.toString()).withHeader("auth", userId);
