@@ -4,10 +4,14 @@ import { ICloneable } from "./ICloneable"
 
 export class Prototype implements ICloneable {
 
-    forms: Map<string, any>;
+    private forms: Map<string, FormGroup>;
     private clonerService: ClonerService
 
     constructor() {
+        this.loadCache()
+    }
+
+    loadCache(){
         this.forms = new Map<string, any>();
 
         // consider this as a costly process to create a form
@@ -25,8 +29,8 @@ export class Prototype implements ICloneable {
         this.forms.set("default-form", defaultForm)
         this.clonerService = new ClonerService()
     }
-
-    clone(formType): FormGroup {
+    
+    getForm(formType: string): FormGroup {
         let targetForm = this.forms.get(formType)
         return this.clonerService.deepClone(targetForm)
     }

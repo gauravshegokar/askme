@@ -1,4 +1,5 @@
+import { FormGroup } from '@angular/forms';
 export interface ICloneable {
 
-    clone(formType: String);
+    getForm(formType: String): FormGroup;
 }

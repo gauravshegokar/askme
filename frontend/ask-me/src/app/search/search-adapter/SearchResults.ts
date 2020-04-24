@@ -1,4 +1,4 @@
 
-export interface SearchResults{
+export interface SearchResultsInterface{
     getSearchResults(keywords: string);
 }

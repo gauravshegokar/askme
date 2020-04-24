@@ -1,4 +1,4 @@
-import { SearchResults } from './SearchResults'
+import { SearchResultsInterface } from './SearchResults'
 import { SearchService } from '../search.service'
 import { first, map } from "rxjs/operators";
 import { Injectable } from '@angular/core';
@@ -7,7 +7,7 @@ import { observable } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
-export class SearchResultAdapter implements SearchResults {
+export class SearchResultAdapter implements SearchResultsInterface {
     constructor(private searchService: SearchService) {
     }
 

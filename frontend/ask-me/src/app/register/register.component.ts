@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit {
     // });
   
     // getting form from prototype Design Pattern  
-    return this.prototype.clone("default-form")
+    return this.prototype.getForm("default-form")
   }
 
   // resets the form
