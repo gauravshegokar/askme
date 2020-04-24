@@ -38,7 +38,7 @@ export class ChannelsListComponent implements OnInit {
   }
 
   submit() {
-    this.channelsListService.subscribeChannel(this.form.value.selChannel,this.form.value.selAction).subscribe(
+    this.channelsListService.channelAction(this.form.value.selChannel,this.form.value.selAction).subscribe(
       response => {
         if (response.status == 201 || response.status == 200) {
           this.router.navigate(['/']);

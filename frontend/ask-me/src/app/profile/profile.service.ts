@@ -59,7 +59,7 @@ export class ProfileService {
     // console.log(profileId)
     let jsonLink = 'assets/data/ownedChannels' + profileId + '.json'
     let apiLink = `${environment.apiUrl}/api/users/` + profileId + `/ownedchannels`
-    let link = jsonLink
+    let link = apiLink
 
     return this.http.get<OwnedChannels>(link)
   }
@@ -75,6 +75,6 @@ export class ProfileService {
 
   getPaymentDetails(profileId){
     let apiLink = `${environment.apiUrl}/api/users/` + profileId + `/subscriptionAmount`
-    return this.http.get<SubscribedAmount>(apiLink)    
+    return this.http.get<SubscribedAmount>(apiLink)
   }
 }

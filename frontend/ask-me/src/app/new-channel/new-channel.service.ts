@@ -29,7 +29,7 @@ export class NewChannelService {
       channelDescription: selChannelDescription
     }
 
-    let link = mockLink
+    let link = apiLink
     return this.http.post<any>(link, jsonData, { observe: 'response' })
   }
 

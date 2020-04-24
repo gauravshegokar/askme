@@ -6,6 +6,8 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, NgZone, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
+import {SubscribeChannelService} from "@app/channels-list/subscribe-channel.service";
+import {DeleteChannelService} from "@app/channels-list/delete-channel.service";
 
 
 @Injectable({
@@ -13,7 +15,9 @@ import { map, take } from 'rxjs/operators';
 })
 export class ChannelsListService {
 
-  constructor(private http: HttpClient, private _ngZone: NgZone) { }
+  constructor(private http: HttpClient, private _ngZone: NgZone,
+              private subscribeChannelService: SubscribeChannelService,
+              private  deleteChannelService: DeleteChannelService) { }
 
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
@@ -26,28 +30,18 @@ export class ChannelsListService {
   getChannels(): Observable<Channels> {
     let jsonLink = 'assets/data/channels.json'
     let apiLink = `${environment.apiUrl}/api/channels`
-    let link = jsonLink
+    let link = apiLink
 
     return this.http.get<Channels>(link)
   }
 
-  subscribeChannel(selChannel: string,selAction: string) {
-    console.log(selChannel)
+  channelAction(selChannel: string,selAction: string) {
     console.log(selAction)
-    let mockLink = "http://www.mocky.io/v2/5e70f6df30000029007a3374"
-
-
-    let jsonData = {
-    }
 
     if(selAction == "Subscribe"){
-      let apiLink = `${environment.apiUrl}/api/channels/` + selChannel + `/subscribe`
-      let link = mockLink
-      return this.http.post<any>(link, jsonData, { observe: 'response' })
-    }else{
-      let apiLink = `${environment.apiUrl}/api/channels/` + selChannel
-      let link = mockLink
-      return this.http.delete(link, { observe: 'response' })
+      return this.subscribeChannelService.executeAction(selChannel)
+    }else if(selAction == "Delete"){
+      return this.deleteChannelService.executeAction(selChannel)
     }
   }
 
