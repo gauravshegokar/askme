@@ -13,6 +13,7 @@
       Allow users to log in using username and password.
       
   ➢	Registration : 
+  
     ■	Users will enter the desired username and password along with optional fields - first name and last name. 
     
     ■	Specify if admin or not. 
@@ -86,6 +87,15 @@
 9.	Template
 10.	Singleton
 11.	Factory
+12.	Visitor
+13. 	State
+14. 	Strategy
+15.	Proxy
+16.	Adapter
+17.	Prototype
+18.	Decorator
+19.	Iterator
+20.	Interpreter
 
 Download and Install required softwares
 1. Java
