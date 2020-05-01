@@ -2,7 +2,9 @@
 # AskMe
 * [ATAM](https://drive.google.com/open?id=1DBdHQdeko5G_63ZAR2x4Ot52fxxOgNLxWEsyBYzU8Ng)
 * [API Specification](https://drive.google.com/open?id=1pTtn7knjzpbAbVUFs--CvBJJm4JUCDqP)
-* [Iteration 1 recording](https://drive.google.com/open?id=1SQxIeoqaEXmk3kdzDr2isTb-6oJv4YQk)
+* [Presentation](https://docs.google.com/presentation/d/1OB11XLYbHpguU86Wi2dSGxQHJVX4Hom1ztu2It_JHHc/edit?usp=sharing)
+* [Technical Report](https://docs.google.com/document/d/1CY5ff58fd1YAvk0MfOX8j7TPSRhy6CoGH971ckDpklo/edit?usp=sharing)
+* [Demo](https://www.youtube.com/watch?v=VvmQ9yZr9HQ)
 # Functional requirements
 
 ❖	Users from across countries should be able to use this forum for discussion purposes.
