@@ -91,116 +91,41 @@ Download/Setup & StartUp Application
   https://github.com/jiazhang-class/18653-Team8
 2. The codebase has two separate folders (projects) for frontend and backend.
 3. FrontEnd project set-up/startup
-    Open Intellij IDEA , File-> Open the frontend->ask-me folder
-    Wait a few moments for the project to load and indexing to complete
+    a. Open Intellij IDEA , File-> Open the frontend->ask-me folder
+    b. Wait a few moments for the project to load and indexing to complete
+    c. Once done, verify the project structure
+    d. Navigate to ask-me folder on terminal (in INTELLIJ IDEA) and execute the following command to download and install the required
+    project modules : npm install -g @angular/cli
+    e. Once done, start the server by executing the following command from the same location: ng serve -o
+    f. This should take a few moments to compile and start the application. 
+    g. The application startup can be monitored from the Run window.
+    h. The home page of the application should load automatically in the default browser on the url :http://localhost:4220
+    i. Do not start navigating the application yet because we still have the backend server to setup & start
 
-
-Once done, verify the project structure:
-
-Navigate to ask-me folder on terminal (in INTELLIJ IDEA) and execute the following command to download and install the required project modules
-npm install -g @angular/cli
-
-Once done, start the server by executing the following command from the same location:
-ng serve -o
-
-This should take a few moments to compile and start the application. 
-The application startup can be monitored from the Run window:
-
-The home page of the application should load automatically in the default browser on the url :http://localhost:4220
-
-Do not start navigating the application yet because we still have the backend server to setup & start
-
-Server (Backend) project setup/start
-
-Open Intellij IDEA , File-> Open folder server
-
-This will take about a minute to load the project, index files, download/sync sbt dependencies etc. While this happens go ahead and create the database schema
-
-
-
-
-		
-Create a database/schema in mysql
-Can use mysql shell for database creation
-CREATE DATABASE sad
-Or can execute the command from MySql workbench command line tool
-
-Or create a new view from MySql workbench
-
-
-The project in Intellij should now be available for edit and configurations.
-
-Open file conf/application.conf and update the database connection details and credentials to match the local environment
-
-Goto file conf/routes and update the value of the following parameter to reflect the number of posts one wishes to be displayed on the feed page.
-
-The application can be started in either of the following two ways:
-SBT SHELL 
-Open SBT Shell and wait for a few moments to allow initialization
-
-Run clean
-
-Once done, execute the following command
-run <desired-port> (recommended : 9000)
-
-RUN as PLAY APPLICATION
-GOTO Run -> Edit Configurations
-Select + -> PLAY APPLICATION
-Edit the following fields with the mentioned values
-
-Click Apply
-Now, run the application by clicking the following button
-                                    
-The application startup can be monitored from the Run windows :
-
-Somewhere during startup the default web browser will open up with the following page, prompting the user to “Execute Evolution”
-Click on the button to allow DB Evolution to execute, this might take a few moments.
-Once done, verify the database to ensure that the following tables have been created.
-Verify the tables
-
-Verify the data
-
-Verify the ER Diagram
-
-Once the DB evolution completes, the backend application will start on the browser with the following default page.
-http://localhost:9000
-
-Navigate back to the front end application on the url
-http://localhost:4220
-                       
-Application Demo/Execution steps
-Start navigating and exploring as suggested in this Demo video.
-AskMe Demo
-Steps for application navigation
-Register as a regular/admin user. Use the Save/Undo/Reset buttons to save the form information, undo and reset to an empty form
-
-Login with the newly created user or one of the existing users
-
-User lands on the feed page where he can see the the top most feed of the website.
-
-User navigates to the channel, hashtag, post or user by clicking on the below highlighted links.
-
-Channel Details page.
-
-Post Details page
-
-User chooses to add a comment on the post, which shows up immediately on submit.
-
-Profile details page.
-
-User clicks on “Payment amount” to trigger payment, pop up shows up on success.
-
-User creates a new post in any channel that he is subscribed to.
-
-User creates a new channel
-
-User searches for a post or a hashtag
-
-User views the list of channels and navigates to view further details.
-
-On the channels list page, the user can select a channel and subscribe/delete (if he is the owner) a channel.
-
-
-The navigation bar has buttons to take users to Home page, Search, New Channel, New Post, Channel List, Profile & Logout.
-
- 
+4. Server (Backend) project setup/start
+    a. Open Intellij IDEA , File-> Open folder server
+    b.This will take about a minute to load the project, index files, download/sync sbt dependencies etc. 
+    c. While this happens go ahead and create the database schema
+    d. Create a database/schema in mysql : CREATE DATABASE sad
+    e. The project in Intellij should now be available for edit and configurations.
+    f. Open file conf/application.conf and update the database connection details and credentials to match the local environment
+    g. Goto file conf/routes and update the value of the following parameter to reflect the number of posts one wishes to be displayed
+    on the feed page.
+    h. The application can be started in either of the following two ways:
+       	i.SBT SHELL 
+	Open SBT Shell and wait for a few moments to allow initialization : Run clean
+	Once done, execute the following command
+	run <desired-port> (recommended : 9000)
+	ii. RUN as PLAY APPLICATION
+	GOTO Run -> Edit Configurations
+	Select + -> PLAY APPLICATION
+	Edit the fields with the mentioned values
+	Click Apply
+    i. Now, run the application by clicking the button
+    j. The application startup can be monitored from the Run windows 
+    k. Somewhere during startup the default web browser will open up with the page, prompting the user to “Execute Evolution”
+    l. Click on the button to allow DB Evolution to execute, this might take a few moments
+    m. Once done, verify the database to ensure that the tables have been created.
+    n. Once the DB evolution completes, the backend application will start on the browser with default page : http://localhost:9000
+    o. Navigate back to the front end application on the url : http://localhost:4220
+                     
