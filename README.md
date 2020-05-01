@@ -67,4 +67,140 @@
 10.	Singleton
 11.	Factory
 
+Download and Install required softwares
+1. Java
+  Download and install JDK 1.8 for the OS type
+  https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html
+2. Intellij IDEA
+  Download and install Intellij IDEA Ultimate Edition 2019.3 and above
+  https://www.jetbrains.com/idea/download/#section=windows
+3. Node.js
+  Download and install NodeJS appropriately for the OS
+  https://nodejs.org/en/download/
+4. NPM
+  Download and install NPM appropriately for the OS
+  https://www.npmjs.com/get-npm
+5. Plugins & SDK 
+  Open Intellij IDEA, File->Settings and ensure that the following plugins are installed:
+  Scala, SBT, Play, Ebean
+  Ensure that sdk is appropriately set to 1.8, File->Project Structure
+
+
+Download/Setup & StartUp Application
+1. The website codebase is available at the following github location:
+  https://github.com/jiazhang-class/18653-Team8
+2. The codebase has two separate folders (projects) for frontend and backend.
+3. FrontEnd project set-up/startup
+    Open Intellij IDEA , File-> Open the frontend->ask-me folder
+    Wait a few moments for the project to load and indexing to complete
+
+
+Once done, verify the project structure:
+
+Navigate to ask-me folder on terminal (in INTELLIJ IDEA) and execute the following command to download and install the required project modules
+npm install -g @angular/cli
+
+Once done, start the server by executing the following command from the same location:
+ng serve -o
+
+This should take a few moments to compile and start the application. 
+The application startup can be monitored from the Run window:
+
+The home page of the application should load automatically in the default browser on the url :http://localhost:4220
+
+Do not start navigating the application yet because we still have the backend server to setup & start
+
+Server (Backend) project setup/start
+
+Open Intellij IDEA , File-> Open folder server
+
+This will take about a minute to load the project, index files, download/sync sbt dependencies etc. While this happens go ahead and create the database schema
+
+
+
+
+		
+Create a database/schema in mysql
+Can use mysql shell for database creation
+CREATE DATABASE sad
+Or can execute the command from MySql workbench command line tool
+
+Or create a new view from MySql workbench
+
+
+The project in Intellij should now be available for edit and configurations.
+
+Open file conf/application.conf and update the database connection details and credentials to match the local environment
+
+Goto file conf/routes and update the value of the following parameter to reflect the number of posts one wishes to be displayed on the feed page.
+
+The application can be started in either of the following two ways:
+SBT SHELL 
+Open SBT Shell and wait for a few moments to allow initialization
+
+Run clean
+
+Once done, execute the following command
+run <desired-port> (recommended : 9000)
+
+RUN as PLAY APPLICATION
+GOTO Run -> Edit Configurations
+Select + -> PLAY APPLICATION
+Edit the following fields with the mentioned values
+
+Click Apply
+Now, run the application by clicking the following button
+                                    
+The application startup can be monitored from the Run windows :
+
+Somewhere during startup the default web browser will open up with the following page, prompting the user to “Execute Evolution”
+Click on the button to allow DB Evolution to execute, this might take a few moments.
+Once done, verify the database to ensure that the following tables have been created.
+Verify the tables
+
+Verify the data
+
+Verify the ER Diagram
+
+Once the DB evolution completes, the backend application will start on the browser with the following default page.
+http://localhost:9000
+
+Navigate back to the front end application on the url
+http://localhost:4220
+                       
+Application Demo/Execution steps
+Start navigating and exploring as suggested in this Demo video.
+AskMe Demo
+Steps for application navigation
+Register as a regular/admin user. Use the Save/Undo/Reset buttons to save the form information, undo and reset to an empty form
+
+Login with the newly created user or one of the existing users
+
+User lands on the feed page where he can see the the top most feed of the website.
+
+User navigates to the channel, hashtag, post or user by clicking on the below highlighted links.
+
+Channel Details page.
+
+Post Details page
+
+User chooses to add a comment on the post, which shows up immediately on submit.
+
+Profile details page.
+
+User clicks on “Payment amount” to trigger payment, pop up shows up on success.
+
+User creates a new post in any channel that he is subscribed to.
+
+User creates a new channel
+
+User searches for a post or a hashtag
+
+User views the list of channels and navigates to view further details.
+
+On the channels list page, the user can select a channel and subscribe/delete (if he is the owner) a channel.
+
+
+The navigation bar has buttons to take users to Home page, Search, New Channel, New Post, Channel List, Profile & Logout.
+
  
