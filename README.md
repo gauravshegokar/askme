@@ -8,7 +8,12 @@
 
 
 
-Download and Install required softwares
+
+# Project Setup Instructions
+
+
+### Download and Install required softwares
+
 1. Java
   Download and install JDK 1.8 for the OS type
   https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html
@@ -31,9 +36,7 @@ Download and Install required softwares
   Ensure that sdk is appropriately set to 1.8, File->Project Structure
 
 
-# Project Setup Instructions
-
-Download/Setup & StartUp Application
+### Download/Setup & StartUp Application
 1. The website codebase is available at the following github location:
   https://github.com/jiazhang-class/18653-Team8
   
