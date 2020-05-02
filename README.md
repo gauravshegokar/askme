@@ -7,6 +7,64 @@
 * [Demo](https://www.youtube.com/watch?v=VvmQ9yZr9HQ)
 
 
+# Project Structure
+
+```
+├── API
+│   └── SAD-askMe-API\ Specification\ Doc.docx
+├── Documents
+│   ├── Assumptions.docx
+│   ├── Download\ and\ Installation\ Guide.docx
+│   ├── Technical\ Report\ -\ Team\ 8.docx
+│   ├── access\ information.docx
+│   └── tutorial_\ step-by-step\ usage.docx
+├── README.md
+├── contact.txt
+├── frontend
+│   └── ask-me   --> Frontend Server - Angular
+│       ├── README.md
+│       ├── angular.json
+│       ├── browserslist
+│       ├── e2e
+│       ├── karma.conf.js
+│       ├── node_modules
+│       ├── package-lock.json
+│       ├── package.json
+│       ├── src
+│       ├── tsconfig.app.json
+│       ├── tsconfig.json
+│       ├── tsconfig.spec.json
+│       └── tslint.json
+└── server  --> Backend Server - Play
+    ├── README.md
+    ├── app
+    │   ├── Filters.java
+    │   ├── controllers 
+    │   ├── domains
+    │   ├── middlewares
+    │   ├── models
+    │   ├── services
+    │   └── views
+    ├── build.sbt
+    ├── conf
+    │   ├── application.conf
+    │   ├── evolutions
+    │   └── routes
+    ├── project
+    │   ├── build.properties
+    │   ├── plugins.sbt
+    │   ├── project
+    │   └── target
+    ├── public
+    │   ├── images
+    │   ├── javascripts
+    │   └── stylesheets
+    └── target
+        ├── native_libraries
+        ├── scala-2.11
+        ├── streams
+        └── web
+```
 
 
 # Project Setup Instructions
