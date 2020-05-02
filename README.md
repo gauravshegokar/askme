@@ -90,8 +90,8 @@
 10.	Singleton
 11.	Factory
 12.	Visitor
-13. 	State
-14. 	Strategy
+13. State
+14. Strategy
 15.	Proxy
 16.	Adapter
 17.	Prototype
