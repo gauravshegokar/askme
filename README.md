@@ -133,9 +133,9 @@ Users from across countries should be able to use this forum for discussion purp
   
 5. View Post
   
-    ■	Once the user clicks on the post (from the feed/channel page), the user should see the post details like - author, post creation    date, channel name, post content etc.
+    *	Once the user clicks on the post (from the feed/channel page), the user should see the post details like - author, post creation    date, channel name, post content etc.
     
-    ■	View comments on the posts by users and add more comments.
+    *	View comments on the posts by users and add more comments.
     
 6. Post Creation
   
